@@ -11,14 +11,15 @@
         android:icon="@drawable/ic_search"
         android:title="@string/title_search" />
 
+
     <item
         android:id="@+id/navigation_map"
-        android:icon="@drawable/ic_location"
-        android:title="@string/title_mypage" />
+        android:icon="@drawable/ic_person"
+        android:title="@string/title_map" />
 
     <item
         android:id="@+id/navigation_mypage"
-        android:icon="@drawable/ic_person"
-        android:title="@string/title_map" />
+        android:icon="@drawable/ic_location"
+        android:title="@string/title_mypage" />
 
 </menu>
