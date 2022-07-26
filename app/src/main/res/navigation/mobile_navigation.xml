@@ -15,18 +15,18 @@
         android:id="@+id/navigation_search"
         android:name="com.example.nulli.ui.search.SearchFragment"
         android:label="@string/title_search"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_search" />
 
     <fragment
         android:id="@+id/navigation_map"
         android:name="com.example.nulli.ui.map.MapFragment"
         android:label="@string/title_map"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_map" />
 
     <fragment
         android:id="@+id/navigation_mypage"
-        android:name="com.example.nulli.ui.map."
-        android:label="@string/title_map"
-        tools:layout="@layout/fragment_notifications" />
+        android:name="com.example.nulli.ui.mypage.MypageFragment"
+        android:label="@string/title_mypage"
+        tools:layout="@layout/fragment_mypage" />
 
 </navigation>
