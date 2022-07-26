@@ -6,10 +6,14 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.View
+import com.example.nulli.MainActivity
 import com.example.nulli.R
 import com.example.nulli.databinding.ActivitySplashBinding
+import com.example.nulli.ui.auth.AuthMailActivity
 import com.example.nulli.ui.auth.JoinActivity
 import com.example.nulli.ui.auth.LoginActivity
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class SplashActivity : AppCompatActivity() {
 
@@ -22,8 +26,23 @@ class SplashActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         Handler(Looper.myLooper()!!).postDelayed({
-            binding.btnLogin.visibility = View.VISIBLE
-            binding.btnJoin.visibility = View.VISIBLE
+            val user = Firebase.auth.currentUser
+            if (user != null) {
+                user.reload()
+
+                    val intent = if (user.isEmailVerified) {
+                        Intent(this, MainActivity::class.java)
+                    } else {
+                        Intent(this, AuthMailActivity::class.java)
+                    }
+
+                    startActivity(intent)
+                    finish()
+            } else {
+                binding.btnLogin.visibility = View.VISIBLE
+                binding.btnJoin.visibility = View.VISIBLE
+            }
+
         },2000)
 
         binding.btnLogin.setOnClickListener {
