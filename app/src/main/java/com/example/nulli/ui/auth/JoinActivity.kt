@@ -30,26 +30,47 @@ class JoinActivity : AppCompatActivity() {
     }
 
     fun join() {
+        var isJoin = true
         val email = binding.etEmail.text.toString()
         val password = binding.etPassword.text.toString()
+        val name = binding.etName.text.toString()
 
-        auth.createUserWithEmailAndPassword(email, password)
-            .addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
-                    Log.d(TAG, "createUserWithEmail:success")
-                    val user = auth.currentUser
-                    updateUI(user)
-                } else {
-                    // If sign in fails, display a message to the user.
-                    Log.w(TAG, "createUserWithEmail:failure", task.exception)
-                    Toast.makeText(
-                        baseContext, "Authentication failed.",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    updateUI(null)
+        if(email.isEmpty()) {
+            Toast.makeText(this,"이메일을 입력해주세요", Toast.LENGTH_LONG).show()
+            isJoin = false
+        }
+        if(name.isEmpty()) {
+            Toast.makeText(this,"닉네임을 입력해주세요",Toast.LENGTH_LONG).show()
+            isJoin = false
+        }
+        if(password.isEmpty()) {
+            Toast.makeText(this,"패스워드를 입력해주세요",Toast.LENGTH_LONG).show()
+            isJoin = false
+        }
+        //비밀번호 자리
+        if(password.length < 8) {
+            Toast.makeText(this,"비밀번호를 8자리 이상으로 입력해주세요",Toast.LENGTH_LONG).show()
+            isJoin = false
+        }
+        if(isJoin){
+
+            auth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this) { task ->
+                    if (task.isSuccessful) {
+                        Toast.makeText(this,"회원가입을 성공했습니다.",Toast.LENGTH_LONG).show()
+                        val user = auth.currentUser
+                        updateUI(user)
+                    } else {
+                        // If sign in fails, display a message to the user.
+                        Log.w(TAG, "createUserWithEmail:failure", task.exception)
+                        Toast.makeText(
+                            baseContext, "Authentication failed.",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        updateUI(null)
+                    }
                 }
-            }
+        }
     }
 
     private fun updateUI(user: FirebaseUser?) {

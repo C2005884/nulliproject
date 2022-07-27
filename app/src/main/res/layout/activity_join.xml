@@ -16,6 +16,17 @@
         android:hint="아이디(이메일)"
         android:inputType="textEmailAddress"/>
 
+
+    <EditText
+        android:id="@+id/etName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:hint="닉네임"
+        android:inputType="textPersonName"
+        app:layout_constraintTop_toBottomOf="@+id/etEmail"/>
+
     <EditText
         android:id="@+id/etPassword"
         android:layout_width="match_parent"
@@ -24,7 +35,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:hint="비밀번호(8자이상)"
         android:inputType="textPassword"
-        app:layout_constraintTop_toBottomOf="@+id/etEmail"/>
+        app:layout_constraintTop_toBottomOf="@+id/etName"/>
 
     <Button
         android:id="@+id/btnJoin"
