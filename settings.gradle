@@ -10,7 +10,12 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        jcenter()
+        maven{
+            url 'https://naver.jfrog.io/artifactory/maven/'
+        }
     }
 }
+
 rootProject.name = "Nulli"
 include ':app'

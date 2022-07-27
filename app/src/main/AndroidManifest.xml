@@ -32,6 +32,10 @@
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name"></activity>
+
+        <meta-data
+            android:name="com.naver.maps.map.CLIENT_ID"
+            android:value="mkoqhbk1a4" />
     </application>
 
 </manifest>
