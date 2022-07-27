@@ -41,7 +41,7 @@ dependencies {
     implementation 'com.naver.maps:map-sdk:3.14.0'
     //noinspection GradleCompatible
     implementation 'com.android.support:support-compat:28.0.0'
-    //현재 위치 띄우기
+    //네이버 지도 위치 추적
     implementation 'com.google.android.gms:play-services-location:17.0.0'
 
     implementation 'androidx.core:core-ktx:1.8.0'
