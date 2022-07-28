@@ -1,8 +1,12 @@
 package com.example.nulli.api
 
+import com.example.nulli.api.search.SearchResponse
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
@@ -22,7 +26,24 @@ class CallApi {
         .client(client)
         .build()
 
-    fun search(text:String){
+    fun search(searchString:String, callback:(List<SearchResponse.Item>?) -> Unit){
+        retrofit.create(NaverApi::class.java)
+            .searchPlace(searchString)
+            .enqueue(object :
+                Callback<SearchResponse> {
+                override fun onResponse(
+                    call: Call<SearchResponse>,
+                    response: Response<SearchResponse>
+                ) {
+                    callback(response.body()?.items)
+
+                }
+
+                override fun onFailure(call: Call<SearchResponse>, t: Throwable) {
+
+                }
+
+            })
 
     }
 }
