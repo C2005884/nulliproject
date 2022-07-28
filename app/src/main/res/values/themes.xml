@@ -11,4 +11,9 @@
         <item name="colorOnSecondary">@color/black</item>
         <!-- Customize your theme here. -->
     </style>
+    <style name="AuthEditText" parent="android:Widget.EditText">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:layout_margin">10dp</item>
+    </style>
 </resources>

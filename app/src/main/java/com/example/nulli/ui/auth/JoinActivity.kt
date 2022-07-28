@@ -34,6 +34,7 @@ class JoinActivity : AppCompatActivity() {
         val email = binding.etEmail.text.toString()
         val password = binding.etPassword.text.toString()
         val name = binding.etName.text.toString()
+        val password2 = binding.etPassword2.text.toString()
 
         if(email.isEmpty()) {
             Toast.makeText(this,"이메일을 입력해주세요", Toast.LENGTH_LONG).show()
@@ -52,12 +53,16 @@ class JoinActivity : AppCompatActivity() {
             Toast.makeText(this,"비밀번호를 8자리 이상으로 입력해주세요",Toast.LENGTH_LONG).show()
             isJoin = false
         }
+        if(password != password2) {
+            Toast.makeText(this,"같은 비밀번호를 입력해주세요",Toast.LENGTH_LONG).show()
+            isJoin = false
+        }
         if(isJoin){
 
             auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
-                        Toast.makeText(this,"회원가입을 성공했습니다.",Toast.LENGTH_LONG).show()
+                        Toast.makeText(this,"인증 이메일이 전송됐습니다. 확인해주세요",Toast.LENGTH_LONG).show()
                         val user = auth.currentUser
                         updateUI(user)
                     } else {

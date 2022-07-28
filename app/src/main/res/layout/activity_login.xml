@@ -1,39 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.auth.LoginActivity">
+    tools:context=".ui.auth.LoginActivity"
+    android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/etEmail"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="107dp"
+        android:background="@color/primary">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="25dp"
+            android:gravity="center"
+            android:text="로그인"
+            android:textColor="#FFFFFF"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:hint="아이디(이메일)"
-        android:inputType="textEmailAddress"/>
+        android:layout_marginTop="30dp"
+        android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/etPassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:hint="비밀번호(8자이상)"
-        android:inputType="textPassword"
-        app:layout_constraintTop_toBottomOf="@+id/etEmail"/>
+        <EditText
+            android:id="@+id/etEmail"
+            style="@style/AuthEditText"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="아이디(이메일)"
+            android:inputType="textEmailAddress"
+            android:textSize="20sp" />
 
-    <Button
-        android:id="@+id/btnLogin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:text="로그인"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etPassword"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="#999999" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <EditText
+            android:id="@+id/etPassword"
+            style="@style/AuthEditText"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="비밀번호(8자이상)"
+            android:inputType="textPassword"
+            android:textSize="20sp"
+            app:layout_constraintTop_toBottomOf="@+id/etEmail" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="#999999" />
+
+        <Button
+            android:id="@+id/btnLogin"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_margin="20dp"
+            android:background="@drawable/background_radius_orange"
+            android:text="로그인"
+            android:textSize="20sp"
+            app:layout_constraintTop_toBottomOf="@+id/etPassword" />
+
+    </LinearLayout>
+
+
+</LinearLayout>
