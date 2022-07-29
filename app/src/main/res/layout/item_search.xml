@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="의료의료의료 병원"
+        tools:text="상호명"
         android:layout_margin="8dp"
         android:textSize="20dp"
         />
@@ -21,17 +21,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="8dp"
-        tools:text = "서울 광진구 광나루로56길 85(테크노마트) 3층"
+        tools:text = "주소"
         app:layout_constraintTop_toBottomOf="@+id/tvTitle"/>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="16dp"
         android:background="#d7d7d7"
-        app:layout_constraintBottom_toTopOf="@+id/tvAddress"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
