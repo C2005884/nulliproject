@@ -23,6 +23,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.SignInButton
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -135,10 +136,17 @@ class SplashActivity : AppCompatActivity() {
                 if (task.isSuccessful) {
                     val user = auth.currentUser
                     Log.d("xxxx ", user.toString())
+                    moveMainPage(task.result?.user)
                 } else {
                     Log.d("xxxx ", "signInWithCredential:failure", task.exception)
                 }
 
             }
+    }
+
+    fun moveMainPage(user: FirebaseUser?) {
+        if(user != null) {
+            startActivity(Intent(this, MainActivity::class.java))
+        }
     }
 }
