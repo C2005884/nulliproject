@@ -2,6 +2,7 @@ package com.example.nulli.ui.map
 
 import android.os.Build
 import android.text.Html
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
@@ -12,6 +13,7 @@ import com.example.nulli.databinding.ItemSearchBinding
 class SearchAdapter : RecyclerView.Adapter<SearchAdapter.ViewHolder>() {
 
     private val datas: ArrayList<SearchResponse.Item> = arrayListOf()
+    var itemClick : (String) -> Unit = {}
 
     fun setDatas(arrayList: ArrayList<SearchResponse.Item>) {
         datas.clear()
@@ -36,6 +38,10 @@ class SearchAdapter : RecyclerView.Adapter<SearchAdapter.ViewHolder>() {
 
     inner class ViewHolder(val binding: ItemSearchBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(data: SearchResponse.Item) {
+            binding.root.setOnClickListener {
+                Log.e("click", data.roadAddress)
+                itemClick(data.roadAddress)
+            }
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 binding.tvTitle.text = Html.fromHtml(data.title, Html.FROM_HTML_MODE_LEGACY)
             } else {

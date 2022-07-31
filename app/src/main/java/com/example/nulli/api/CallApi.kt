@@ -1,5 +1,7 @@
 package com.example.nulli.api
 
+import android.util.Log
+import com.example.nulli.api.geocode.GeocodeResponse
 import com.example.nulli.api.search.SearchResponse
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
@@ -26,8 +28,38 @@ class CallApi {
         .client(client)
         .build()
 
+    private val naverMapRetrofit: Retrofit = Retrofit.Builder()
+        .baseUrl("https://openapi.naver.com/v1/")
+        .addConverterFactory(GsonConverterFactory.create(gson!!))
+        .client(client)
+        .build()
+
+    private val geocodeRetrofit: Retrofit = Retrofit.Builder()
+        .baseUrl("https://naveropenapi.apigw.ntruss.com/map-geocode/v2/")
+        .addConverterFactory(GsonConverterFactory.create(gson!!))
+        .client(client)
+        .build()
+
+    fun getLatLng(address:String, callback:(GeocodeResponse.Addresse?) -> Unit) {
+        geocodeRetrofit.create(GeocodeApi::class.java)
+            .getLatLng(address)
+            .enqueue(object  : Callback<GeocodeResponse> {
+                override fun onResponse(
+                    call: Call<GeocodeResponse>,
+                    response: Response<GeocodeResponse>
+                ) {
+                    callback(response.body()?.addresses?.get(0))
+                }
+
+                override fun onFailure(call: Call<GeocodeResponse>, t: Throwable) {
+                    TODO("Not yet implemented")
+                }
+
+            })
+    }
+
     fun search(searchString:String, callback:(List<SearchResponse.Item>?) -> Unit){
-        retrofit.create(NaverApi::class.java)
+        retrofit.create(NaverMapApi::class.java)
             .searchPlace(searchString)
             .enqueue(object :
                 Callback<SearchResponse> {
@@ -35,8 +67,8 @@ class CallApi {
                     call: Call<SearchResponse>,
                     response: Response<SearchResponse>
                 ) {
+                    //Log.e("res","${response.body()}")
                     callback(response.body()?.items)
-
                 }
 
                 override fun onFailure(call: Call<SearchResponse>, t: Throwable) {

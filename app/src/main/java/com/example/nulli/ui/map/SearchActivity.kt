@@ -28,7 +28,16 @@ class SearchActivity : AppCompatActivity() {
 
         binding.rvSearch.apply {
             layoutManager = LinearLayoutManager(this@SearchActivity)
-            adapter = SearchAdapter()
+            adapter = SearchAdapter().apply {
+                itemClick = {
+                    Toast.makeText(this@SearchActivity, it, Toast.LENGTH_SHORT).show()
+                    CallApi().getLatLng(it){
+                        Toast.makeText(this@SearchActivity, "${it?.x} ${it?.y}", Toast.LENGTH_LONG).show()
+
+                        //Toast.makeText(this@SearchActivity, it.toString(), Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
         }
 //        binding.rvSearch.layoutManager = LinearLayoutManager(this)
 //        binding.rvSearch.adapter = SearchAdapter()

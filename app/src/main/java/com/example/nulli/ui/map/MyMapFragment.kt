@@ -1,14 +1,25 @@
 package com.example.nulli.ui.map
 
-import android.content.Intent
+import android.content.Context
+import android.graphics.Color
+import android.graphics.Rect
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.nulli.R
+import com.example.nulli.api.CallApi
+import com.example.nulli.api.geocode.GeocodeResponse
+import com.example.nulli.api.search.SearchResponse
 import com.example.nulli.databinding.FragmentMapBinding
+import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.*
+import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.util.FusedLocationSource
 
 class MyMapFragment : Fragment() , OnMapReadyCallback {
@@ -16,6 +27,7 @@ class MyMapFragment : Fragment() , OnMapReadyCallback {
     private var _binding: FragmentMapBinding? = null
     private lateinit var locationSource: FusedLocationSource
     private lateinit var naverMap: NaverMap
+    private var isKeyboardOn = false
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -43,8 +55,90 @@ class MyMapFragment : Fragment() , OnMapReadyCallback {
             }
 
         mapFragment.getMapAsync(this)
-        binding.tvSearch.setOnClickListener {
-            requireActivity().startActivity(Intent(requireActivity(),SearchActivity::class.java))
+        setSearch()
+    }
+
+    private fun setSearch() {
+        setRv()
+        setKeyboard()
+        binding.etSearch.setOnEditorActionListener { textView, i, keyEvent ->
+            search(textView.text.toString())
+            val inputMethodManager = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            inputMethodManager.hideSoftInputFromWindow(textView.windowToken, 0)
+            textView.clearFocus()
+            false
+        }
+    }
+
+    private fun setKeyboard() {
+        binding.root.viewTreeObserver.addOnGlobalLayoutListener {
+            val rec = Rect()
+            binding.root.getWindowVisibleDisplayFrame(rec)
+
+            //finding screen height
+            val screenHeight = binding.root.rootView.height
+
+            //finding keyboard height
+            val keypadHeight = screenHeight - rec.bottom
+            isKeyboardOn = keypadHeight <= screenHeight * 0.15
+            binding.clPanel.isVisible = isKeyboardOn
+        }
+    }
+
+    private fun setRv() {
+        binding.rvSearch.apply {
+            layoutManager = LinearLayoutManager(requireContext())
+            adapter = SearchAdapter().apply {
+                itemClick = {
+                    CallApi().getLatLng(it){
+                        //Toast.makeText(this@SearchActivity, "${it?.x} ${it?.y}", Toast.LENGTH_LONG).show()
+
+                        //Toast.makeText(this@SearchActivity, it.toString(), Toast.LENGTH_SHORT).show()
+                        jumpMarker(it)
+
+                    }
+                }
+            }
+        }
+    }
+
+    private fun jumpMarker(it: GeocodeResponse.Addresse?) {
+        if(it?.x==null && it?.y==null) {
+            Toast.makeText(requireContext(), "해당 위치로 이동할 수 없습니다.", Toast.LENGTH_SHORT).show()
+            return
+        }
+        val cameraUpdate = CameraUpdate.scrollTo(LatLng(it.y.toDouble(), it.x.toDouble()))
+            .animate(CameraAnimation.Fly, 1000)
+        naverMap.moveCamera(cameraUpdate)
+    }
+
+    private fun search(text: String) {
+        CallApi().search(text) {
+            (binding.rvSearch.adapter as SearchAdapter).setDatas(ArrayList(it))
+            for(item in ArrayList(it)) {
+                CallApi().getLatLng(item.roadAddress) {
+                    makeMarker(item, it)
+                }
+            }
+        }
+
+    }
+
+    private fun makeMarker(item: SearchResponse.Item, it: GeocodeResponse.Addresse?) {
+        if(it?.x==null && it?.y==null) {
+            Toast.makeText(requireContext(), "해당 위치로 이동할 수 없습니다.", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        val marker = Marker()
+        marker.position = LatLng(it.y.toDouble(), it.x.toDouble())
+        marker.captionText = item.title
+        marker.captionColor = Color.BLUE
+        marker.map = naverMap
+
+        marker.setOnClickListener {
+            Toast.makeText(requireContext(), "${item.title}", Toast.LENGTH_SHORT).show()
+            false
         }
     }
 
@@ -52,6 +146,15 @@ class MyMapFragment : Fragment() , OnMapReadyCallback {
         this.naverMap = naverMap
         naverMap.locationSource = locationSource
         naverMap.locationTrackingMode = LocationTrackingMode.Follow
+        naverMap.setOnMapClickListener { pointF, latLng ->
+
+            if(isKeyboardOn) {
+                val inputMethodManager =
+                    requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                inputMethodManager.hideSoftInputFromWindow(binding.etSearch.windowToken, 0)
+            }
+            false
+        }
         setMapUiSettings()
 
     }
