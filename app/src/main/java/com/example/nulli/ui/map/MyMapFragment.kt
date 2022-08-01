@@ -1,5 +1,6 @@
 package com.example.nulli.ui.map
 
+import android.animation.ObjectAnimator
 import android.content.Context
 import android.graphics.Color
 import android.graphics.Rect
@@ -28,6 +29,7 @@ class MyMapFragment : Fragment() , OnMapReadyCallback {
     private lateinit var locationSource: FusedLocationSource
     private lateinit var naverMap: NaverMap
     private var isKeyboardOn = false
+    private var isFabOpen = false
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -56,6 +58,7 @@ class MyMapFragment : Fragment() , OnMapReadyCallback {
 
         mapFragment.getMapAsync(this)
         setSearch()
+        setFABClickEvent()
     }
 
     private fun setSearch() {
@@ -187,5 +190,36 @@ class MyMapFragment : Fragment() , OnMapReadyCallback {
 
     companion object {
         private const val LOCATION_PERMISSION_REQUEST_CODE = 1000
+    }
+    private fun setFABClickEvent() {
+        // 플로팅 버튼 클릭시 애니메이션 동작 기능
+        binding.fabMain.setOnClickListener {
+            toggleFab()
+        }
+
+        // 플로팅 버튼 클릭 이벤트 - 캡처
+        binding.fabMap.setOnClickListener {
+            Toast.makeText(this.context, "지도", Toast.LENGTH_SHORT).show()
+        }
+
+        // 플로팅 버튼 클릭 이벤트 - 공유
+       binding.fabObstacleMap.setOnClickListener {
+            Toast.makeText(this.context, "장애물지도", Toast.LENGTH_SHORT).show()
+        }
+    }
+    private fun toggleFab(){
+        // 플로팅 액션 버튼 닫기 - 열려있는 플로팅 버튼 집어넣는 애니메이션
+        if (isFabOpen) {
+            ObjectAnimator.ofFloat(binding.fabMap, "translationY", 0f).apply { start() }
+            ObjectAnimator.ofFloat(binding.fabObstacleMap, "translationY", 0f).apply { start() }
+            ObjectAnimator.ofFloat(binding.fabMain, View.ROTATION, 45f, 0f).apply { start() }
+        } else { // 플로팅 액션 버튼 열기 - 닫혀있는 플로팅 버튼 꺼내는 애니메이션
+            ObjectAnimator.ofFloat(binding.fabObstacleMap, "translationY", -360f).apply { start() }
+            ObjectAnimator.ofFloat(binding.fabMap, "translationY", -180f).apply { start() }
+            ObjectAnimator.ofFloat(binding.fabMain, View.ROTATION, 0f, 45f).apply { start() }
+        }
+
+        isFabOpen = !isFabOpen
+
     }
 }
