@@ -1,10 +1,14 @@
 package com.example.nulli.ui.map
 
 import android.animation.ObjectAnimator
+import android.app.Service
 import android.content.Context
 import android.graphics.Color
 import android.graphics.Rect
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,6 +22,7 @@ import com.example.nulli.api.CallApi
 import com.example.nulli.api.geocode.GeocodeResponse
 import com.example.nulli.api.search.SearchResponse
 import com.example.nulli.databinding.FragmentMapBinding
+import com.example.nulli.util.SkeyBoard
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.*
 import com.naver.maps.map.overlay.Marker
@@ -30,6 +35,7 @@ class MyMapFragment : Fragment() , OnMapReadyCallback {
     private lateinit var naverMap: NaverMap
     private var isKeyboardOn = false
     private var isFabOpen = false
+    private var isEditObstacle = false
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -74,18 +80,26 @@ class MyMapFragment : Fragment() , OnMapReadyCallback {
     }
 
     private fun setKeyboard() {
-        binding.root.viewTreeObserver.addOnGlobalLayoutListener {
-            val rec = Rect()
-            binding.root.getWindowVisibleDisplayFrame(rec)
+            val controlManager: InputMethodManager? =
+                requireActivity().getSystemService(Service.INPUT_METHOD_SERVICE) as InputMethodManager?
+            val softKeyboard = SkeyBoard(binding.root, controlManager!!)
+            softKeyboard.setSoftKeyboardCallback(object : SkeyBoard.SoftKeyboardChanged {
+                override fun onSoftKeyboardHide() {
+                    Handler(Looper.getMainLooper()).post {
+                        Log.e("SKD", "hide")
+                        isKeyboardOn = false
+                        binding.rvSearch.isVisible = true
+                    }
+                }
 
-            //finding screen height
-            val screenHeight = binding.root.rootView.height
-
-            //finding keyboard height
-            val keypadHeight = screenHeight - rec.bottom
-            isKeyboardOn = keypadHeight <= screenHeight * 0.15
-            binding.clPanel.isVisible = isKeyboardOn
-        }
+                override fun onSoftKeyboardShow() {
+                    Handler(Looper.getMainLooper()).post {
+                        Log.e("SKD", "show")
+                        isKeyboardOn = true
+                        binding.rvSearch.isVisible = false
+                    }
+                }
+            })
     }
 
     private fun setRv() {
@@ -155,9 +169,16 @@ class MyMapFragment : Fragment() , OnMapReadyCallback {
                 val inputMethodManager =
                     requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                 inputMethodManager.hideSoftInputFromWindow(binding.etSearch.windowToken, 0)
+            } else {
+                binding.rvSearch.isVisible = false
             }
             false
         }
+        naverMap.addOnCameraChangeListener { reason, animated ->
+            Log.i("NaverMap", "카메라 변경 - reson: $reason, animated: $animated")
+        }
+
+
         setMapUiSettings()
 
     }
@@ -190,6 +211,8 @@ class MyMapFragment : Fragment() , OnMapReadyCallback {
 
     companion object {
         private const val LOCATION_PERMISSION_REQUEST_CODE = 1000
+        private const val OBSTACLE = 0
+        private const val BUILDING = 1
     }
     private fun setFABClickEvent() {
         // 플로팅 버튼 클릭시 애니메이션 동작 기능
@@ -204,9 +227,19 @@ class MyMapFragment : Fragment() , OnMapReadyCallback {
 
         // 플로팅 버튼 클릭 이벤트 - 공유
        binding.fabObstacleMap.setOnClickListener {
-            Toast.makeText(this.context, "장애물지도", Toast.LENGTH_SHORT).show()
+            setEditMode(OBSTACLE)
         }
     }
+
+    private fun setEditMode(type: Int) {
+        binding.etSearch.isVisible = false
+        binding.rvSearch.isVisible = false
+        binding.fabMain.isVisible = false
+        binding.clPanel.isVisible = true
+        binding.clObstaclePanel.isVisible = true
+        binding.ivTarget.isVisible = true
+    }
+
     private fun toggleFab(){
         // 플로팅 액션 버튼 닫기 - 열려있는 플로팅 버튼 집어넣는 애니메이션
         if (isFabOpen) {
@@ -222,4 +255,5 @@ class MyMapFragment : Fragment() , OnMapReadyCallback {
         isFabOpen = !isFabOpen
 
     }
+
 }
