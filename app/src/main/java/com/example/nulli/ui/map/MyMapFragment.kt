@@ -175,7 +175,8 @@ class MyMapFragment : Fragment() , OnMapReadyCallback {
             false
         }
         naverMap.addOnCameraChangeListener { reason, animated ->
-            Log.i("NaverMap", "카메라 변경 - reson: $reason, animated: $animated")
+            //Log.i("NaverMap", "카메라 변경 - reson: $reason, animated: $animated")
+            CallApi().getLocation()
         }
 
 

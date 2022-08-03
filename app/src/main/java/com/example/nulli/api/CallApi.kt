@@ -2,9 +2,11 @@ package com.example.nulli.api
 
 import android.util.Log
 import com.example.nulli.api.geocode.GeocodeResponse
+import com.example.nulli.api.reverse_geocoding.ReverseGeocodingResponse
 import com.example.nulli.api.search.SearchResponse
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import com.naver.maps.geometry.LatLng
 import okhttp3.OkHttpClient
 import retrofit2.Call
 import retrofit2.Callback
@@ -35,7 +37,7 @@ class CallApi {
         .build()
 
     private val geocodeRetrofit: Retrofit = Retrofit.Builder()
-        .baseUrl("https://naveropenapi.apigw.ntruss.com/map-geocode/v2/")
+        .baseUrl("https://naveropenapi.apigw.ntruss.com/")
         .addConverterFactory(GsonConverterFactory.create(gson!!))
         .client(client)
         .build()
@@ -52,6 +54,24 @@ class CallApi {
                 }
 
                 override fun onFailure(call: Call<GeocodeResponse>, t: Throwable) {
+                    TODO("Not yet implemented")
+                }
+
+            })
+    }
+
+    fun getLocation(latlng: LatLng, callback:(String?) -> Unit) {
+        geocodeRetrofit.create(GeocodeApi::class.java)
+            .getLocation(latlng.longitude.toString()+","+latlng.latitude.toString())
+            .enqueue(object  : Callback<ReverseGeocodingResponse> {
+                override fun onResponse(
+                    call: Call<ReverseGeocodingResponse>,
+                    response: Response<ReverseGeocodingResponse>
+                ) {
+                    callback(response.body()?.getLocation())
+                }
+
+                override fun onFailure(call: Call<ReverseGeocodingResponse>, t: Throwable) {
                     TODO("Not yet implemented")
                 }
 
