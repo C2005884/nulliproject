@@ -16,6 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Nulli">
         <activity
+            android:name=".ui.map.WriteObstacleActivity"
+            android:exported="false" />
+        <activity
             android:name=".teachable.TeachableActivity"
             android:exported="false" />
         <activity

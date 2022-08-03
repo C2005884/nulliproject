@@ -188,12 +188,16 @@ data class ReverseGeocodingResponse(
 
     fun getLocation() : String {
         val location =
-            results[0].region.area1.name + " " +
-                    results[0].region.area2.name +
-                    results[0].land.name + " " +
-                    results[0].land.number1 + " " +
-                    results[0].land.number2 + " " +
-                    results[0].land.addition0.value
+            try {
+                results[0].region.area1.name + " " +
+                        results[0].region.area2.name +
+                        results[0].land.name + " " +
+                        results[0].land.number1 + " " +
+                        results[0].land.number2 + " " +
+                        results[0].land.addition0.value
+            } catch (E:Exception) {
+                "결과가 없습니다."
+            }
 
         return location
     }

@@ -37,7 +37,7 @@ public class TeachableActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_teachable);
 
         result = findViewById(R.id.result);
         confidence = findViewById(R.id.confidence);
@@ -96,7 +96,7 @@ public class TeachableActivity extends AppCompatActivity {
                     maxPos = i;
                 }
             }
-            String[] classes = {"경사", "계단", "좁은길", "턱"};
+            String[] classes = {"경사", "계단", "기타", "턱"};
 
             result.setText(classes[maxPos]);
 

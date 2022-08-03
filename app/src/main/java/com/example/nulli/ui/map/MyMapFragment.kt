@@ -3,6 +3,7 @@ package com.example.nulli.ui.map
 import android.animation.ObjectAnimator
 import android.app.Service
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.Rect
 import android.os.Bundle
@@ -14,6 +15,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -23,6 +25,10 @@ import com.example.nulli.api.geocode.GeocodeResponse
 import com.example.nulli.api.search.SearchResponse
 import com.example.nulli.databinding.FragmentMapBinding
 import com.example.nulli.util.SkeyBoard
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
+import com.google.firestore.v1.Write
+
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.*
 import com.naver.maps.map.overlay.Marker
@@ -35,11 +41,31 @@ class MyMapFragment : Fragment() , OnMapReadyCallback {
     private lateinit var naverMap: NaverMap
     private var isKeyboardOn = false
     private var isFabOpen = false
-    private var isEditObstacle = false
+    private var isEdit = false
+    private var b4GeocodingTime = 0L
+    private lateinit var onBackPressedCallback: OnBackPressedCallback
 
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        onBackPressedCallback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if(isEdit) {
+                    setEditMode(CLEAR)
+
+                }
+            }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(this, onBackPressedCallback)
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        onBackPressedCallback.remove()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -174,9 +200,16 @@ class MyMapFragment : Fragment() , OnMapReadyCallback {
             }
             false
         }
+
         naverMap.addOnCameraChangeListener { reason, animated ->
             //Log.i("NaverMap", "카메라 변경 - reson: $reason, animated: $animated")
-            CallApi().getLocation()
+            if(isEdit) {
+                if(System.currentTimeMillis() - b4GeocodingTime > 300) {
+                    CallApi().getLocation(naverMap.cameraPosition.target) {
+                        binding.tvAddress.text = it
+                    }
+                }
+            }
         }
 
 
@@ -212,6 +245,7 @@ class MyMapFragment : Fragment() , OnMapReadyCallback {
 
     companion object {
         private const val LOCATION_PERMISSION_REQUEST_CODE = 1000
+        private const val CLEAR = -1
         private const val OBSTACLE = 0
         private const val BUILDING = 1
     }
@@ -233,12 +267,41 @@ class MyMapFragment : Fragment() , OnMapReadyCallback {
     }
 
     private fun setEditMode(type: Int) {
-        binding.etSearch.isVisible = false
-        binding.rvSearch.isVisible = false
-        binding.fabMain.isVisible = false
-        binding.clPanel.isVisible = true
-        binding.clObstaclePanel.isVisible = true
-        binding.ivTarget.isVisible = true
+        when (type) {
+            CLEAR -> {
+                isEdit = false
+                binding.etSearch.isVisible = true
+                binding.fabMain.isVisible = true
+                binding.fabMap.isVisible = true
+                binding.fabObstacleMap.isVisible = true
+                binding.clObstaclePanel.isVisible = false
+                binding.ivTarget.isVisible = false }
+            OBSTACLE, BUILDING -> {
+                isEdit = true
+                binding.etSearch.isVisible = false
+                binding.rvSearch.isVisible = false
+                binding.fabMain.isVisible = false
+                binding.fabMap.isVisible = false
+                binding.fabObstacleMap.isVisible = false
+                binding.clObstaclePanel.isVisible = true
+                binding.ivTarget.isVisible = true
+            }
+        }
+
+        binding.tvApply.setOnClickListener {
+            if (type == OBSTACLE) {
+                saveData(type)
+            } else if (type == BUILDING) {
+                saveData(type)
+            }
+            Toast.makeText(requireContext(), "등록", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun saveData(type: Int) {
+        val intent = Intent(requireActivity(), WriteObstacleActivity::class.java)
+        startActivity(intent)
+
     }
 
     private fun toggleFab(){

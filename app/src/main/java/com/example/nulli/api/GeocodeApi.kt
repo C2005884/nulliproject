@@ -17,7 +17,7 @@ interface GeocodeApi {
     fun getLatLng(@Query("query") text:String
     ): Call<GeocodeResponse>
 
-    @GET("ap-reversegeocode/v2/gc")
+    @GET("map-reversegeocode/v2/gc")
     @Headers(
         "X-NCP-APIGW-API-KEY-ID:mkoqhbk1a4",
         "X-NCP-APIGW-API-KEY:pPbcUH6ANUOs43XP0FhqDZt5IsswgdjFFGZP8NTD"
