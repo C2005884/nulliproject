@@ -6,9 +6,11 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.Rect
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.text.Html
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -24,7 +26,12 @@ import com.example.nulli.api.CallApi
 import com.example.nulli.api.geocode.GeocodeResponse
 import com.example.nulli.api.search.SearchResponse
 import com.example.nulli.databinding.FragmentMapBinding
+import com.example.nulli.model.Obstacle
 import com.example.nulli.util.SkeyBoard
+import com.example.nulli.util.nulliUtil
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.google.firestore.v1.Write
@@ -32,9 +39,12 @@ import com.google.firestore.v1.Write
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.*
 import com.naver.maps.map.overlay.Marker
+import com.naver.maps.map.overlay.OverlayImage
 import com.naver.maps.map.util.FusedLocationSource
 
-class MyMapFragment : Fragment() , OnMapReadyCallback {
+class MyMapFragment : Fragment(), OnMapReadyCallback {
+
+    private val db = Firebase.database.reference
 
     private var _binding: FragmentMapBinding? = null
     private lateinit var locationSource: FusedLocationSource
@@ -45,6 +55,12 @@ class MyMapFragment : Fragment() , OnMapReadyCallback {
     private var b4GeocodingTime = 0L
     private lateinit var onBackPressedCallback: OnBackPressedCallback
 
+    private val obstacleList: ArrayList<Obstacle> = arrayListOf()
+
+    private var currentLatitude: Double = 0.0
+    private var currentLongitude: Double = 0.0
+    private var currentAddress: String = ""
+
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
@@ -53,7 +69,7 @@ class MyMapFragment : Fragment() , OnMapReadyCallback {
         super.onAttach(context)
         onBackPressedCallback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-                if(isEdit) {
+                if (isEdit) {
                     setEditMode(CLEAR)
 
                 }
@@ -77,6 +93,32 @@ class MyMapFragment : Fragment() , OnMapReadyCallback {
         return root
     }
 
+
+    override fun onResume() {
+        super.onResume()
+        loadObstacle()
+    }
+
+    private fun loadObstacle() {
+        db.child("obstacle").addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for (s in snapshot.children) {
+                    val obstacle = s.getValue(Obstacle::class.java)
+                    if (obstacle != null && !obstacleList.contains(obstacle)) {
+                        obstacleList.add(obstacle)
+                    }
+                }
+                Log.e("size: ", obstacleList.size.toString())
+                setObstacleMarker()
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+
+        })
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         locationSource =
@@ -98,7 +140,8 @@ class MyMapFragment : Fragment() , OnMapReadyCallback {
         setKeyboard()
         binding.etSearch.setOnEditorActionListener { textView, i, keyEvent ->
             search(textView.text.toString())
-            val inputMethodManager = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            val inputMethodManager =
+                requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             inputMethodManager.hideSoftInputFromWindow(textView.windowToken, 0)
             textView.clearFocus()
             false
@@ -106,26 +149,26 @@ class MyMapFragment : Fragment() , OnMapReadyCallback {
     }
 
     private fun setKeyboard() {
-            val controlManager: InputMethodManager? =
-                requireActivity().getSystemService(Service.INPUT_METHOD_SERVICE) as InputMethodManager?
-            val softKeyboard = SkeyBoard(binding.root, controlManager!!)
-            softKeyboard.setSoftKeyboardCallback(object : SkeyBoard.SoftKeyboardChanged {
-                override fun onSoftKeyboardHide() {
-                    Handler(Looper.getMainLooper()).post {
-                        Log.e("SKD", "hide")
-                        isKeyboardOn = false
-                        binding.rvSearch.isVisible = true
-                    }
+        val controlManager: InputMethodManager? =
+            requireActivity().getSystemService(Service.INPUT_METHOD_SERVICE) as InputMethodManager?
+        val softKeyboard = SkeyBoard(binding.root, controlManager!!)
+        softKeyboard.setSoftKeyboardCallback(object : SkeyBoard.SoftKeyboardChanged {
+            override fun onSoftKeyboardHide() {
+                Handler(Looper.getMainLooper()).post {
+                    Log.e("SKD", "hide")
+                    isKeyboardOn = false
+                    binding.rvSearch.isVisible = true
                 }
+            }
 
-                override fun onSoftKeyboardShow() {
-                    Handler(Looper.getMainLooper()).post {
-                        Log.e("SKD", "show")
-                        isKeyboardOn = true
-                        binding.rvSearch.isVisible = false
-                    }
+            override fun onSoftKeyboardShow() {
+                Handler(Looper.getMainLooper()).post {
+                    Log.e("SKD", "show")
+                    isKeyboardOn = true
+                    binding.rvSearch.isVisible = false
                 }
-            })
+            }
+        })
     }
 
     private fun setRv() {
@@ -133,7 +176,7 @@ class MyMapFragment : Fragment() , OnMapReadyCallback {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = SearchAdapter().apply {
                 itemClick = {
-                    CallApi().getLatLng(it){
+                    CallApi().getLatLng(it) {
                         //Toast.makeText(this@SearchActivity, "${it?.x} ${it?.y}", Toast.LENGTH_LONG).show()
 
                         //Toast.makeText(this@SearchActivity, it.toString(), Toast.LENGTH_SHORT).show()
@@ -146,7 +189,7 @@ class MyMapFragment : Fragment() , OnMapReadyCallback {
     }
 
     private fun jumpMarker(it: GeocodeResponse.Addresse?) {
-        if(it?.x==null && it?.y==null) {
+        if (it?.x == null && it?.y == null) {
             Toast.makeText(requireContext(), "해당 위치로 이동할 수 없습니다.", Toast.LENGTH_SHORT).show()
             return
         }
@@ -158,7 +201,7 @@ class MyMapFragment : Fragment() , OnMapReadyCallback {
     private fun search(text: String) {
         CallApi().search(text) {
             (binding.rvSearch.adapter as SearchAdapter).setDatas(ArrayList(it))
-            for(item in ArrayList(it)) {
+            for (item in ArrayList(it)) {
                 CallApi().getLatLng(item.roadAddress) {
                     makeMarker(item, it)
                 }
@@ -168,14 +211,19 @@ class MyMapFragment : Fragment() , OnMapReadyCallback {
     }
 
     private fun makeMarker(item: SearchResponse.Item, it: GeocodeResponse.Addresse?) {
-        if(it?.x==null && it?.y==null) {
+        if (it?.x == null && it?.y == null) {
             Toast.makeText(requireContext(), "해당 위치로 이동할 수 없습니다.", Toast.LENGTH_SHORT).show()
             return
         }
 
         val marker = Marker()
         marker.position = LatLng(it.y.toDouble(), it.x.toDouble())
-        marker.captionText = item.title
+        marker.captionText = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            Html.fromHtml(item.title, Html.FROM_HTML_MODE_LEGACY).toString()
+        } else {
+            Html.fromHtml(item.title).toString()
+        }
+
         marker.captionColor = Color.BLUE
         marker.map = naverMap
 
@@ -191,7 +239,7 @@ class MyMapFragment : Fragment() , OnMapReadyCallback {
         naverMap.locationTrackingMode = LocationTrackingMode.Follow
         naverMap.setOnMapClickListener { pointF, latLng ->
 
-            if(isKeyboardOn) {
+            if (isKeyboardOn) {
                 val inputMethodManager =
                     requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                 inputMethodManager.hideSoftInputFromWindow(binding.etSearch.windowToken, 0)
@@ -203,10 +251,13 @@ class MyMapFragment : Fragment() , OnMapReadyCallback {
 
         naverMap.addOnCameraChangeListener { reason, animated ->
             //Log.i("NaverMap", "카메라 변경 - reson: $reason, animated: $animated")
-            if(isEdit) {
-                if(System.currentTimeMillis() - b4GeocodingTime > 300) {
+            if (isEdit) {
+                if (System.currentTimeMillis() - b4GeocodingTime > 300) {
                     CallApi().getLocation(naverMap.cameraPosition.target) {
                         binding.tvAddress.text = it
+                        currentLatitude = naverMap.cameraPosition.target.latitude
+                        currentLongitude = naverMap.cameraPosition.target.longitude
+                        currentAddress = it.toString()
                     }
                 }
             }
@@ -215,6 +266,45 @@ class MyMapFragment : Fragment() , OnMapReadyCallback {
 
         setMapUiSettings()
 
+    }
+
+    private fun setObstacleMarker() {
+        val blockIcon = OverlayImage.fromResource(R.drawable.block)
+        val slopIcon = OverlayImage.fromResource(R.drawable.slope)
+        val stairsIcon = OverlayImage.fromResource(R.drawable.stairs)
+        val otherIcon = OverlayImage.fromResource(R.drawable.warning)
+
+        val iconSize = nulliUtil().dp2Px(requireContext(), 30).toInt()
+
+        for (obstacle in obstacleList) {
+            if (obstacle.latitude == null || obstacle.longitude == null) {
+                continue
+            } else {
+                val marker = Marker().apply {
+                    position =
+                        LatLng(obstacle.latitude!!.toDouble(), obstacle.longitude!!.toDouble())
+                    icon = when ((obstacle.type ?: "-1").toInt()) {
+                        Obstacle.STAIR -> stairsIcon
+                        Obstacle.SLOPE -> slopIcon
+                        Obstacle.BLOCK -> blockIcon
+                        Obstacle.OTHER -> otherIcon
+                        else -> otherIcon
+                    }.apply {
+                        width = iconSize
+                        height = iconSize
+                    }
+                }
+                marker.setOnClickListener {
+                    //Toast.makeText(requireContext(), obstacle.id, Toast.LENGTH_SHORT).show()
+                    val intent = Intent(requireActivity(), WriteObstacleActivity::class.java).apply {
+                        putExtra(WriteObstacleActivity.ID, obstacle.id)
+                    }
+                    startActivity(intent)
+                    true
+                }
+                marker.map = naverMap
+            }
+        }
     }
 
     private fun setMapUiSettings() {
@@ -230,11 +320,16 @@ class MyMapFragment : Fragment() , OnMapReadyCallback {
         _binding = null
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int,
-                                            permissions: Array<String>,
-                                            grantResults: IntArray) {
-        if (locationSource.onRequestPermissionsResult(requestCode, permissions,
-                grantResults)) {
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>,
+        grantResults: IntArray
+    ) {
+        if (locationSource.onRequestPermissionsResult(
+                requestCode, permissions,
+                grantResults
+            )
+        ) {
             if (!locationSource.isActivated) { // 권한 거부됨
                 naverMap.locationTrackingMode = LocationTrackingMode.None
             }
@@ -249,19 +344,20 @@ class MyMapFragment : Fragment() , OnMapReadyCallback {
         private const val OBSTACLE = 0
         private const val BUILDING = 1
     }
+
     private fun setFABClickEvent() {
         // 플로팅 버튼 클릭시 애니메이션 동작 기능
         binding.fabMain.setOnClickListener {
             toggleFab()
         }
 
-        // 플로팅 버튼 클릭 이벤트 - 캡처
+        // 플로팅 버튼 클릭 이벤트 - 후기
         binding.fabMap.setOnClickListener {
-            Toast.makeText(this.context, "지도", Toast.LENGTH_SHORT).show()
+            setEditMode(BUILDING)
         }
 
-        // 플로팅 버튼 클릭 이벤트 - 공유
-       binding.fabObstacleMap.setOnClickListener {
+        // 플로팅 버튼 클릭 이벤트 - 장애물
+        binding.fabObstacleMap.setOnClickListener {
             setEditMode(OBSTACLE)
         }
     }
@@ -275,7 +371,8 @@ class MyMapFragment : Fragment() , OnMapReadyCallback {
                 binding.fabMap.isVisible = true
                 binding.fabObstacleMap.isVisible = true
                 binding.clObstaclePanel.isVisible = false
-                binding.ivTarget.isVisible = false }
+                binding.ivTarget.isVisible = false
+            }
             OBSTACLE, BUILDING -> {
                 isEdit = true
                 binding.etSearch.isVisible = false
@@ -299,19 +396,31 @@ class MyMapFragment : Fragment() , OnMapReadyCallback {
     }
 
     private fun saveData(type: Int) {
-        val intent = Intent(requireActivity(), WriteObstacleActivity::class.java)
+        val intent = if (type == OBSTACLE) {
+            Intent(requireActivity(), WriteObstacleActivity::class.java).apply {
+                putExtra(WriteObstacleActivity.LAT, currentLatitude)
+                putExtra(WriteObstacleActivity.LNG, currentLongitude)
+                putExtra(WriteObstacleActivity.ADR, currentAddress)
+            }
+        } else {
+            Intent(requireActivity(), WriteObstacleActivity::class.java).apply {
+                putExtra(WriteBuildingActivity.LAT, currentLatitude)
+                putExtra(WriteBuildingActivity.LNG, currentLongitude)
+                putExtra(WriteBuildingActivity.ADR, currentAddress)
+            }
+        }
         startActivity(intent)
-
     }
 
-    private fun toggleFab(){
+    private fun toggleFab() {
         // 플로팅 액션 버튼 닫기 - 열려있는 플로팅 버튼 집어넣는 애니메이션
         if (isFabOpen) {
             ObjectAnimator.ofFloat(binding.fabMap, "translationY", 0f).apply { start() }
             ObjectAnimator.ofFloat(binding.fabObstacleMap, "translationY", 0f).apply { start() }
             ObjectAnimator.ofFloat(binding.fabMain, View.ROTATION, 45f, 0f).apply { start() }
         } else { // 플로팅 액션 버튼 열기 - 닫혀있는 플로팅 버튼 꺼내는 애니메이션
-            ObjectAnimator.ofFloat(binding.fabObstacleMap, "translationY", -360f).apply { start() }
+            ObjectAnimator.ofFloat(binding.fabObstacleMap, "translationY", -360f)
+                .apply { start() }
             ObjectAnimator.ofFloat(binding.fabMap, "translationY", -180f).apply { start() }
             ObjectAnimator.ofFloat(binding.fabMain, View.ROTATION, 0f, 45f).apply { start() }
         }

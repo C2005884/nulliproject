@@ -89,5 +89,7 @@ dependencies {
     //image picker
     implementation 'io.github.ParkSangGwon:tedimagepicker:1.2.8'
 
+    // firebase storage
+    implementation 'com.google.firebase:firebase-storage-ktx'
 
 }

@@ -24,6 +24,7 @@ class ImageAnalysis(val context: Context) {
         })
     }
 
+
     fun classifyImage(image: Bitmap, callback:(String, String) -> Unit) {
         try {
             val model: Model = Model.newInstance(context)
