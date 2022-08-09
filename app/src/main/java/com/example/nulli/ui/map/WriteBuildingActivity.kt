@@ -59,6 +59,32 @@ class WriteBuildingActivity : AppCompatActivity() {
                 showSingleImage(it)
             }
         }
+        binding.llType.setOnClickListener {
+            val dialog = BuildingTypeSelectorDialog().apply {
+                clickEvent = {
+                    when(it) {
+                        1 -> {
+                            Glide.with(this@WriteBuildingActivity).load(R.drawable.hospital).into(binding.ivType)
+                            binding.tvType.text = "병원"
+                        }
+                        2 -> {
+                            Glide.with(this@WriteBuildingActivity).load(R.drawable.drug).into(binding.ivType)
+                            binding.tvType.text = "약국"
+                        }
+                        1 -> {
+                            Glide.with(this@WriteBuildingActivity).load(R.drawable.rehabilitation).into(binding.ivType)
+                            binding.tvType.text = "재활센터"
+                        }
+                        1 -> {
+                            Glide.with(this@WriteBuildingActivity).load(R.drawable.vrious).into(binding.ivType)
+                            binding.tvType.text = "기타"
+                        }
+                    }
+                    //Toast.makeText(this@WriteBuildingActivity,it.toString(),Toast.LENGTH_SHORT).show()
+                }
+            }
+            dialog.show(supportFragmentManager, null)
+        }
 
 //        binding.ivObstacle.setOnClickListener {
 //            TedImagePicker.with(this)
