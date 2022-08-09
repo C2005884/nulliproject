@@ -3,6 +3,7 @@ package com.example.nulli.ui.map
 import android.view.LayoutInflater
 import androidx.recyclerview.widget.RecyclerView
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import com.bumptech.glide.Glide
 import com.example.nulli.databinding.ItemReviewBinding
 import com.example.nulli.model.Review
@@ -49,6 +50,7 @@ class ReviewAdapter : RecyclerView.Adapter<ReviewAdapter.ViewHolder>() {
 
     inner class ViewHolder(private val binding: ItemReviewBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(review: Review) {
+            binding.cv.isVisible = !review.imageUrl.isNullOrBlank()
             Glide.with(binding.root).load(review.imageUrl).into(binding.ivReview)
             binding.tvReview.text = review.content
             Glide.with(binding.root).load(review.profileImageUri).into(binding.ivProfile)
