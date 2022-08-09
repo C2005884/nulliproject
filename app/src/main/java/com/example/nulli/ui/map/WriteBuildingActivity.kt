@@ -12,6 +12,8 @@ import com.example.nulli.databinding.ActivityWriteBuildingBinding
 import com.example.nulli.databinding.ActivityWriteObstacleBinding
 import com.example.nulli.model.Obstacle
 import com.example.nulli.model.Review
+import com.example.nulli.ui.map.WriteObstacleActivity.Companion.LAT
+import com.example.nulli.ui.map.WriteObstacleActivity.Companion.LNG
 import com.example.nulli.util.ImageAnalysis
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.ktx.database
@@ -52,6 +54,12 @@ class WriteBuildingActivity : AppCompatActivity() {
         setRv()
         setData()
 
+        binding.ivBuilding.setOnClickListener {
+            TedImagePicker.with(this).start {
+                showSingleImage(it)
+            }
+        }
+
 //        binding.ivObstacle.setOnClickListener {
 //            TedImagePicker.with(this)
 //                .start { uri -> showSingleImage(uri) }
@@ -71,7 +79,7 @@ class WriteBuildingActivity : AppCompatActivity() {
                  content = "국회의 정기회는 법률이 정하는 바에 의하여 매년 1회 집회되며, 국회의 임시회는 대통령 또는 국회재적의원 4분의 1 이상의 요구에 의하여 집회된다. 일반사면을 명하려면 국회의 동의를 얻어야 한다.".substring(0, Random().nextInt(100)),
                 date = 1660043301000,
                  dateText = "2022년 8월 9일 화요일 오후 8:08:21 GMT+09:00",
-                  imageUrl = "https://picsum.photos/id/${Random().nextInt(500)}/200/300",
+                  imageUrl = "",
                  nickname = "닉네임은여덟자리",
                  profileImageUri = "https://picsum.photos/id/${Random().nextInt(500)}/200/300",
                  uid = ""
@@ -104,7 +112,7 @@ class WriteBuildingActivity : AppCompatActivity() {
                 content = "국회의 정기회는 법률이 정하는 바에 의하여 매년 1회 집회되며, 국회의 임시회는 대통령 또는 국회재적의원 4분의 1 이상의 요구에 의하여 집회된다. 일반사면을 명하려면 국회의 동의를 얻어야 한다.".substring(0, Random().nextInt(100)),
                 date = 1660043301000,
                 dateText = "2022년 8월 9일 화요일 오후 8:08:21 GMT+09:00",
-                imageUrl = "https://picsum.photos/id/${Random().nextInt(500)}/200/300",
+                imageUrl = "",
                 nickname = "닉네임은여덟자리",
                 profileImageUri = "https://picsum.photos/id/${Random().nextInt(500)}/200/300",
                 uid = ""
@@ -115,7 +123,6 @@ class WriteBuildingActivity : AppCompatActivity() {
                 content = "국회의 정기회는 법률이 정하는 바에 의하여 매년 1회 집회되며, 국회의 임시회는 대통령 또는 국회재적의원 4분의 1 이상의 요구에 의하여 집회된다. 일반사면을 명하려면 국회의 동의를 얻어야 한다.".substring(0, Random().nextInt(100)),
                 date = 1660043301000,
                 dateText = "2022년 8월 9일 화요일 오후 8:08:21 GMT+09:00",
-                imageUrl = "https://picsum.photos/id/${Random().nextInt(500)}/200/300",
                 nickname = "닉네임은여덟자리",
                 profileImageUri = "https://picsum.photos/id/${Random().nextInt(500)}/200/300",
                 uid = ""
@@ -243,42 +250,10 @@ class WriteBuildingActivity : AppCompatActivity() {
     private fun showSingleImage(uri: Uri) {
 
         mImageUri = uri
-        mtype = Random().nextInt(4)
-
-//        Glide.with(this).load(mImageUri).into(binding.ivObstacle)
-        when(mtype) {
-            Obstacle.BLOCK -> {
-                binding.tvType.text = "턱"
-                Glide.with(this).load(R.drawable.block).into(binding.ivType)
-            }
-            Obstacle.SLOPE -> {
-                binding.tvType.text = "경사"
-                Glide.with(this).load(R.drawable.slope).into(binding.ivType)
-            }
-            Obstacle.STAIR -> {
-                binding.tvType.text = "계단"
-                Glide.with(this).load(R.drawable.stairs).into(binding.ivType)
-            }
-            Obstacle.OTHER -> {
-                binding.tvType.text = "기타"
-                Glide.with(this).load(R.drawable.warning).into(binding.ivType)
-            }
-        }
-
-//        ImageAnalysis(this).apply {
-//            classifyImage(uri.toString()) { classified, confidence ->
-//                Toast.makeText(this@WriteObstacleActivity, "$classified $confidence", Toast.LENGTH_SHORT).show()
-//                mtype = when(classified) {
-//                    "경사" -> Obstacle.SLOPE
-//                    "계단" -> Obstacle.STAIR
-//                    "기타" -> Obstacle.OTHER
-//                    "턱" -> Obstacle.BLOCK
-//                    else -> Obstacle.OTHER
-//                }
-//            }
-//        }
+        Glide.with(this).load(uri).into(binding.ivBuilding)
     }
-    companion object {
+
+        companion object {
         const val LAT = "latitude"
         const val LNG = "longitude"
         const val ADR = "address"
