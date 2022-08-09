@@ -38,6 +38,27 @@
         app:layout_constraintStart_toStartOf="@+id/etSearch"
         app:layout_constraintTop_toTopOf="@id/etSearch" />
 
+    <com.google.android.material.chip.Chip
+        android:id="@+id/chipReview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/etSearch"
+        app:layout_constraintStart_toStartOf="@+id/etSearch"
+        app:iconStartPadding="2dp"
+        app:chipIcon="@drawable/ic_comment"
+        android:text="후기"/>
+
+    <com.google.android.material.chip.Chip
+        android:id="@+id/chipObstacle"
+        app:chipIcon="@drawable/barrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/etSearch"
+        app:layout_constraintStart_toEndOf="@+id/chipReview"
+        android:layout_marginStart="8dp"
+        app:iconStartPadding="4dp"
+        android:text="장애물"/>
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabObstacleMap"
         android:layout_width="wrap_content"

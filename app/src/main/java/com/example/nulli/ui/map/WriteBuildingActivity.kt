@@ -71,11 +71,11 @@ class WriteBuildingActivity : AppCompatActivity() {
                             Glide.with(this@WriteBuildingActivity).load(R.drawable.drug).into(binding.ivType)
                             binding.tvType.text = "약국"
                         }
-                        1 -> {
+                        3 -> {
                             Glide.with(this@WriteBuildingActivity).load(R.drawable.rehabilitation).into(binding.ivType)
                             binding.tvType.text = "재활센터"
                         }
-                        1 -> {
+                        4 -> {
                             Glide.with(this@WriteBuildingActivity).load(R.drawable.vrious).into(binding.ivType)
                             binding.tvType.text = "기타"
                         }
