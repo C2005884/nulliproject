@@ -44,6 +44,33 @@ class WriteObstacleActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        binding.llType.setOnClickListener {
+            val dialog = ObstacleTypeSelectorDialog().apply {
+                clickEvent = {
+                    when(it) {
+                        1 -> {
+                            Glide.with(this@WriteObstacleActivity).load(R.drawable.block).into(binding.ivType)
+                            binding.tvType.text = "턱"
+                        }
+                        2 -> {
+                            Glide.with(this@WriteObstacleActivity).load(R.drawable.slope).into(binding.ivType)
+                            binding.tvType.text = "경사"
+                        }
+                        3 -> {
+                            Glide.with(this@WriteObstacleActivity).load(R.drawable.stairs).into(binding.ivType)
+                            binding.tvType.text = "계단"
+                        }
+                        4 -> {
+                            Glide.with(this@WriteObstacleActivity).load(R.drawable.warning).into(binding.ivType)
+                            binding.tvType.text = "기타"
+                        }
+                    }
+                    //Toast.makeText(this@WriteBuildingActivity,it.toString(),Toast.LENGTH_SHORT).show()
+                }
+            }
+            dialog.show(supportFragmentManager, null)
+        }
+
 
         mId = intent.getStringExtra(ID)?: ""
 
@@ -65,6 +92,7 @@ class WriteObstacleActivity : AppCompatActivity() {
 
         }
     }
+
 
     private fun initView() {
         db.child("obstacle").child(mId).addListenerForSingleValueEvent(object: ValueEventListener {
