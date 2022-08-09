@@ -5,11 +5,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.core.net.toUri
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.nulli.R
 import com.example.nulli.databinding.ActivityWriteBuildingBinding
 import com.example.nulli.databinding.ActivityWriteObstacleBinding
 import com.example.nulli.model.Obstacle
+import com.example.nulli.model.Review
 import com.example.nulli.util.ImageAnalysis
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.ktx.database
@@ -18,6 +20,7 @@ import com.google.firebase.storage.ktx.storage
 import gun0912.tedimagepicker.builder.TedImagePicker
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 class WriteBuildingActivity : AppCompatActivity() {
 
@@ -46,13 +49,161 @@ class WriteBuildingActivity : AppCompatActivity() {
 
         binding.tvAddress.text = maddress
 
-        binding.ivObstacle.setOnClickListener {
-            TedImagePicker.with(this)
-                .start { uri -> showSingleImage(uri) }
-        }
-        binding.tvApply.setOnClickListener {
-            makeObstacle()
+        setRv()
+        setData()
 
+//        binding.ivObstacle.setOnClickListener {
+//            TedImagePicker.with(this)
+//                .start { uri -> showSingleImage(uri) }
+//        }
+//        binding.tvApply.setOnClickListener {
+//            makeObstacle()
+//
+//        }
+
+    }
+
+    private fun setData(){
+        val datas:ArrayList<Review> = arrayListOf(
+            Review(
+                 id = "",
+                 buildingId = "",
+                 content = "국회의 정기회는 법률이 정하는 바에 의하여 매년 1회 집회되며, 국회의 임시회는 대통령 또는 국회재적의원 4분의 1 이상의 요구에 의하여 집회된다. 일반사면을 명하려면 국회의 동의를 얻어야 한다.".substring(0, Random().nextInt(100)),
+                date = 1660043301000,
+                 dateText = "2022년 8월 9일 화요일 오후 8:08:21 GMT+09:00",
+                  imageUrl = "https://picsum.photos/id/${Random().nextInt(500)}/200/300",
+                 nickname = "닉네임은여덟자리",
+                 profileImageUri = "https://picsum.photos/id/${Random().nextInt(500)}/200/300",
+                 uid = ""
+            ),
+            Review(
+                id = "",
+                buildingId = "",
+                content = "국회의 정기회는 법률이 정하는 바에 의하여 매년 1회 집회되며, 국회의 임시회는 대통령 또는 국회재적의원 4분의 1 이상의 요구에 의하여 집회된다. 일반사면을 명하려면 국회의 동의를 얻어야 한다.".substring(0, Random().nextInt(100)),
+                date = 1660043301000,
+                dateText = "2022년 8월 9일 화요일 오후 8:08:21 GMT+09:00",
+                imageUrl = "https://picsum.photos/id/${Random().nextInt(500)}/200/300",
+                nickname = "닉네임은여덟자리",
+                profileImageUri = "https://picsum.photos/id/${Random().nextInt(500)}/200/300",
+                uid = ""
+            ),
+            Review(
+                id = "",
+                buildingId = "",
+                content = "국회의 정기회는 법률이 정하는 바에 의하여 매년 1회 집회되며, 국회의 임시회는 대통령 또는 국회재적의원 4분의 1 이상의 요구에 의하여 집회된다. 일반사면을 명하려면 국회의 동의를 얻어야 한다.".substring(0, Random().nextInt(100)),
+                date = 1660043301000,
+                dateText = "2022년 8월 9일 화요일 오후 8:08:21 GMT+09:00",
+                imageUrl = "https://picsum.photos/id/${Random().nextInt(500)}/200/300",
+                nickname = "닉네임은여덟자리",
+                profileImageUri = "https://picsum.photos/id/${Random().nextInt(500)}/200/300",
+                uid = ""
+            ),
+            Review(
+                id = "",
+                buildingId = "",
+                content = "국회의 정기회는 법률이 정하는 바에 의하여 매년 1회 집회되며, 국회의 임시회는 대통령 또는 국회재적의원 4분의 1 이상의 요구에 의하여 집회된다. 일반사면을 명하려면 국회의 동의를 얻어야 한다.".substring(0, Random().nextInt(100)),
+                date = 1660043301000,
+                dateText = "2022년 8월 9일 화요일 오후 8:08:21 GMT+09:00",
+                imageUrl = "https://picsum.photos/id/${Random().nextInt(500)}/200/300",
+                nickname = "닉네임은여덟자리",
+                profileImageUri = "https://picsum.photos/id/${Random().nextInt(500)}/200/300",
+                uid = ""
+            ),
+            Review(
+                id = "",
+                buildingId = "",
+                content = "국회의 정기회는 법률이 정하는 바에 의하여 매년 1회 집회되며, 국회의 임시회는 대통령 또는 국회재적의원 4분의 1 이상의 요구에 의하여 집회된다. 일반사면을 명하려면 국회의 동의를 얻어야 한다.".substring(0, Random().nextInt(100)),
+                date = 1660043301000,
+                dateText = "2022년 8월 9일 화요일 오후 8:08:21 GMT+09:00",
+                imageUrl = "https://picsum.photos/id/${Random().nextInt(500)}/200/300",
+                nickname = "닉네임은여덟자리",
+                profileImageUri = "https://picsum.photos/id/${Random().nextInt(500)}/200/300",
+                uid = ""
+            ),            Review(
+                id = "",
+                buildingId = "",
+                content = "국회의 정기회는 법률이 정하는 바에 의하여 매년 1회 집회되며, 국회의 임시회는 대통령 또는 국회재적의원 4분의 1 이상의 요구에 의하여 집회된다. 일반사면을 명하려면 국회의 동의를 얻어야 한다.".substring(0, Random().nextInt(100)),
+                date = 1660043301000,
+                dateText = "2022년 8월 9일 화요일 오후 8:08:21 GMT+09:00",
+                imageUrl = "https://picsum.photos/id/${Random().nextInt(500)}/200/300",
+                nickname = "닉네임은여덟자리",
+                profileImageUri = "https://picsum.photos/id/${Random().nextInt(500)}/200/300",
+                uid = ""
+            ),
+            Review(
+                id = "",
+                buildingId = "",
+                content = "국회의 정기회는 법률이 정하는 바에 의하여 매년 1회 집회되며, 국회의 임시회는 대통령 또는 국회재적의원 4분의 1 이상의 요구에 의하여 집회된다. 일반사면을 명하려면 국회의 동의를 얻어야 한다.".substring(0, Random().nextInt(100)),
+                date = 1660043301000,
+                dateText = "2022년 8월 9일 화요일 오후 8:08:21 GMT+09:00",
+                imageUrl = "https://picsum.photos/id/${Random().nextInt(500)}/200/300",
+                nickname = "닉네임은여덟자리",
+                profileImageUri = "https://picsum.photos/id/${Random().nextInt(500)}/200/300",
+                uid = ""
+            ),
+            Review(
+                id = "",
+                buildingId = "",
+                content = "국회의 정기회는 법률이 정하는 바에 의하여 매년 1회 집회되며, 국회의 임시회는 대통령 또는 국회재적의원 4분의 1 이상의 요구에 의하여 집회된다. 일반사면을 명하려면 국회의 동의를 얻어야 한다.".substring(0, Random().nextInt(100)),
+                date = 1660043301000,
+                dateText = "2022년 8월 9일 화요일 오후 8:08:21 GMT+09:00",
+                imageUrl = "https://picsum.photos/id/${Random().nextInt(500)}/200/300",
+                nickname = "닉네임은여덟자리",
+                profileImageUri = "https://picsum.photos/id/${Random().nextInt(500)}/200/300",
+                uid = ""
+            ),
+            Review(
+                id = "",
+                buildingId = "",
+                content = "국회의 정기회는 법률이 정하는 바에 의하여 매년 1회 집회되며, 국회의 임시회는 대통령 또는 국회재적의원 4분의 1 이상의 요구에 의하여 집회된다. 일반사면을 명하려면 국회의 동의를 얻어야 한다.".substring(0, Random().nextInt(100)),
+                date = 1660043301000,
+                dateText = "2022년 8월 9일 화요일 오후 8:08:21 GMT+09:00",
+                imageUrl = "https://picsum.photos/id/${Random().nextInt(500)}/200/300",
+                nickname = "닉네임은여덟자리",
+                profileImageUri = "https://picsum.photos/id/${Random().nextInt(500)}/200/300",
+                uid = ""
+            ),
+            Review(
+                id = "",
+                buildingId = "",
+                content = "국회의 정기회는 법률이 정하는 바에 의하여 매년 1회 집회되며, 국회의 임시회는 대통령 또는 국회재적의원 4분의 1 이상의 요구에 의하여 집회된다. 일반사면을 명하려면 국회의 동의를 얻어야 한다.".substring(0, Random().nextInt(100)),
+                date = 1660043301000,
+                dateText = "2022년 8월 9일 화요일 오후 8:08:21 GMT+09:00",
+                imageUrl = "https://picsum.photos/id/${Random().nextInt(500)}/200/300",
+                nickname = "닉네임은여덟자리",
+                profileImageUri = "https://picsum.photos/id/${Random().nextInt(500)}/200/300",
+                uid = ""
+            ),
+            Review(
+                id = "",
+                buildingId = "",
+                content = "국회의 정기회는 법률이 정하는 바에 의하여 매년 1회 집회되며, 국회의 임시회는 대통령 또는 국회재적의원 4분의 1 이상의 요구에 의하여 집회된다. 일반사면을 명하려면 국회의 동의를 얻어야 한다.".substring(0, Random().nextInt(100)),
+                date = 1660043301000,
+                dateText = "2022년 8월 9일 화요일 오후 8:08:21 GMT+09:00",
+                imageUrl = "https://picsum.photos/id/${Random().nextInt(500)}/200/300",
+                nickname = "닉네임은여덟자리",
+                profileImageUri = "https://picsum.photos/id/${Random().nextInt(500)}/200/300",
+                uid = ""
+            ),
+            Review(
+                id = "",
+                buildingId = "",
+                content = "국회의 정기회는 법률이 정하는 바에 의하여 매년 1회 집회되며, 국회의 임시회는 대통령 또는 국회재적의원 4분의 1 이상의 요구에 의하여 집회된다. 일반사면을 명하려면 국회의 동의를 얻어야 한다.".substring(0, Random().nextInt(100)),
+                date = 1660043301000,
+                dateText = "2022년 8월 9일 화요일 오후 8:08:21 GMT+09:00",
+                imageUrl = "https://picsum.photos/id/${Random().nextInt(500)}/200/300",
+                nickname = "닉네임은여덟자리",
+                profileImageUri = "https://picsum.photos/id/${Random().nextInt(500)}/200/300",
+                uid = ""
+            ),
+        )
+        (binding.rvReview.adapter as ReviewAdapter).setDatas(datas)
+    }
+
+    private fun setRv() {
+        binding.rvReview.apply{
+            layoutManager = LinearLayoutManager(this@WriteBuildingActivity)
+            adapter = ReviewAdapter()
         }
     }
 
@@ -94,7 +245,7 @@ class WriteBuildingActivity : AppCompatActivity() {
         mImageUri = uri
         mtype = Random().nextInt(4)
 
-        Glide.with(this).load(mImageUri).into(binding.ivObstacle)
+//        Glide.with(this).load(mImageUri).into(binding.ivObstacle)
         when(mtype) {
             Obstacle.BLOCK -> {
                 binding.tvType.text = "턱"

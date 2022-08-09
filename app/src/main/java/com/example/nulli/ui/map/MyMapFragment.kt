@@ -386,11 +386,12 @@ class MyMapFragment : Fragment(), OnMapReadyCallback {
         }
 
         binding.tvApply.setOnClickListener {
-            if (type == OBSTACLE) {
-                saveData(type)
-            } else if (type == BUILDING) {
-                saveData(type)
-            }
+//            if (type == OBSTACLE) {
+//                saveData(type)
+//            } else if (type == BUILDING) {
+//                saveData(type)
+//            }
+            saveData(type)
             Toast.makeText(requireContext(), "등록", Toast.LENGTH_SHORT).show()
         }
     }
@@ -403,7 +404,7 @@ class MyMapFragment : Fragment(), OnMapReadyCallback {
                 putExtra(WriteObstacleActivity.ADR, currentAddress)
             }
         } else {
-            Intent(requireActivity(), WriteObstacleActivity::class.java).apply {
+            Intent(requireActivity(), WriteBuildingActivity::class.java).apply {
                 putExtra(WriteBuildingActivity.LAT, currentLatitude)
                 putExtra(WriteBuildingActivity.LNG, currentLongitude)
                 putExtra(WriteBuildingActivity.ADR, currentAddress)

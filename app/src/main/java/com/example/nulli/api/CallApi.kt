@@ -72,7 +72,7 @@ class CallApi {
                 }
 
                 override fun onFailure(call: Call<ReverseGeocodingResponse>, t: Throwable) {
-                    TODO("Not yet implemented")
+                   //TODO("Not yet implemented")
                 }
 
             })
