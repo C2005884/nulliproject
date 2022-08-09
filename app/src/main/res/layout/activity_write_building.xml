@@ -18,14 +18,14 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/ivBack"
-        app:layout_constraintBottom_toBottomOf="@id/ivBack"
         android:text="후기"
-        android:textStyle="bold"
+        android:textColor="#000000"
         android:textSize="20sp"
-        />
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/ivBack"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/ivBack" />
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="0dp"
@@ -62,19 +62,20 @@
 
                 <ImageView
                     android:id="@+id/ivType"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
                     android:src="@drawable/hospital" />
 
                 <TextView
                     android:id="@+id/tvType"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="#000000"
                     tools:text="병원"
-                    android:textSize="30sp"
-                    android:gravity="center|start"
+                    android:textSize="20sp"
+                    android:gravity="center|start "
                     android:layout_gravity="center"
-                    android:layout_marginStart="16dp" />
+                    android:layout_marginStart="5dp" />
             </LinearLayout>
 
             <LinearLayout
@@ -97,6 +98,7 @@
                     android:id="@+id/tvAddress"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="#000000"
                     tools:text="서울특별시 광진구 구의3동 223-18"
                     android:textSize="16sp"
                     android:gravity="center|start"
@@ -109,7 +111,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="10dp"
                 android:nestedScrollingEnabled="false"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/llType"

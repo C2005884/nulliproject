@@ -41,9 +41,11 @@
     <com.google.android.material.chip.Chip
         android:id="@+id/chipReview"
         android:layout_width="wrap_content"
+        app:layout_constraintHorizontal_chainStyle="packed"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/etSearch"
-        app:layout_constraintStart_toStartOf="@+id/etSearch"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/chipObstacle"
         app:iconStartPadding="2dp"
         app:chipIcon="@drawable/ic_comment"
         android:text="후기"/>
@@ -53,8 +55,9 @@
         app:chipIcon="@drawable/barrier"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/chipReview"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etSearch"
-        app:layout_constraintStart_toEndOf="@+id/chipReview"
         android:layout_marginStart="8dp"
         app:iconStartPadding="4dp"
         android:text="장애물"/>
