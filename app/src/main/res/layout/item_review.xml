@@ -31,7 +31,6 @@
         app:layout_constraintEnd_toStartOf="@id/cv"
         tools:text = "선거에 있어서 최고득표자가 2인 이상인 때에는 국회의 재적의원 과반수가 출석한 공개회의에서 다수표를 얻은 자를 당선자로 한다. 국가는 전통문화의 계승·발전과 민족문화의 창달에 노력하여야 한다. 국회는 국무총리 또는 국무위원의 해임을 대통령에게 건의할 수 있다. 정당의 설립은 자유이며, 복수정당제는 보장된다."
         android:layout_marginHorizontal="16dp"
-        android:textColor="@color/black"
         android:maxLength="300"
         />
 
@@ -61,6 +60,7 @@
         android:text="닉네임은여덟글자"
         android:textSize="12dp"
         android:textStyle="bold"
+        android:textColor="@color/black"
         app:layout_constraintStart_toEndOf="@id/cvProfile"
         app:layout_constraintTop_toBottomOf="@id/cvProfile"
         app:layout_constraintTop_toTopOf="@id/cvProfile" />
@@ -71,6 +71,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:text="2022년 8월 9일"
+        android:textColor="@color/black"
         android:textSize="8dp"
         app:layout_constraintBottom_toBottomOf="@id/cvProfile"
         app:layout_constraintStart_toEndOf="@id/cvProfile" />
