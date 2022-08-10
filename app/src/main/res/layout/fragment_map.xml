@@ -52,15 +52,15 @@
 
     <com.google.android.material.chip.Chip
         android:id="@+id/chipObstacle"
-        app:chipIcon="@drawable/barrier"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toEndOf="@id/chipReview"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etSearch"
         android:layout_marginStart="8dp"
+        android:text="장애물"
+        app:chipIcon="@drawable/barrier"
         app:iconStartPadding="4dp"
-        android:text="장애물"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/chipReview"
+        app:layout_constraintTop_toBottomOf="@+id/etSearch" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabObstacleMap"

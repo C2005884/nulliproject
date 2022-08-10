@@ -133,6 +133,8 @@ class MyMapFragment : Fragment(), OnMapReadyCallback {
         mapFragment.getMapAsync(this)
         setSearch()
         setFABClickEvent()
+
+
     }
 
     private fun setSearch() {
@@ -301,6 +303,12 @@ class MyMapFragment : Fragment(), OnMapReadyCallback {
                     }
                     startActivity(intent)
                     true
+                }
+                binding.chipReview.setOnClickListener {
+                    marker.map = null
+                }
+                binding.chipObstacle.setOnClickListener {
+                    marker.map = naverMap
                 }
                 marker.map = naverMap
             }

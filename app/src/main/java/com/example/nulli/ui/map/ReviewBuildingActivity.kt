@@ -45,7 +45,7 @@ class ReviewBuildingActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.llType.setOnClickListener {
-            val dialog = ObstacleTypeSelectorDialog().apply {
+            val dialog = BuildingTypeSelectorDialog().apply {
                 clickEvent = {
                     when(it) {
                         1 -> {

@@ -1,5 +1,6 @@
 package com.example.nulli.ui.map
 
+import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -53,6 +54,11 @@ class WriteBuildingActivity : AppCompatActivity() {
 
         setRv()
         setData()
+
+        binding.btnWrite.setOnClickListener {
+            val intent = Intent(this,ReviewBuildingActivity::class.java)
+            startActivity(intent)
+        }
 
         binding.ivBuilding.setOnClickListener {
             TedImagePicker.with(this).start {
