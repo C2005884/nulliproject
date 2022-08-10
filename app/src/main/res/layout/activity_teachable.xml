@@ -7,13 +7,13 @@
     tools:context=".teachable.TeachableActivity">
 
     <Button
+        android:id="@+id/button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:id="@+id/button"
-        android:text="Take Picture"
-        android:textAllCaps="false"
         android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:text="사진 촬영"
+        android:textAllCaps="false"
         android:textSize="21sp"
         android:textStyle="bold" />
 

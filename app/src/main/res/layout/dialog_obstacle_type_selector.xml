@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:gravity="center"
-            android:textColor="#000000"
+            android:textColor="@color/txt_medium_gray"
             android:text="장소 유형을 선택해주세요"
             android:textSize="16sp"
             android:textStyle="bold"
@@ -29,7 +29,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/txt_medium_gray"
+            android:background="@color/txt_white_gray"
             app:layout_constraintTop_toBottomOf="@id/tvTitle" />
 
 

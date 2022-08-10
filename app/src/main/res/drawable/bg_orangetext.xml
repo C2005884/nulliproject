@@ -7,9 +7,9 @@
 
     <stroke
         android:width="2dp"
-        android:color="@color/txt_white_gray"/>
+        android:color="#edaa72"/>
 
     <corners
-        android:radius="10dp"/>
+        android:radius="15dp"/>
 
 </shape>

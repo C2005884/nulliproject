@@ -136,9 +136,9 @@ class ReviewBuildingActivity : AppCompatActivity() {
 
         val ref = db.child("building")
         var key = ""
-        val obstacle = if(mId.isBlank()) {
+        val building = if(mId.isBlank()) {
             key = ref.push().key!!
-            Obstacle().apply {
+            Review().apply {
                 id = key
                 latitude = mlatitude.toString()
                 longitude = mlongitude.toString()
@@ -149,12 +149,12 @@ class ReviewBuildingActivity : AppCompatActivity() {
                 nickname = fUser?.displayName.toString()
                 date = System.currentTimeMillis()
                 dateText = SimpleDateFormat("yyyyMMdd_HH:mm:ss", Locale.KOREAN).format(Date())
-                imageUri = """https://firebasestorage.googleapis.com/v0/b/nulli-e491a.appspot.com/o/obstacle%2F$key?alt=media"""
+                imageUri = """https://firebasestorage.googleapis.com/v0/b/nulli-e491a.appspot.com/o/building%2F$key?alt=media"""
             }
         } else {
 
             key = mId
-            Obstacle().apply {
+            Review().apply {
                 id = key
                 latitude = mBuilding.latitude.toString()
                 longitude = mBuilding.longitude.toString()
@@ -166,12 +166,12 @@ class ReviewBuildingActivity : AppCompatActivity() {
                 date = System.currentTimeMillis()
                 dateText = SimpleDateFormat("yyyyMMdd_HH:mm:ss", Locale.KOREAN).format(Date())
                 imageUri =
-                    """https://firebasestorage.googleapis.com/v0/b/nulli-e491a.appspot.com/o/obstacle%2F$key?alt=media"""
+                    """https://firebasestorage.googleapis.com/v0/b/nulli-e491a.appspot.com/o/building%2F$key?alt=media"""
             }
         }
 
         storage.child("building").child(key).putFile(mImageUri!!).addOnCompleteListener {
-            ref.child(key).setValue(obstacle).addOnCompleteListener {
+            ref.child(key).setValue(building).addOnCompleteListener {
                 Toast.makeText(this, "등록 완료되었습니다.", Toast.LENGTH_SHORT).show()
                 finish()
             }

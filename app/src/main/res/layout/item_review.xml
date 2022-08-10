@@ -56,22 +56,23 @@
         android:id="@+id/tvNickname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="닉네임은여덟글자"
         android:textSize="12dp"
         android:textStyle="bold"
-        android:text="닉네임은여덟글자"
-        app:layout_constraintTop_toTopOf="@id/cvProfile"
         app:layout_constraintStart_toEndOf="@id/cvProfile"
-        app:layout_constraintTop_toBottomOf="@id/cvProfile"/>
+        app:layout_constraintTop_toBottomOf="@id/cvProfile"
+        app:layout_constraintTop_toTopOf="@id/cvProfile" />
 
     <TextView
         android:id="@+id/tvDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:textSize="8dp"
+        android:layout_marginStart="8dp"
         android:text="2022년 8월 9일"
-        app:layout_constraintStart_toEndOf="@id/cvProfile"
-        app:layout_constraintBottom_toBottomOf="@id/cvProfile"/>
+        android:textSize="8dp"
+        app:layout_constraintBottom_toBottomOf="@id/cvProfile"
+        app:layout_constraintStart_toEndOf="@id/cvProfile" />
 
     <View
         android:layout_width="match_parent"
