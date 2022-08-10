@@ -27,38 +27,49 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/ivBack" />
 
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        app:layout_constraintStart_toStartOf="parent"
+    <Button
+        android:id="@+id/btnWrite"
+        android:layout_width="84dp"
+        android:layout_height="42dp"
+        android:layout_marginEnd="16dp"
+        android:text="글쓰기"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="@id/ivBack"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ivBack"
-        android:layout_marginTop="16dp">
+        app:layout_constraintTop_toTopOf="@id/ivBack" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="414dp"
+        android:layout_height="683dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivBack">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content">
 
             <ImageView
                 android:id="@+id/ivBuilding"
                 android:layout_width="0dp"
                 android:layout_height="200dp"
                 android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="16dp"
                 android:background="@color/accent"
-                app:layout_constraintTop_toBottomOf="@id/llLocation"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="16dp" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/llLocation" />
 
             <LinearLayout
                 android:id="@+id/llType"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/ivBuilding"
-                app:layout_constraintStart_toStartOf="@id/ivBuilding"
-                app:layout_constraintEnd_toEndOf="@id/ivBuilding"
                 android:layout_marginTop="16dp"
-                android:orientation="horizontal" >
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="@id/ivBuilding"
+                app:layout_constraintStart_toStartOf="@id/ivBuilding"
+                app:layout_constraintTop_toBottomOf="@+id/ivBuilding">
 
                 <ImageView
                     android:id="@+id/ivType"
@@ -70,23 +81,23 @@
                     android:id="@+id/tvType"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="#000000"
-                    tools:text="병원"
-                    android:textSize="20sp"
-                    android:gravity="center|start"
                     android:layout_gravity="center"
-                    android:layout_marginStart="5dp" />
+                    android:layout_marginStart="5dp"
+                    android:gravity="center|start"
+                    android:textColor="#000000"
+                    android:textSize="20sp"
+                    tools:text="병원" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/llLocation"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="@id/ivBuilding"
-                app:layout_constraintEnd_toEndOf="@id/ivBuilding"
                 android:layout_marginTop="16dp"
-                android:orientation="horizontal" >
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="@id/ivBuilding"
+                app:layout_constraintStart_toStartOf="@id/ivBuilding"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
                     android:id="@+id/ivLocation"
@@ -98,12 +109,12 @@
                     android:id="@+id/tvAddress"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="#000000"
-                    tools:text="서울특별시 광진구 구의3동 223-18"
-                    android:textSize="16sp"
-                    android:gravity="center|start"
                     android:layout_gravity="center"
-                    android:layout_marginStart="16dp" />
+                    android:layout_marginStart="16dp"
+                    android:gravity="center|start"
+                    android:textColor="#000000"
+                    android:textSize="16sp"
+                    tools:text="서울특별시 광진구 구의3동 223-18" />
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
@@ -116,6 +127,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/llType"
                 tools:listitem="@layout/item_review" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

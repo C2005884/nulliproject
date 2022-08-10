@@ -7,12 +7,13 @@
     tools:context=".ui.map.WriteObstacleActivity">
 
     <ImageView
-        android:id="@+id/ivObstacle"
-        android:layout_width="271dp"
-        android:layout_height="166dp"
-        android:layout_marginTop="100dp"
+        android:id="@+id/ivReview"
+        android:layout_width="298dp"
+        android:layout_height="174dp"
+        android:layout_marginTop="104dp"
         android:background="@color/accent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -20,9 +21,9 @@
         android:id="@+id/llType"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/ivObstacle"
-        app:layout_constraintStart_toStartOf="@id/ivObstacle"
-        app:layout_constraintEnd_toEndOf="@id/ivObstacle"
+        app:layout_constraintTop_toBottomOf="@+id/ivReview"
+        app:layout_constraintStart_toStartOf="@id/ivReview"
+        app:layout_constraintEnd_toEndOf="@id/ivReview"
         android:layout_marginTop="16dp"
         android:orientation="horizontal" >
 
@@ -30,13 +31,13 @@
             android:id="@+id/ivType"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:src="@drawable/block" />
+            android:src="@drawable/hospital" />
 
         <TextView
             android:id="@+id/tvType"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:text="턱"
+            tools:text="병원"
             android:textColor="#000000"
             android:textSize="20sp"
             android:gravity="center|start"
@@ -49,8 +50,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="@id/ivObstacle"
-        app:layout_constraintEnd_toEndOf="@id/ivObstacle"
+        app:layout_constraintStart_toStartOf="@id/ivReview"
+        app:layout_constraintEnd_toEndOf="@id/ivReview"
         android:layout_marginTop="16dp"
         android:orientation="horizontal" >
 
@@ -76,8 +77,8 @@
         android:id="@+id/etContent"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintStart_toStartOf="@id/ivObstacle"
-        app:layout_constraintEnd_toEndOf="@+id/ivObstacle"
+        app:layout_constraintStart_toStartOf="@id/ivReview"
+        app:layout_constraintEnd_toEndOf="@+id/ivReview"
         app:layout_constraintTop_toBottomOf="@id/llType"
         app:layout_constraintBottom_toTopOf="@id/llApply"
         android:background="@drawable/bg_edittext"
@@ -111,13 +112,13 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
+        android:layout_marginBottom="8dp"
         android:text="사진 추가"
-        app:layout_constraintBottom_toTopOf="@+id/ivObstacle"
-        tools:layout_editor_absoluteX="70dp" />
+        app:layout_constraintBottom_toTopOf="@+id/ivReview"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
