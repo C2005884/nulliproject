@@ -209,4 +209,5 @@ class ReviewBuildingActivity : AppCompatActivity() {
         const val LNG = "longitude"
         const val ADR = "address"
     }
+
 }
