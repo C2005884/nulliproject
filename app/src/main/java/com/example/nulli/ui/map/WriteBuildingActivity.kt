@@ -107,19 +107,19 @@ class WriteBuildingActivity : AppCompatActivity() {
 
     private fun setType(type:Int) {
         when(type) {
-            HOSPITAL -> {
+            Building.HOSPITAL -> {
                 Glide.with(this@WriteBuildingActivity).load(R.drawable.hospital).into(binding.ivType)
                 binding.tvType.text = "병원"
             }
-            DRUG -> {
+            Building.DRUG -> {
                 Glide.with(this@WriteBuildingActivity).load(R.drawable.drug).into(binding.ivType)
                 binding.tvType.text = "약국"
             }
-            REHABILITATION -> {
+            Building.REHABILITATION -> {
                 Glide.with(this@WriteBuildingActivity).load(R.drawable.rehabilitation).into(binding.ivType)
                 binding.tvType.text = "재활센터"
             }
-            VRIOUS -> {
+            Building.VRIOUS -> {
                 Glide.with(this@WriteBuildingActivity).load(R.drawable.vrious).into(binding.ivType)
                 binding.tvType.text = "기타"
             }
@@ -314,9 +314,5 @@ class WriteBuildingActivity : AppCompatActivity() {
         const val ADR = "address"
         const val TYPE = "type"
 
-        const val HOSPITAL = 1
-        const val DRUG = 2
-        const val REHABILITATION = 3
-        const val VRIOUS = 4
     }
 }

@@ -12,7 +12,6 @@ data class Building(
     var type: String? = "",
     var uid:String? = "",
     var nickname:String = "",
-    var content:String = "",
     var date:Long = 0L,
     var dateText:String="",
     var imageUri:String = "",

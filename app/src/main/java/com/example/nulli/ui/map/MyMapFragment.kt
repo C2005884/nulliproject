@@ -26,6 +26,7 @@ import com.example.nulli.api.CallApi
 import com.example.nulli.api.geocode.GeocodeResponse
 import com.example.nulli.api.search.SearchResponse
 import com.example.nulli.databinding.FragmentMapBinding
+import com.example.nulli.model.Building
 import com.example.nulli.model.Obstacle
 import com.example.nulli.util.SkeyBoard
 import com.example.nulli.util.nulliUtil
@@ -44,6 +45,7 @@ import com.naver.maps.map.util.FusedLocationSource
 
 class MyMapFragment : Fragment(), OnMapReadyCallback {
 
+
     private val db = Firebase.database.reference
 
     private var _binding: FragmentMapBinding? = null
@@ -55,7 +57,12 @@ class MyMapFragment : Fragment(), OnMapReadyCallback {
     private var b4GeocodingTime = 0L
     private lateinit var onBackPressedCallback: OnBackPressedCallback
 
+    private var isFirstObstacle = true
+    private var isFirstBuilding = true
+
+    private val markerList:ArrayList<Marker> = arrayListOf()
     private val obstacleList: ArrayList<Obstacle> = arrayListOf()
+    private val buildingList: ArrayList<Building> = arrayListOf()
 
     private var currentLatitude: Double = 0.0
     private var currentLongitude: Double = 0.0
@@ -97,6 +104,7 @@ class MyMapFragment : Fragment(), OnMapReadyCallback {
     override fun onResume() {
         super.onResume()
         loadObstacle()
+        loadBuilding()
     }
 
     private fun loadObstacle() {
@@ -110,6 +118,26 @@ class MyMapFragment : Fragment(), OnMapReadyCallback {
                 }
                 Log.e("size: ", obstacleList.size.toString())
                 setObstacleMarker()
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+
+        })
+    }
+
+    private fun loadBuilding() {
+        db.child("building").addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for (s in snapshot.children) {
+                    val building = s.getValue(Building::class.java)
+                    if (building != null && !buildingList.contains(building)) {
+                        buildingList.add(building)
+                    }
+                }
+                Log.e("size: ", buildingList.size.toString())
+                setBuildingMarker()
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -133,8 +161,18 @@ class MyMapFragment : Fragment(), OnMapReadyCallback {
         mapFragment.getMapAsync(this)
         setSearch()
         setFABClickEvent()
+        setChipClickEvent()
 
 
+    }
+
+    private fun setChipClickEvent() {
+        binding.chipReview.setOnClickListener {
+            setBuildingMarker()
+        }
+        binding.chipObstacle.setOnClickListener {
+            setObstacleMarker()
+        }
     }
 
     private fun setSearch() {
@@ -271,6 +309,11 @@ class MyMapFragment : Fragment(), OnMapReadyCallback {
     }
 
     private fun setObstacleMarker() {
+        if(!isFirstObstacle) {
+            clearMarker()
+        }
+        isFirstObstacle = false
+
         val blockIcon = OverlayImage.fromResource(R.drawable.block)
         val slopIcon = OverlayImage.fromResource(R.drawable.slope)
         val stairsIcon = OverlayImage.fromResource(R.drawable.stairs)
@@ -296,6 +339,7 @@ class MyMapFragment : Fragment(), OnMapReadyCallback {
                         height = iconSize
                     }
                 }
+                markerList.add(marker)
                 marker.setOnClickListener {
                     //Toast.makeText(requireContext(), obstacle.id, Toast.LENGTH_SHORT).show()
                     val intent = Intent(requireActivity(), WriteObstacleActivity::class.java).apply {
@@ -304,15 +348,66 @@ class MyMapFragment : Fragment(), OnMapReadyCallback {
                     startActivity(intent)
                     true
                 }
-                binding.chipReview.setOnClickListener {
-                    marker.map = null
-                }
-                binding.chipObstacle.setOnClickListener {
-                    marker.map = naverMap
-                }
                 marker.map = naverMap
             }
         }
+    }
+
+    private fun setBuildingMarker() {
+        if(!isFirstBuilding) {
+            clearMarker()
+        }
+        isFirstBuilding= false
+
+        val hospitalIcon = OverlayImage.fromResource(R.drawable.hospital)
+        val drugIcon = OverlayImage.fromResource(R.drawable.drug)
+        val rehabilitationIcon = OverlayImage.fromResource(R.drawable.rehabilitation)
+        val vriousIcon = OverlayImage.fromResource(R.drawable.vrious)
+
+        val iconSize = nulliUtil().dp2Px(requireContext(), 50).toInt()
+
+        for (building in buildingList) {
+            if (building.latitude == null || building.longitude == null) {
+                continue
+            } else {
+                val marker = Marker().apply {
+                    position =
+                        LatLng(building.latitude!!.toDouble(), building.longitude!!.toDouble())
+                    icon = when ((building.type ?: "-1").toInt()) {
+                        Building.HOSPITAL -> hospitalIcon
+                        Building.DRUG -> drugIcon
+                        Building.REHABILITATION -> rehabilitationIcon
+                        Building.VRIOUS -> vriousIcon
+                        else -> vriousIcon
+                    }.apply {
+                        width = iconSize
+                        height = iconSize
+                    }
+                }
+                markerList.add(marker)
+                marker.setOnClickListener {
+                    //Toast.makeText(requireContext(), obstacle.id, Toast.LENGTH_SHORT).show()
+                    val intent = Intent(requireActivity(), WriteBuildingActivity::class.java).apply {
+                        putExtra(WriteBuildingActivity.ID, building.id)
+                        putExtra(WriteBuildingActivity.LAT, building.latitude)
+                        putExtra(WriteBuildingActivity.LNG, building.longitude)
+                        putExtra(WriteBuildingActivity.ADR, building.address)
+                        putExtra(WriteBuildingActivity.TYPE, building.type?.toInt())
+                    }
+                    startActivity(intent)
+                    true
+                }
+
+                marker.map = naverMap
+            }
+        }
+    }
+
+    private fun clearMarker() {
+        for (m in markerList) {
+            m.map = null
+        }
+        markerList.clear()
     }
 
     private fun setMapUiSettings() {
