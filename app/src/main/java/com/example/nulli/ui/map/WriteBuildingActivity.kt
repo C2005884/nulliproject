@@ -66,7 +66,7 @@ class WriteBuildingActivity : AppCompatActivity() {
         binding.btnWrite.setOnClickListener {
             if(mid.isBlank()){
                 AlertDialog.Builder(this)
-                    .setTitle("빌딩을 등록하시겠습니까?")
+                    .setTitle("장소를 등록하시겠습니까?")
                     .setPositiveButton("등록하기"){ dialogInterface: DialogInterface, i: Int ->
                         makeBuilding()
                     }
