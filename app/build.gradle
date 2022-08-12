@@ -92,4 +92,7 @@ dependencies {
     // firebase storage
     implementation 'com.google.firebase:firebase-storage-ktx'
 
+    //lottie
+    implementation 'com.airbnb.android:lottie:5.2.0'
+
 }

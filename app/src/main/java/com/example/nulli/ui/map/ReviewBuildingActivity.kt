@@ -77,46 +77,37 @@ class ReviewBuildingActivity : AppCompatActivity() {
             if(binding.etContent.toString().length<10) {
                 Toast.makeText(this, "내용을 10자 이상 입력해주세요", Toast.LENGTH_SHORT).show()
             } else {
-                makeBuilding()
+                makeReview()
             }
         }
     }
 
 
-    private fun makeBuilding() {
+    private fun makeReview() {
+        val buildingRef = db.child("building")
+        val ref = db.child("review")
 
-        val ref = db.child("building")
-        var key = ""
-        val building = if(mId.isBlank()) {
-            key = ref.push().key!!
-            Review().apply {
-                id = key
-                uid = fUser?.uid.toString()
-                content = binding.etContent.text.toString()
-                nickname = fUser?.displayName.toString()
-                date = System.currentTimeMillis()
-                dateText = SimpleDateFormat("yyyyMMdd_HH:mm:ss", Locale.KOREAN).format(Date())
-                imageUri = """https://firebasestorage.googleapis.com/v0/b/nulli-e491a.appspot.com/o/building%2F$key?alt=media"""
-            }
-        } else {
-
-            key = mId
-            Review().apply {
-                id = key
-                uid = fUser?.uid.toString()
-                content = binding.etContent.text.toString()
-                nickname = fUser?.displayName.toString()
-                date = System.currentTimeMillis()
-                dateText = SimpleDateFormat("yyyyMMdd_HH:mm:ss", Locale.KOREAN).format(Date())
-                imageUri =
-                    """https://firebasestorage.googleapis.com/v0/b/nulli-e491a.appspot.com/o/building%2F$key?alt=media"""
-            }
+        var key = ref.push().key!!
+        val review = Review().apply {
+            id = key
+            uid = fUser?.uid.toString()
+            buildingId = mId
+            content = binding.etContent.text.toString()
+            nickname = fUser?.displayName.toString()
+            date = System.currentTimeMillis()
+            dateText = SimpleDateFormat("yyyyMMdd_HH:mm:ss", Locale.KOREAN).format(Date())
+            profileImageUri = fUser?.photoUrl.toString()
+            imageUri =
+                """https://firebasestorage.googleapis.com/v0/b/nulli-e491a.appspot.com/o/review%2F$key?alt=media"""
         }
 
-        storage.child("building").child(key).putFile(mImageUri!!).addOnCompleteListener {
-            ref.child(key).setValue(building).addOnCompleteListener {
-                Toast.makeText(this, "등록 완료되었습니다.", Toast.LENGTH_SHORT).show()
-                finish()
+        storage.child("review").child(key).putFile(mImageUri!!).addOnCompleteListener {
+            ref.child(key).setValue(review).addOnCompleteListener {
+                buildingRef.child(mId).child("review").child(key)
+                    .setValue(System.currentTimeMillis()).addOnCompleteListener {
+                    Toast.makeText(this, "등록 완료되었습니다.", Toast.LENGTH_SHORT).show()
+                    finish()
+                }
             }
         }
     }
