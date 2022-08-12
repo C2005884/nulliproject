@@ -1,13 +1,17 @@
 package com.example.nulli.ui.home
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.nulli.R
 import com.example.nulli.databinding.FragmentHomeBinding
+import com.example.nulli.ui.dialog.LottieDialog
 
 class HomeFragment : Fragment() {
 
@@ -26,6 +30,17 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
         return root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val dialog = LottieDialog().apply { 
+            lottieRes = R.raw.loading
+        }.show(childFragmentManager,null)
+
+        Handler(Looper.myLooper()!!).postDelayed({
+          dialog.
+        }, 1000)
     }
 
     override fun onDestroyView() {
