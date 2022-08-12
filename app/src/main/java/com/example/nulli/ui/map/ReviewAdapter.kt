@@ -50,8 +50,8 @@ class ReviewAdapter : RecyclerView.Adapter<ReviewAdapter.ViewHolder>() {
 
     inner class ViewHolder(private val binding: ItemReviewBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(review: Review) {
-            binding.cv.isVisible = !review.imageUrl.isNullOrBlank()
-            Glide.with(binding.root).load(review.imageUrl).into(binding.ivReview)
+            binding.cv.isVisible = !review.imageUri.isNullOrBlank()
+            Glide.with(binding.root).load(review.imageUri).into(binding.ivReview)
             binding.tvReview.text = review.content
             Glide.with(binding.root).load(review.profileImageUri).into(binding.ivProfile)
             binding.tvNickname.text = review.nickname

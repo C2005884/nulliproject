@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import com.example.nulli.databinding.DialogBuildingTypeSelectorBinding
+import com.example.nulli.model.Building
 
 class BuildingTypeSelectorDialog : DialogFragment() {
 
@@ -30,19 +31,19 @@ class BuildingTypeSelectorDialog : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.llType1.setOnClickListener {
-            clickEvent(1)
+            clickEvent(Building.HOSPITAL)
             dismiss()
         }
         binding.llType2.setOnClickListener {
-            clickEvent(2)
+            clickEvent(Building.DRUG)
             dismiss()
         }
         binding.llType3.setOnClickListener {
-            clickEvent(3)
+            clickEvent(Building.REHABILITATION)
             dismiss()
         }
         binding.llType4.setOnClickListener {
-            clickEvent(4)
+            clickEvent(Building.VRIOUS)
             dismiss()
         }
     }
