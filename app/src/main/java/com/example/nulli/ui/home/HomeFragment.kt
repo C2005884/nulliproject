@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.nulli.R
@@ -36,10 +37,12 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val dialog = LottieDialog().apply { 
             lottieRes = R.raw.loading
-        }.show(childFragmentManager,null)
+        }.show(childFragmentManager,"lottie")
 
         Handler(Looper.myLooper()!!).postDelayed({
-          dialog.
+            childFragmentManager.findFragmentByTag("lottie")?.let {
+                (it as DialogFragment).dismiss()
+            }
         }, 1000)
     }
 

@@ -3,6 +3,7 @@ package com.example.nulli.ui.map
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.example.nulli.R
@@ -44,7 +45,7 @@ class ReviewBuildingActivity : AppCompatActivity() {
 
         mtype = intent.getIntExtra(WriteBuildingActivity.TYPE, 1)
         maddress = intent.getStringExtra(WriteBuildingActivity.ADR) ?:""
-
+        mId = intent.getStringExtra(WriteBuildingActivity.ID)?:""
         binding.tvAddress.text = maddress
 
 
@@ -67,7 +68,6 @@ class ReviewBuildingActivity : AppCompatActivity() {
             }
         }
 
-        mId = intent.getStringExtra(ID)?: ""
 
         binding.ivReview.setOnClickListener {
             TedImagePicker.with(this)
@@ -87,6 +87,7 @@ class ReviewBuildingActivity : AppCompatActivity() {
         val buildingRef = db.child("building")
         val ref = db.child("review")
 
+        Log.e("mid","${mId}")
         var key = ref.push().key!!
         val review = Review().apply {
             id = key
