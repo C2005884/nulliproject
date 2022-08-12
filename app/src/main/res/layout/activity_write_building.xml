@@ -121,6 +121,7 @@
                 android:id="@+id/rvReview"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="12dp"
                 android:nestedScrollingEnabled="false"
                 app:layout_constraintStart_toStartOf="parent"
