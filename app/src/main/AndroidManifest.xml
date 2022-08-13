@@ -16,6 +16,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Nulli">
         <activity
+            android:name=".SettingsWithdrawalActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SettingsWithhdrawalActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SettingsImgChangeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SettingsNickChangeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".settings.SettingsPwChangeActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.map.ReviewBuildingActivity"
             android:exported="false" />
         <activity

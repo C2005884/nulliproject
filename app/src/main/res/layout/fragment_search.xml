@@ -6,5 +6,77 @@
     android:layout_height="match_parent"
     tools:context=".ui.search.SearchFragment">
 
+    <EditText
+        android:id="@+id/etSearch"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_margin="16dp"
+        android:background="@drawable/bg_edittext"
+        android:gravity="center|left"
+        android:paddingStart="45dp"
+        android:hint="검색"
+        android:textSize="20sp"
+        android:inputType="textEmailSubject"
+        android:imeOptions="actionSearch"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:src="@drawable/ic_search"
+        app:layout_constraintBottom_toBottomOf="@id/etSearch"
+        app:layout_constraintStart_toStartOf="@id/etSearch"
+        app:layout_constraintTop_toTopOf="@id/etSearch" />
+
+    <View
+        android:id="@+id/line1"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#d7d7d7"
+        android:layout_marginTop="30dp"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etSearch"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/text3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/line1"
+        android:textSize="15dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="300dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textStyle="bold"
+        tools:text="인기 검색어"
+        tools:ignore="MissingConstraints" />
+
+    <com.google.android.material.chip.Chip
+        android:id="@+id/chipPopularity"
+        android:layout_width="wrap_content"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/text3"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="10dp"
+        app:iconStartPadding="2dp"
+        android:text="#장애인지하철시위"/>
+
+    <View
+        android:id="@+id/line2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#d7d7d7"
+        android:layout_marginTop="30dp"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/chipPopularity"
+        app:layout_constraintVertical_bias="1.0" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
