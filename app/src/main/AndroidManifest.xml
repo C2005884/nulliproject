@@ -16,6 +16,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Nulli">
         <activity
+            android:name=".BoardCommentActivity"
+            android:exported="false" />
+        <activity
+            android:name=".BoardWriteActivity"
+            android:exported="false" />
+        <activity
+            android:name=".BoardListActivity"
+            android:exported="false" />
+        <activity
             android:name=".SettingsWithdrawalActivity"
             android:exported="false" />
         <activity
