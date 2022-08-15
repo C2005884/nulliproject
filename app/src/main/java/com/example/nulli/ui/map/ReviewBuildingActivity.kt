@@ -4,6 +4,7 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.example.nulli.R
@@ -47,7 +48,6 @@ class ReviewBuildingActivity : AppCompatActivity() {
         maddress = intent.getStringExtra(WriteBuildingActivity.ADR) ?:""
         mId = intent.getStringExtra(WriteBuildingActivity.ID)?:""
         binding.tvAddress.text = maddress
-
 
         when(mtype) {
             Building.HOSPITAL -> {
@@ -118,6 +118,7 @@ class ReviewBuildingActivity : AppCompatActivity() {
         mImageUri = uri
         Glide.with(this).load(mImageUri).into(binding.ivReview)
     }
+
 
     companion object {
         const val ID = "id"

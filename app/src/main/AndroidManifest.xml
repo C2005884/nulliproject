@@ -16,25 +16,22 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Nulli">
         <activity
-            android:name=".BoardCommentActivity"
+            android:name=".board.BoardCommentActivity"
             android:exported="false" />
         <activity
-            android:name=".BoardWriteActivity"
+            android:name=".board.BoardWriteActivity"
             android:exported="false" />
         <activity
-            android:name=".BoardListActivity"
+            android:name=".board.BoardListActivity"
             android:exported="false" />
         <activity
-            android:name=".SettingsWithdrawalActivity"
+            android:name=".settings.SettingsWithdrawalActivity"
             android:exported="false" />
         <activity
-            android:name=".SettingsWithhdrawalActivity"
+            android:name=".settings.SettingsImgChangeActivity"
             android:exported="false" />
         <activity
-            android:name=".SettingsImgChangeActivity"
-            android:exported="false" />
-        <activity
-            android:name=".SettingsNickChangeActivity"
+            android:name=".settings.SettingsNickChangeActivity"
             android:exported="false" />
         <activity
             android:name=".settings.SettingsPwChangeActivity"
