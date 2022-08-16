@@ -16,6 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Nulli">
         <activity
+            android:name=".settings.SettingsNotificationActivity"
+            android:exported="false" />
+        <activity
             android:name=".board.BoardCommentActivity"
             android:exported="false" />
         <activity
