@@ -96,7 +96,7 @@ class MypageFragment : Fragment() {
                 }
         }
 
-        binding.btnLogout.setOnClickListener {
+        binding.tvLogout.setOnClickListener {
             auth.signOut()
             val intent = Intent(requireActivity(),SplashActivity::class.java)
             requireActivity().startActivity(intent)
