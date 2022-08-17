@@ -99,16 +99,24 @@ class ReviewBuildingActivity : AppCompatActivity() {
             dateText = SimpleDateFormat("yyyyMMdd_HH:mm:ss", Locale.KOREAN).format(Date())
             profileImageUri = fUser?.photoUrl.toString()
             imageUri =
+                if(mImageUri == null) "" else
                 """https://firebasestorage.googleapis.com/v0/b/nulli-e491a.appspot.com/o/review%2F$key?alt=media"""
         }
 
-        storage.child("review").child(key).putFile(mImageUri!!).addOnCompleteListener {
+
             ref.child(key).setValue(review).addOnCompleteListener {
                 buildingRef.child(mId).child("review").child(key)
                     .setValue(System.currentTimeMillis()).addOnCompleteListener {
-                    Toast.makeText(this, "등록 완료되었습니다.", Toast.LENGTH_SHORT).show()
-                    finish()
-                }
+                        if(mImageUri != null){
+                        storage.child("review").child(key).putFile(mImageUri!!)
+                            .addOnCompleteListener {
+                            Toast.makeText(this, "등록 완료되었습니다.", Toast.LENGTH_SHORT).show()
+                            finish()
+                        }
+                        }else{
+                                Toast.makeText(this, "등록 완료되었습니다.", Toast.LENGTH_SHORT).show()
+                                finish()
+                            }
             }
         }
     }

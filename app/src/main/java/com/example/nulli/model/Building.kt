@@ -6,6 +6,7 @@ import androidx.annotation.Keep
 
 data class Building(
     var id:String = "",
+    var title:String? = "",
     var latitude:String? = "",
     var longitude:String? = "",
     var address: String? = "",
@@ -15,7 +16,7 @@ data class Building(
     var date:Long = 0L,
     var dateText:String="",
     var imageUri:String = "",
-    var reviewIdList:ArrayList<String> = arrayListOf()
+    var review:HashMap<String, Long> = hashMapOf()
 ) {
     companion object {
         const val HOSPITAL = 0

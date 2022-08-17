@@ -48,6 +48,11 @@ class ReviewAdapter : RecyclerView.Adapter<ReviewAdapter.ViewHolder>() {
         return datas.size
     }
 
+    override fun onViewRecycled(holder: ViewHolder) {
+        super.onViewRecycled(holder)
+        holder.clear()
+    }
+
     inner class ViewHolder(private val binding: ItemReviewBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(review: Review) {
             binding.cv.isVisible = !review.imageUri.isNullOrBlank()
@@ -56,6 +61,11 @@ class ReviewAdapter : RecyclerView.Adapter<ReviewAdapter.ViewHolder>() {
             Glide.with(binding.root).load(review.profileImageUri).into(binding.ivProfile)
             binding.tvNickname.text = review.nickname
             binding.tvDate.text = SimpleDateFormat("yyyy년 M월 d일", Locale.KOREAN).format(review.date)
+        }
+
+        fun clear() {
+            Glide.with(binding.root).clear(binding.ivReview)
+            Glide.with(binding.root).clear(binding.ivProfile)
         }
     }
 }

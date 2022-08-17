@@ -9,6 +9,8 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.nulli.databinding.FragmentMypageBinding
+import com.example.nulli.settings.SettingsImgChangeActivity
+import com.example.nulli.settings.SettingsNickChangeActivity
 import com.example.nulli.ui.SplashActivity
 import com.example.nulli.ui.auth.LoginActivity
 import com.google.firebase.auth.ktx.auth
@@ -41,6 +43,16 @@ class MypageFragment : Fragment() {
             ${fuser?.displayName}
             ${fuser?.uid}
         """.trimMargin("|")
+
+        binding.tvNicnameChange.setOnClickListener {
+            val intent = Intent(requireActivity(),SettingsNickChangeActivity::class.java)
+            requireActivity().startActivity(intent)
+        }
+
+        binding.tvProfileImageChange.setOnClickListener {
+            val intent = Intent(requireActivity(),SettingsImgChangeActivity::class.java)
+            requireActivity().startActivity(intent)
+        }
 
         binding.btnLogout.setOnClickListener {
             auth.signOut()
