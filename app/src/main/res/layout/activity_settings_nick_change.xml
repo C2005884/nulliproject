@@ -25,18 +25,18 @@
         android:textSize="20sp"
         android:textStyle="bold" />
 
-    <EditText
-        android:id="@+id/stnick"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:hint="새로운 닉네임을 입력하세요."
-        android:paddingStart="20dp"
-        android:background="@drawable/bg_graytext"
-        android:textSize="20sp"
-        android:textStyle="bold" />
+        <EditText
+            android:id="@+id/stnick"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/bg_graytext"
+            android:hint="새로운 닉네임을 입력하세요."
+            android:paddingStart="20dp"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/text2"
