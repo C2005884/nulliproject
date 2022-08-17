@@ -60,7 +60,7 @@ class ReviewBuildingActivity : AppCompatActivity() {
             }
             Building.REHABILITATION -> {
                 Glide.with(this@ReviewBuildingActivity).load(R.drawable.rehabilitation).into(binding.ivType)
-                binding.tvType.text = "재활"
+                binding.tvType.text = "재활센터"
             }
             Building.VRIOUS -> {
                 Glide.with(this@ReviewBuildingActivity).load(R.drawable.vrious).into(binding.ivType)

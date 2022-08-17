@@ -416,6 +416,7 @@ class MyMapFragment : Fragment(), OnMapReadyCallback {
         uiSettings.isScaleBarEnabled = true
         uiSettings.isIndoorLevelPickerEnabled = true
         uiSettings.isLocationButtonEnabled = true
+        uiSettings.isCompassEnabled = false
         NaverMapOptions().locationButtonEnabled(true)
     }
 
