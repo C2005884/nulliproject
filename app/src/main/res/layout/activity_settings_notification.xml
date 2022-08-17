@@ -15,7 +15,7 @@
             android:id="@+id/imsi1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_graybox"
+            android:background="@drawable/bg_graytext"
             android:orientation="vertical"
             android:layout_margin="10dp"
             app:layout_constraintLeft_toRightOf="parent"
