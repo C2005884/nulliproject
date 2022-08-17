@@ -19,6 +19,7 @@
         >
 
         <ImageView
+            android:id="@+id/ivProfile"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginLeft="20dp"
@@ -28,6 +29,7 @@
             android:src="@drawable/ic_person" />
 
         <TextView
+            android:id="@+id/tvNickname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="18dp"
@@ -37,6 +39,12 @@
             android:textStyle="bold" />
 
     </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -56,6 +64,7 @@
             android:textStyle="normal" />
 
         <TextView
+            android:id="@+id/tvPasswordChange"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
@@ -224,5 +233,6 @@
             />
 
     </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

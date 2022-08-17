@@ -75,6 +75,32 @@
         app:layout_constraintStart_toStartOf="@id/fabMain"
         app:layout_constraintTop_toTopOf="@id/fabMain" />
 
+    <TextView
+        android:id="@+id/tvObstacleMapLable"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:background="#ffffff"
+        android:padding="12dp"
+        android:text="장애물"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/fabObstacleMap"
+        app:layout_constraintEnd_toStartOf="@id/fabObstacleMap"
+        app:layout_constraintTop_toTopOf="@id/fabObstacleMap" />
+
+    <TextView
+        android:id="@+id/tvMapLable"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:background="#ffffff"
+        android:padding="12dp"
+        android:text="지도"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/fabMap"
+        app:layout_constraintEnd_toStartOf="@id/fabMap"
+        app:layout_constraintTop_toTopOf="@id/fabMap" />
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabMap"
         android:layout_width="wrap_content"

@@ -371,6 +371,7 @@ class MyMapFragment : Fragment(), OnMapReadyCallback {
                 continue
             } else {
                 val marker = Marker().apply {
+                    captionText = building.title?: ""
                     position =
                         LatLng(building.latitude!!.toDouble(), building.longitude!!.toDouble())
                     icon = when ((building.type ?: "-1").toInt()) {
@@ -522,11 +523,18 @@ class MyMapFragment : Fragment(), OnMapReadyCallback {
             ObjectAnimator.ofFloat(binding.fabMap, "translationY", 0f).apply { start() }
             ObjectAnimator.ofFloat(binding.fabObstacleMap, "translationY", 0f).apply { start() }
             ObjectAnimator.ofFloat(binding.fabMain, View.ROTATION, 45f, 0f).apply { start() }
+            binding.tvMapLable.visibility = View.GONE
+            binding.tvObstacleMapLable.visibility = View.GONE
         } else { // 플로팅 액션 버튼 열기 - 닫혀있는 플로팅 버튼 꺼내는 애니메이션
-            ObjectAnimator.ofFloat(binding.fabObstacleMap, "translationY", -360f)
-                .apply { start() }
+            ObjectAnimator.ofFloat(binding.fabObstacleMap, "translationY", -360f).apply { start() }
             ObjectAnimator.ofFloat(binding.fabMap, "translationY", -180f).apply { start() }
             ObjectAnimator.ofFloat(binding.fabMain, View.ROTATION, 0f, 45f).apply { start() }
+
+            ObjectAnimator.ofFloat(binding.tvObstacleMapLable, "translationY", -360f).apply { start() }
+
+            ObjectAnimator.ofFloat(binding.tvMapLable, "translationY", -180f).apply { start() }
+            binding.tvMapLable.visibility = View.VISIBLE
+            binding.tvObstacleMapLable.visibility = View.VISIBLE
         }
 
         isFabOpen = !isFabOpen

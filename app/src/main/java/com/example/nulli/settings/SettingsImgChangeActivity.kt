@@ -25,6 +25,9 @@ class SettingsImgChangeActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        Glide.with(this).load(fuser?.photoUrl).into(binding.imgChange)
+
         setContentView(binding.root)
         binding.imgChange.setOnClickListener {
             TedImagePicker.with(this).start {
