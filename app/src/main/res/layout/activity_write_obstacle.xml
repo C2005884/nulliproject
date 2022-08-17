@@ -54,7 +54,7 @@
             android:layout_marginStart="16dp"
             android:gravity="center|start"
             android:textColor="#000000"
-            android:textSize="15sp"
+            android:textSize="10sp"
             android:hint="장애물 사진을 먼저 추가하세요"
             tools:text="턱" />
     </LinearLayout>
@@ -97,7 +97,7 @@
         android:layout_marginBottom="5dp"
         android:background="@drawable/bg_edittext"
         android:gravity="start|top"
-        android:hint="커뮤니티 이용규칙 추가예정"
+        android:hint="커뮤니티 이용규칙"
         android:maxLength="200"
         android:padding="16dp"
         android:textSize="16sp"

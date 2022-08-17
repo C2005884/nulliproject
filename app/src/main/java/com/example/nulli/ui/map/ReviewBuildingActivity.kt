@@ -3,6 +3,7 @@ package com.example.nulli.ui.map
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Html
 import android.util.Log
 import android.view.MenuItem
 import android.widget.Toast
@@ -43,6 +44,12 @@ class ReviewBuildingActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
+        binding.etContent.setHint(
+            Html.fromHtml("<h6>" + "내용을 입력해주세요" + "</h6>" + "<small>" + "" +
+                    "<br>" +
+                    "사용자들의 원활한 지도 사용을 위해 부적절한 게시를 금합니다. 위반 시 게시물이 삭제되고 서비스 이용이 제한될 수 있습니다."+
+                    "</small>"))
 
         mtype = intent.getIntExtra(WriteBuildingActivity.TYPE, 1)
         maddress = intent.getStringExtra(WriteBuildingActivity.ADR) ?:""

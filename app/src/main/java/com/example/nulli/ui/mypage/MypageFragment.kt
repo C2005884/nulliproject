@@ -81,7 +81,7 @@ class MypageFragment : Fragment() {
             requireActivity().startActivity(intent)
         }
 
-        binding.tvProfile.setOnClickListener {
+        binding.tvProfileImageChange.setOnClickListener {
             val intent = Intent(requireActivity(),SettingsImgChangeActivity::class.java)
             requireActivity().startActivity(intent)
         }

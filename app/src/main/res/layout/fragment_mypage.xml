@@ -46,182 +46,182 @@
         android:fillViewport="true">
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
-        android:orientation="vertical"
-        app:layout_constraintLeft_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            android:text="개인정보"
-            android:textColor="@color/txt_dark_gray"
-            android:textSize="15sp"
-            android:textStyle="normal" />
-
-        <TextView
-            android:id="@+id/tvPasswordChange"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:text="비밀번호 변경"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:textStyle="normal" />
-
         <LinearLayout
             android:layout_width="match_parent"
-            android:background="#999999"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_height="1dp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            android:text="커뮤니티"
-            android:textColor="@color/txt_dark_gray"
-            android:textSize="15sp"
-            android:textStyle="normal" />
+            android:layout_marginTop="80dp"
+            android:orientation="vertical"
+            app:layout_constraintLeft_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/tvNicnameChange"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:text="닉네임 재설정"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:textStyle="normal" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:text="개인정보"
+                android:textColor="@color/txt_dark_gray"
+                android:textSize="15sp"
+                android:textStyle="normal" />
 
-        <TextView
-            android:id="@+id/tvProfileImageChange"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="5dp"
-            android:text="프로필 이미지 변경"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:textStyle="normal" />
+            <TextView
+                android:id="@+id/tvPasswordChange"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:text="비밀번호 변경"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="normal" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:background="#999999"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_height="1dp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:background="#999999"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_height="1dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:text="커뮤니티"
+                android:textColor="@color/txt_dark_gray"
+                android:textSize="15sp"
+                android:textStyle="normal" />
+
+            <TextView
+                android:id="@+id/tvNicnameChange"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:text="닉네임 재설정"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="normal" />
+
+            <TextView
+                android:id="@+id/tvProfileImageChange"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="5dp"
+                android:text="프로필 이미지 변경"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="normal" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:background="#999999"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_height="1dp"/>
 
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            android:text="앱 설정"
-            android:textColor="@color/txt_dark_gray"
-            android:textSize="15sp"
-            android:textStyle="normal" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:text="앱 설정"
+                android:textColor="@color/txt_dark_gray"
+                android:textSize="15sp"
+                android:textStyle="normal" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:text="푸시 알림 설정"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:textStyle="normal" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:text="푸시 알림 설정"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="normal" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:background="#999999"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_height="1dp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:background="#999999"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_height="1dp"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            android:text="이용 안내"
-            android:textColor="@color/txt_dark_gray"
-            android:textSize="15sp"
-            android:textStyle="normal" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:text="이용 안내"
+                android:textColor="@color/txt_dark_gray"
+                android:textSize="15sp"
+                android:textStyle="normal" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:text="앱 버전"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:textStyle="normal" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:text="앱 버전"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="normal" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="5dp"
-            android:text="널리 사용 설명서"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:textStyle="normal" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="5dp"
+                android:text="널리 사용 설명서"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="normal" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:background="#999999"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_height="1dp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:background="#999999"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_height="1dp"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            android:text="기타"
-            android:textColor="@color/txt_dark_gray"
-            android:textSize="15sp"
-            android:textStyle="normal" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:text="기타"
+                android:textColor="@color/txt_dark_gray"
+                android:textSize="15sp"
+                android:textStyle="normal" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:text="회원 탈퇴"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:textStyle="normal" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:text="회원 탈퇴"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="normal" />
 
-        <TextView
-            android:id="@+id/tvLogout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="5dp"
-            android:text="로그아웃"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:textStyle="normal" />
+            <TextView
+                android:id="@+id/tvLogout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="5dp"
+                android:text="로그아웃"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="normal" />
 
-        <TextView
-            android:id="@+id/tvProfile"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:textAlignment="center"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            tools:layout_editor_absoluteX="8dp" />
+            <TextView
+                android:id="@+id/tvProfile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                tools:layout_editor_absoluteX="8dp" />
 
-    </LinearLayout>
+        </LinearLayout>
     </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
