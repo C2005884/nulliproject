@@ -21,6 +21,7 @@
                 android:id="@+id/text"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginTop="270dp"
                 android:gravity="center"
                 android:text="닉네임 설정"
                 android:textColor="#000000"
@@ -56,10 +57,14 @@
                 android:id="@+id/btnChange"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_margin="20dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="210dp"
+                android:layout_marginEnd="16dp"
                 android:background="@drawable/background_radius_orange"
                 android:text="적용"
-                android:textSize="20sp" />
+                android:textSize="15sp"
+                android:textStyle="bold"
+                />
 
         </LinearLayout>
 

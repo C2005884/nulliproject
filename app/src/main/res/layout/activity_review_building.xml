@@ -21,12 +21,12 @@
 
     <ImageView
         android:id="@+id/ivReview"
-        android:layout_width="271dp"
-        android:layout_height="166dp"
-        android:layout_marginTop="3dp"
+        android:layout_width="0dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginHorizontal="16dp"
         android:background="@color/txt_white_gray"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
@@ -42,8 +42,9 @@
 
         <ImageView
             android:id="@+id/ivType"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_margin="10dp"
             android:src="@drawable/hospital" />
 
         <TextView
@@ -51,7 +52,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginStart="16dp"
             android:gravity="center|start"
             android:textColor="#000000"
             android:textSize="20sp"
@@ -81,7 +81,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginStart="16dp"
             android:gravity="center|start"
             android:textColor="#000000"
             android:textSize="16sp"
@@ -91,7 +90,7 @@
     <EditText
         android:id="@+id/etContent"
         android:layout_width="360dp"
-        android:layout_height="270dp"
+        android:layout_height="220dp"
         android:layout_marginVertical="8dp"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
@@ -103,8 +102,10 @@
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@id/llApply"
         app:layout_constraintEnd_toEndOf="@+id/ivReview"
+        app:layout_constraintHorizontal_bias="0.473"
         app:layout_constraintStart_toStartOf="@id/ivReview"
         app:layout_constraintTop_toBottomOf="@id/llType"
+        app:layout_constraintVertical_bias="0.375"
         tools:text="cqeqfecfqqxewfegrtwhrtwgwr" />
 
     <LinearLayout

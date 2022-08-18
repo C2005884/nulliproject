@@ -7,22 +7,7 @@
     tools:context=".ui.auth.JoinActivity"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="107dp"
-        >
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="25dp"
-            android:gravity="center"
-            android:text="회원가입"
-            android:textColor="#FFFFFF"
-            android:textSize="25sp"
-            android:textStyle="bold" />
-
-    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -100,10 +85,13 @@
             android:id="@+id/btnJoin"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_margin="20dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="320dp"
+            android:layout_marginEnd="16dp"
             android:background="@drawable/background_radius_orange"
             android:text="회원가입"
-            android:textSize="20sp"
+            android:textSize="15sp"
+            android:textStyle="bold"
             app:layout_constraintTop_toBottomOf="@+id/etPassword" />
 
     </LinearLayout>
