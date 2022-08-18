@@ -14,12 +14,16 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.nulli.databinding.FragmentMypageBinding
+import com.example.nulli.model.Obstacle
 import com.example.nulli.settings.SettingsImgChangeActivity
 import com.example.nulli.settings.SettingsNickChangeActivity
 import com.example.nulli.ui.SplashActivity
 import com.example.nulli.ui.auth.LoginActivity
 import com.example.nulli.ui.map.MyMapFragment
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.ktx.Firebase
 
 class MypageFragment : Fragment() {
@@ -54,6 +58,7 @@ class MypageFragment : Fragment() {
         super.onDetach()
         onBackPressedCallback.remove()
     }
+
 
     override fun onCreateView(
         inflater: LayoutInflater,

@@ -458,13 +458,16 @@ class MyMapFragment : Fragment(), OnMapReadyCallback {
 
         // 플로팅 버튼 클릭 이벤트 - 후기
         binding.fabMap.setOnClickListener {
+            toggleFab()
             setEditMode(BUILDING)
         }
 
         // 플로팅 버튼 클릭 이벤트 - 장애물
         binding.fabObstacleMap.setOnClickListener {
+            toggleFab()
             setEditMode(OBSTACLE)
         }
+
     }
 
     private fun setEditMode(type: Int) {
