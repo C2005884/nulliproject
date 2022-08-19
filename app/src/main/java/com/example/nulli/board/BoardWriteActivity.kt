@@ -65,9 +65,6 @@ class BoardWriteActivity: AppCompatActivity() {
                     "<br>" +
                     "</small>"))
 
-        mId = intent.getStringExtra(WriteBuildingActivity.ID)?:""
-
-
 
         binding.ivPhoto.setOnClickListener {
             TedImagePicker.with(this)
