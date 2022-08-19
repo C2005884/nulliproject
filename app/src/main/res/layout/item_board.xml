@@ -14,13 +14,13 @@
         android:layout_marginHorizontal="16dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="16dp"
         android:maxLength="29"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cvProfile"
-        tools:text="글 제목 어쩌구어쩌구어쩌구어쩌구어쩌구어쩌구어쩌구"/>
+        tools:text="글 제목 어쩌구어쩌구어쩌구어쩌구어쩌구어쩌구어쩌구" />
 
     <TextView
         android:id="@+id/tvContent"
@@ -29,7 +29,7 @@
         android:layout_marginHorizontal="16dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="16dp"
         android:maxLength="200"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -79,14 +79,58 @@
         app:layout_constraintBottom_toBottomOf="@id/cvProfile"
         app:layout_constraintStart_toEndOf="@id/cvProfile" />
 
+
+    <LinearLayout
+        android:id="@+id/llLikeChat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="@id/tvContent"
+        app:layout_constraintHorizontal_bias="0.555"
+        app:layout_constraintLeft_toRightOf="@id/tvContent"
+        app:layout_constraintStart_toStartOf="@id/tvContent"
+        app:layout_constraintTop_toBottomOf="@+id/tvContent">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="280dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/like" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="10dp"
+            android:text="50"
+            android:textSize="15dp"
+            app:layout_constraintStart_toStartOf="@id/imsi1" />
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/chat" />
+
+        <TextView
+            android:layout_width="12dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="10dp"
+            android:text="5"
+            android:textSize="15dp" />
+
+    </LinearLayout>
+
     <View
         android:id="@+id/view"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="10dp"
         android:background="@color/txt_white_gray"
-        app:layout_constraintTop_toBottomOf="@id/tvContent" />
-
-
+        app:layout_constraintTop_toBottomOf="@id/llLikeChat"
+        tools:layout_editor_absoluteX="0dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
