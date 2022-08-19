@@ -10,12 +10,12 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="350dp"
-        android:layout_marginTop="10dp"
-        android:orientation="vertical"
         android:layout_margin="10dp"
         android:background="@drawable/bg_graytext"
-        app:layout_constraintLeft_toRightOf="parent"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.526"
+        app:layout_constraintLeft_toRightOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -30,9 +30,9 @@
             <ImageView
                 android:layout_width="35dp"
                 android:layout_height="35dp"
-                android:layout_marginTop="10dp"
                 android:layout_marginStart="10dp"
-                android:src="@drawable/ic_person"/>
+                android:layout_marginTop="10dp"
+                android:src="@drawable/ic_person" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -42,13 +42,13 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
                     android:text="아이디"
                     android:textColor="@color/black"
                     android:textSize="15sp"
+                    android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginTop="10dp"
-                    android:textStyle="bold" />
+                    app:layout_constraintStart_toStartOf="parent" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -63,12 +63,10 @@
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="15dp"
-            android:text="content"
             android:layout_margin="10dp"
-            />
+            android:hint="내용을 입력해주세요.(200자 이내)"
+            android:textSize="15dp" />
     </LinearLayout>
-
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -84,7 +82,8 @@
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_marginTop="10dp"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="280dp"
+
             android:src="@drawable/like" />
 
         <TextView
@@ -125,7 +124,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_marginTop="770dp"
+        android:layout_marginTop="500dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:background="@drawable/bg_graytext"
         android:orientation="horizontal"
         app:layout_constraintLeft_toRightOf="parent"
@@ -134,7 +135,7 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="310dp"
+            android:layout_marginLeft="290dp"
             android:layout_marginTop="5dp"
             android:text="작성">
         </Button>

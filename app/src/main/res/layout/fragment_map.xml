@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.map.MyMapFragment">
+    tools:context=".ui.map.      MyMapFragment">
 
 
     <fragment
@@ -48,7 +48,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/chipObstacle"
         app:iconStartPadding="2dp"
-        app:chipIcon="@drawable/ic_comment"
+        app:chipIcon="@drawable/chat2"
         android:text="후기"/>
 
     <com.google.android.material.chip.Chip

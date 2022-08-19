@@ -53,6 +53,7 @@
                 tools:listitem="@layout/item_review"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btnWrite"
         android:layout_width="wrap_content"
