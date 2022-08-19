@@ -106,13 +106,8 @@ class BoardWriteActivity: AppCompatActivity() {
 
 
         ref.child(key).setValue(content).addOnCompleteListener {
-            contentRef.child(mId).child("content").child(key)
-                .setValue(System.currentTimeMillis()).addOnCompleteListener {
-
                         Toast.makeText(this, "등록 완료되었습니다.", Toast.LENGTH_SHORT).show()
                         finish()
-
-                }
         }
     }
 
