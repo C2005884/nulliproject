@@ -25,7 +25,7 @@
 
     <fragment
         android:id="@+id/navigation_mypage"
-        android:name="com.example.nulli.ui.mypage.MypageFragment"
+        android:name="com.example.nulli.ui.mypage.MyfeedFragment"
         android:label="@string/title_mypage"
         tools:layout="@layout/fragment_mypage" />
 
