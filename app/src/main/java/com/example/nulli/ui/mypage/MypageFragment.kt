@@ -13,6 +13,7 @@ import com.bumptech.glide.Glide
 import com.example.nulli.databinding.FragmentMypageBinding
 import com.example.nulli.settings.SettingsImgChangeActivity
 import com.example.nulli.settings.SettingsNickChangeActivity
+import com.example.nulli.settings.SettingsWithdrawalActivity
 import com.example.nulli.ui.SplashActivity
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -72,6 +73,11 @@ class MypageFragment : Fragment() {
             ${fuser?.uid}
         """.trimMargin("|")
 
+        binding.tvWithhdrawal.setOnClickListener {
+            val intent = Intent(requireActivity(),SettingsWithdrawalActivity::class.java)
+            requireActivity().startActivity(intent)
+        }
+
         binding.tvNicnameChange.setOnClickListener {
             val intent = Intent(requireActivity(),SettingsNickChangeActivity::class.java)
             requireActivity().startActivity(intent)
@@ -84,6 +90,8 @@ class MypageFragment : Fragment() {
 
         binding.tvPasswordChange.setOnClickListener {
             val emailAddress = fuser?.email
+
+            Toast.makeText(requireContext(), "이메일이 전송되었습니다. 이메일을 확인해주세요", Toast.LENGTH_LONG).show()
 
             Firebase.auth.sendPasswordResetEmail(emailAddress!!)
                 .addOnCompleteListener { task ->
