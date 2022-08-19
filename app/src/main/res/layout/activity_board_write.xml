@@ -29,6 +29,7 @@
 
 
         <EditText
+            android:id="@+id/etTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="제목을 입력해주세요"

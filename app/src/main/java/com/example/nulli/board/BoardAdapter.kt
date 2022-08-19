@@ -58,6 +58,7 @@ class BoardAdapter : RecyclerView.Adapter<BoardAdapter.ViewHolder>() {
     inner class ViewHolder(private val binding: ItemBoardBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(board: Board) {
             binding.ivProfile.isVisible = !board.imageUri.isNullOrBlank()
+            binding.tvTitle.text = board.title
             binding.tvContent.text = board.content
             Glide.with(binding.root).load(board.profileImageUri).into(binding.ivProfile)
             binding.tvNickname.text = board.nickname

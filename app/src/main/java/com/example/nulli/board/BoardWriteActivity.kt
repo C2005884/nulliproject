@@ -36,8 +36,6 @@ class BoardWriteActivity: AppCompatActivity() {
 
     private var mId: String = ""
 
-    private lateinit var maddress:String
-    private var mtype: Int = -1
     private var mImageUri: Uri? = null
 
     private val binding: ActivityBoardWriteBinding by lazy {
@@ -95,6 +93,7 @@ class BoardWriteActivity: AppCompatActivity() {
         val content = Content().apply {
             id = key
             uid = fUser?.uid.toString()
+            title = binding.etTitle.text.toString()
             content = binding.etContent.text.toString()
             nickname = fUser?.displayName.toString()
             date = System.currentTimeMillis()
@@ -109,16 +108,10 @@ class BoardWriteActivity: AppCompatActivity() {
         ref.child(key).setValue(content).addOnCompleteListener {
             contentRef.child(mId).child("content").child(key)
                 .setValue(System.currentTimeMillis()).addOnCompleteListener {
-                    if(mImageUri != null){
-                        storage.child("content").child(key).putFile(mImageUri!!)
-                            .addOnCompleteListener {
-                                Toast.makeText(this, "등록 완료되었습니다.", Toast.LENGTH_SHORT).show()
-                                finish()
-                            }
-                    }else{
+
                         Toast.makeText(this, "등록 완료되었습니다.", Toast.LENGTH_SHORT).show()
                         finish()
-                    }
+
                 }
         }
     }

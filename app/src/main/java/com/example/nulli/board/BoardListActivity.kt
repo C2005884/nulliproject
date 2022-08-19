@@ -41,14 +41,18 @@ class BoardListActivity : AppCompatActivity() {
     private val fUser = auth.currentUser
     private var mBoard = Board()
     private var mid:String = ""
-    private lateinit var maddress:String
-    private var mtype: Int = -1
-    private var mImageUri:Uri? = null
 
     private val binding:ActivityBoardListBinding by lazy {
         ActivityBoardListBinding.inflate(layoutInflater)
     }
 
+    override fun onResume() {
+        super.onResume()
+        if(mid.isNotBlank()) {
+            binding.btnWrite.isEnabled = false
+            loadData()
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

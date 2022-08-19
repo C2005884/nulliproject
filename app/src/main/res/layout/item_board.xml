@@ -6,10 +6,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_margin="8dp">
 
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:maxLength="29"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cvProfile"
+        tools:text="글 제목 어쩌구어쩌구어쩌구어쩌구어쩌구어쩌구어쩌구"/>
+
     <TextView
         android:id="@+id/tvContent"
         android:layout_width="match_parent"
-        android:layout_height="112dp"
+        android:layout_height="match_parent"
         android:layout_marginHorizontal="16dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="8dp"
@@ -17,7 +33,7 @@
         android:maxLength="200"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cvProfile"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle"
         tools:text="선거에 있어서 최고득표자가 2인 이상인 때에는 국회의 재적의원 과반수가 출석한 공개회의에서 다수표를 얻은 자를 당선자로 한다. 국가는 전통문화의 계승·발전과 민족문화의 창달에 노력하여야 한다. 국회는 국무총리 또는 국무위원의 해임을 대통령에게 건의할 수 있다. 정당의 설립은 자유이며, 복수정당제는 보장된다." />
 
     <androidx.cardview.widget.CardView
