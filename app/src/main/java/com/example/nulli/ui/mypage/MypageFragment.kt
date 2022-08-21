@@ -106,6 +106,7 @@ class MypageFragment : Fragment() {
             requireActivity().startActivity(intent)
             requireActivity().finish()
         }
+
     }
 
     override fun onDestroyView() {
