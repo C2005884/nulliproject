@@ -53,7 +53,7 @@
                 android:textSize="15sp" />
 
             <ImageView
-                android:id="@+id/iv_Image"
+                android:id="@+id/ivImage"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_marginRight="40dp"

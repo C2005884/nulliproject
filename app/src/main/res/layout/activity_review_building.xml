@@ -106,7 +106,7 @@
         app:layout_constraintStart_toStartOf="@id/ivReview"
         app:layout_constraintTop_toBottomOf="@id/llType"
         app:layout_constraintVertical_bias="0.375"
-        tools:text="cqeqfecfqqxewfegrtwhrtwgwr" />
+        tools:text="예시입니다. 여기에 장소에 대한 후기를 남겨보세요!! 리스트에 글이 등록됩니다." />
 
     <LinearLayout
         android:id="@+id/llApply"

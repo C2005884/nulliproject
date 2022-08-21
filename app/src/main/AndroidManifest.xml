@@ -43,7 +43,7 @@
             android:name=".board.BoardWriteActivity"
             android:exported="false" />
         <activity
-            android:name=".board.BoardListActivity"
+            android:name=".ui.SplashActivity"
             android:exported="false" />
         <activity
             android:name=".settings.SettingsWithdrawalActivity"
@@ -82,7 +82,7 @@
             android:name=".ui.auth.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.SplashActivity"
+            android:name=".board.BoardListActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

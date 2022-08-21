@@ -27,7 +27,7 @@
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/stPassword1"
+            android:id="@+id/etPassword1"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="10dp"
@@ -41,7 +41,7 @@
 
 
         <EditText
-            android:id="@+id/stPassword2"
+            android:id="@+id/etPassword2"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="5dp"
@@ -55,7 +55,7 @@
 
 
         <EditText
-            android:id="@+id/stPassword3"
+            android:id="@+id/etPassword3"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="5dp"

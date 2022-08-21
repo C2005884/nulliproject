@@ -43,7 +43,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/tvnick"
+                    android:id="@+id/tvNickname"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
@@ -98,7 +98,7 @@
             android:layout_marginStart="3dp"
             android:text="50"
             android:textSize="15dp"
-            app:layout_constraintStart_toStartOf="@id/imsi1" />
+            app:layout_constraintStart_toStartOf="@id/llType2" />
 
         <ImageView
             android:layout_width="20dp"
