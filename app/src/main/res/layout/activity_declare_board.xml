@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".declare.DeclareBoardActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="게시물 신고센터"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="70dp"
+        android:gravity="left"
+        android:layout_marginLeft="15dp"
+        android:textSize="15dp"
+        android:text="권리침해 및 유해정보 신고"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:gravity="left"
+        android:layout_marginLeft="17dp"
+        android:textSize="13dp"
+        android:text="널리는 이용자의 명예훼손, 저작권 침해, 기타 권리 침해, 불법 촬영물 유통 방지를 위해 게시물 신고센터를 운영하고 있습니다. 만약 게시물로 인해 명예훼손, 저작권 침해 등을 당했다고 판단되거나 혹은 불법촬영물, 아동 성착취물 등 불법촬영물로 의심되는 게시물을 발견하셨을 경우, 해당 게시물을 지체 없이 신고해주시기 바랍니다. "
+        android:textStyle="normal"
+        android:textColor="@color/txt_dark_gray"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="210dp"
+        android:gravity="left"
+        android:layout_marginLeft="17dp"
+        android:textSize="13dp"
+        android:text="게시 중단은 개인정보보호법과 정보통신망법을, 유해정보 신고는 전기통신사업법과 아동보호법 및 성폭력특례법을 준수하며, 해당 법령에 명시되어있는 절차에 따라 처리됩니다."
+        android:textStyle="normal"
+        android:textColor="@color/txt_dark_gray"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="300dp"
+        android:gravity="left"
+        android:layout_marginLeft="17dp"
+        android:textSize="13dp"
+        android:text="* 유의사항"
+        android:textStyle="normal"
+        android:textColor="@color/txt_dark_gray"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="320dp"
+        android:gravity="left"
+        android:layout_marginLeft="19dp"
+        android:textSize="11dp"
+        android:text="아래 사유의 게시중단 및 이의제기 요청은 처리되지 않습니다."
+        android:textStyle="normal"
+        android:textColor="@color/txt_dark_gray"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="340dp"
+        android:gravity="left"
+        android:layout_marginLeft="22dp"
+        android:textSize="11dp"
+        android:text="- 게시물이 특정되지 않아 식별이 불가능할 경우"
+        android:textStyle="normal"
+        android:textColor="@color/txt_dark_gray"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="355dp"
+        android:gravity="left"
+        android:layout_marginLeft="22dp"
+        android:textSize="11dp"
+        android:text="- 요청인이 권리 침해를 당한 당사자 및 단체가 아니거나 불명확한 경우"
+        android:textStyle="normal"
+        android:textColor="@color/txt_dark_gray"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="370dp"
+        android:gravity="left"
+        android:layout_marginLeft="22dp"
+        android:textSize="11dp"
+        android:text="- 요청이 게시물 신고센터로 접수되지 않았을 경우"
+        android:textStyle="normal"
+        android:textColor="@color/txt_dark_gray"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="385dp"
+        android:gravity="left"
+        android:layout_marginLeft="22dp"
+        android:textSize="11dp"
+        android:text="- 신청서 및 자료가 누락되었을 경우"
+        android:textStyle="normal"
+        android:textColor="@color/txt_dark_gray"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="405dp"
+        android:gravity="left"
+        android:layout_marginLeft="19dp"
+        android:textSize="11dp"
+        android:text="게시물 신고 요청 및 처리 이후, 취소 요청은 불가능합니다."
+        android:textStyle="normal"
+        android:textColor="@color/txt_dark_gray"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="480dp"
+        android:gravity="left"
+        android:layout_marginLeft="15dp"
+        android:textSize="15dp"
+        android:text="권리침해 및 유해정보 게시물 신고 및 요청"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="510dp"
+        android:gravity="left"
+        android:layout_marginLeft="17dp"
+        android:textSize="13dp"
+        android:text="아래 신고서를 게시물 신고센터 팩스(070-1234-5678)로 전달해주시기 바랍니다."
+        android:textStyle="normal"
+        android:textColor="@color/txt_dark_gray"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="550dp"
+        android:gravity="left"
+        android:layout_marginLeft="22dp"
+        android:textSize="13dp"
+        android:text=" * 신고서 다운로드(PDF)"
+        android:textStyle="bold"
+        android:textColor="@color/primary"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="570dp"
+        android:gravity="left"
+        android:layout_marginLeft="22dp"
+        android:textSize="13dp"
+        android:text=" * 신고서 다운로드(HWP)"
+        android:textStyle="bold"
+        android:textColor="@color/primary"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

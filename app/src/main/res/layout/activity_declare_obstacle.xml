@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".declare.DeclareObstacleActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="장애물 지도 신고센터"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="70dp"
+        android:gravity="left"
+        android:layout_marginLeft="15dp"
+        android:textSize="15dp"
+        android:text="장애물 지도 신고"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:gravity="left"
+        android:layout_marginLeft="17dp"
+        android:textSize="13dp"
+        android:text="널리는 이용자들의 원활한 장애물 지도 사용을 위해 장애물 지도 신고 센터를 운영하고 있습니다. 만약 잘못된 아이콘 및 잘못된 위치 등의 사유로 인해 올바른 내용으로 수정을 원하시는 경우, 해당 내용물을 신고해주시기 바랍니다. "
+        android:textStyle="normal"
+        android:textColor="@color/txt_dark_gray"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="190dp"
+        android:gravity="left"
+        android:layout_marginLeft="17dp"
+        android:textSize="13dp"
+        android:text="장애물 지도는 사용자들이 함께 만들어나가는 커뮤니티 맵핑 입니다. 내가 등록한 정보가 누군가에게 도움이 될 수 있습니다. 올바른 방향으로 나아갈 수 있도록 시용자들의 진실된 마음으로 이용해주세요."
+        android:textStyle="normal"
+        android:textColor="@color/txt_dark_gray"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="280dp"
+        android:gravity="left"
+        android:layout_marginLeft="17dp"
+        android:textSize="13dp"
+        android:text="* 유의사항"
+        android:textStyle="normal"
+        android:textColor="@color/txt_dark_gray"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="300dp"
+        android:gravity="left"
+        android:layout_marginLeft="19dp"
+        android:textSize="11dp"
+        android:text="아래 사유의 등록중단 및 이의제기 요청은 처리되지 않습니다."
+        android:textStyle="normal"
+        android:textColor="@color/txt_dark_gray"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="320dp"
+        android:gravity="left"
+        android:layout_marginLeft="22dp"
+        android:textSize="11dp"
+        android:text="- 장애물 등록 정보 특정되지 않아 식별이 불가능할 경우"
+        android:textStyle="normal"
+        android:textColor="@color/txt_dark_gray"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="335dp"
+        android:gravity="left"
+        android:layout_marginLeft="22dp"
+        android:textSize="11dp"
+        android:text="- 요청인이 장애물 정보를 등록한 당사자 및 단체가 아니거나 불명확한 경우"
+        android:textStyle="normal"
+        android:textColor="@color/txt_dark_gray"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="350dp"
+        android:gravity="left"
+        android:layout_marginLeft="22dp"
+        android:textSize="11dp"
+        android:text="- 요청이 장애물 지도 신고센터로 접수되지 않았을 경우"
+        android:textStyle="normal"
+        android:textColor="@color/txt_dark_gray"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="365dp"
+        android:gravity="left"
+        android:layout_marginLeft="22dp"
+        android:textSize="11dp"
+        android:text="- 신청서 및 자료가 누락되었을 경우"
+        android:textStyle="normal"
+        android:textColor="@color/txt_dark_gray"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="380dp"
+        android:gravity="left"
+        android:layout_marginLeft="19dp"
+        android:textSize="11dp"
+        android:text="장애물 지도 신고 요청 및 처리 이후, 취소 요청은 불가능합니다."
+        android:textStyle="normal"
+        android:textColor="@color/txt_dark_gray"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="455dp"
+        android:gravity="left"
+        android:layout_marginLeft="15dp"
+        android:textSize="15dp"
+        android:text="장애물 지도 신고 및 수정 요청"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="480dp"
+        android:gravity="left"
+        android:layout_marginLeft="17dp"
+        android:textSize="13dp"
+        android:text="아래 신고서를 장애물 지도 신고센터 팩스(070-1234-5678)로 전달해주시기 바랍니다."
+        android:textStyle="normal"
+        android:textColor="@color/txt_dark_gray"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="520dp"
+        android:gravity="left"
+        android:layout_marginLeft="22dp"
+        android:textSize="13dp"
+        android:text=" * 신고서 다운로드(PDF)"
+        android:textStyle="bold"
+        android:textColor="@color/primary"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="540dp"
+        android:gravity="left"
+        android:layout_marginLeft="22dp"
+        android:textSize="13dp"
+        android:text=" * 신고서 다운로드(HWP)"
+        android:textStyle="bold"
+        android:textColor="@color/primary"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

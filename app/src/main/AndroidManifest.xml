@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.nulli" >
+    package="com.example.nulli">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -14,8 +14,25 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Nulli" >
-
+        android:theme="@style/Theme.Nulli">
+        <activity
+            android:name=".declare.DeclareUseLimitActivity"
+            android:exported="false" />
+        <activity
+            android:name=".declare.DeclareCommunityActivity"
+            android:exported="false" />
+        <activity
+            android:name=".declare.DeclareReviewActivity"
+            android:exported="false" />
+        <activity
+            android:name=".declare.DeclareObstacleActivity"
+            android:exported="false" />
+        <activity
+            android:name=".declare.DeclareBoardActivity"
+            android:exported="false" />
+        <activity
+            android:name=".settings.SettingsDeclareActivity"
+            android:exported="false" />
         <activity
             android:name=".settings.SettingsNotificationActivity"
             android:exported="false" />
@@ -66,7 +83,7 @@
             android:exported="false" />
         <activity
             android:name=".ui.SplashActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
