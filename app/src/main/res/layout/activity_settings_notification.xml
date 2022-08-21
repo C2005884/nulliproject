@@ -12,18 +12,16 @@
         android:orientation="vertical">
 
         <LinearLayout
-            android:id="@+id/imsi1"
+            android:id="@+id/llType1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_graytext"
             android:orientation="vertical"
-            android:layout_margin="10dp"
-            app:layout_constraintLeft_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/imsi2"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_marginTop="20dp"
+            android:layout_marginHorizontal="10dp">
 
             <Switch
-                android:id="@+id/switch1"
+                android:id="@+id/scomment1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -31,6 +29,7 @@
                 android:textSize="20sp" />
 
             <Switch
+                android:id="@+id/snotification"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -43,6 +42,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/receive"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
@@ -54,6 +54,7 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/means1"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
                     android:layout_marginStart="16dp"
@@ -69,16 +70,13 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/imsi2"
+            android:id="@+id/llType2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_graybox"
+            android:background="@drawable/bg_graytext"
             android:orientation="vertical"
-            android:layout_margin="10dp"
-            app:layout_constraintBottom_toTopOf="@+id/imsi3"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imsi1">
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="5dp">
 
             <Switch
                 android:id="@+id/switch2"
@@ -118,15 +116,13 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/imsi3"
+            android:id="@+id/llType3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_graybox"
-            android:layout_margin="10dp"
+            android:background="@drawable/bg_graytext"
+            android:layout_marginHorizontal="10dp"
             android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            android:layout_marginTop="5dp">
 
             <Switch
                 android:id="@+id/switch3"
@@ -141,7 +137,7 @@
                 android:layout_height="wrap_content"
                 android:text="내 지역 장애물 알림"
                 android:layout_margin="10dp"
-                android:textSize="20sp" />
+                android:textSize="15sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -177,7 +173,7 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_margin="20dp"
+            android:layout_margin="15dp"
             android:background="@drawable/background_radius_orange"
             android:text="푸시 알림 설정정"
            android:textSize="15sp"

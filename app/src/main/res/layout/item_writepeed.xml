@@ -68,23 +68,21 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginStart="280dp"
-
-                android:src="@drawable/like" />
+                android:layout_marginStart="290dp"
+                android:src="@drawable/like2" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:layout_marginStart="5dp"
-
+                android:layout_marginStart="3dp"
                 android:text="50"
                 android:textSize="15dp"
                 app:layout_constraintStart_toStartOf="@id/imsi1" />
 
             <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:layout_marginStart="5dp"
                 android:layout_marginTop="10dp"
                 android:src="@drawable/chat" />
@@ -92,8 +90,7 @@
             <TextView
                 android:layout_width="12dp"
                 android:layout_height="wrap_content"
-
-                android:layout_marginStart="5dp"
+                android:layout_marginStart="3dp"
                 android:layout_marginTop="10dp"
                 android:text="5"
                 android:textSize="15dp" />
@@ -103,9 +100,16 @@
                 android:layout_height="20dp"
                 android:layout_marginStart="5dp"
                 android:layout_marginTop="10dp"
-                android:src="@drawable/star2" />
+                android:src="@drawable/star" />
 
         </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:hint="제목"
+            android:textSize="15dp" />
 
         <TextView
             android:layout_width="wrap_content"
