@@ -1,25 +1,11 @@
 package com.example.nulli.board
 
-import android.content.DialogInterface
 import android.content.Intent
-import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.bumptech.glide.Glide
-import com.example.nulli.R
+import androidx.appcompat.app.AppCompatActivity
 import com.example.nulli.databinding.ActivityBoardListBinding
-import com.example.nulli.databinding.ActivityWriteBuildingBinding
 import com.example.nulli.model.Board
-import com.example.nulli.model.Building
-import com.example.nulli.model.Obstacle
-import com.example.nulli.model.Review
-
-import com.example.nulli.ui.map.ReviewBuildingActivity
-import com.example.nulli.ui.map.WriteBuildingActivity
 import com.example.nulli.util.WrapContentLinearLayoutManager
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
@@ -28,10 +14,6 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
-import gun0912.tedimagepicker.builder.TedImagePicker
-import java.text.SimpleDateFormat
-import java.util.*
-import kotlin.collections.ArrayList
 
 class BoardListActivity : AppCompatActivity() {
 
@@ -59,6 +41,17 @@ class BoardListActivity : AppCompatActivity() {
         setContentView(binding.root)
         mid = intent.getStringExtra(ID) ?: ""
 
+
+        val title = when (mid) {
+            FREE_BOARD -> "자유 게시판"
+            EXTERNAL_DISABLED_BOARD -> "외부 장애 게시판"
+            INTERNAL_DISABLED_BOARD -> "내부 장애 게시판"
+            DEVELOP_DISABLED_BOARD -> "발달 장애 게시판"
+            MENTALITY_DISABLED_BOARD -> "정신 장애 게시판"
+            else -> "게시판"
+        }
+        binding.tvTitle.text = title
+
         setRv()
         setData()
 
@@ -73,7 +66,7 @@ class BoardListActivity : AppCompatActivity() {
     private fun loadData() {
         db.child("board").child(mid).addListenerForSingleValueEvent(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
-                mBoard = snapshot.getValue(Board::class.java)!!
+                //mBoard = snapshot.getValue(Board::class.java)!!
                 setData()
             }
             override fun onCancelled(error: DatabaseError) {
@@ -144,5 +137,11 @@ class BoardListActivity : AppCompatActivity() {
 
     companion object {
         const val ID = "ID"
+
+        const val FREE_BOARD = "freeBoard"
+        const val EXTERNAL_DISABLED_BOARD = "externalDisabledBoard"
+        const val INTERNAL_DISABLED_BOARD = "internalDisabledBoard"
+        const val DEVELOP_DISABLED_BOARD = "developDisabledBoard"
+        const val MENTALITY_DISABLED_BOARD = "mentalityDisabledBoard"
     }
 }
