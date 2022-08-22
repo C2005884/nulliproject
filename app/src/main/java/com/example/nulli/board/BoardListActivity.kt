@@ -51,17 +51,6 @@ class BoardListActivity : AppCompatActivity() {
 
         binding.tvTitle.text = title
 
-
-        val title = when (mid) {
-            FREE_BOARD -> "자유 게시판"
-            EXTERNAL_DISABLED_BOARD -> "외부 장애 게시판"
-            INTERNAL_DISABLED_BOARD -> "내부 장애 게시판"
-            DEVELOP_DISABLED_BOARD -> "발달 장애 게시판"
-            MENTALITY_DISABLED_BOARD -> "정신 장애 게시판"
-            else -> "게시판"
-        }
-        binding.tvTitle.text = title
-
         setRv()
         setData()
 

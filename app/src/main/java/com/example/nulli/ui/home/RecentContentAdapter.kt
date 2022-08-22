@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import android.view.ViewGroup
 import com.example.nulli.databinding.ItemRecentContentBinding
 
 class RecentContentAdapter : RecyclerView.Adapter<RecentContentAdapter.ViewHolder>() {
