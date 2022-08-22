@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.nulli.board.BoardListActivity
 import com.example.nulli.databinding.FragmentHomeBinding
+import com.example.nulli.util.WrapContentLinearLayoutManager
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
@@ -36,6 +37,12 @@ class HomeFragment : Fragment() {
         return root
     }
 
+    override fun onResume() {
+        super.onResume()
+        loadRecentContent()
+        loadFavoritContent()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 //        val dialog = LottieDialog().apply {
@@ -48,13 +55,11 @@ class HomeFragment : Fragment() {
 //            }
 //        }, 1000)
         setRv()
-        loadRecentContent()
-        loadFavoritContent()
     }
 
     private fun setRv() {
         binding.rvRecentContent.apply {
-            layoutManager = LinearLayoutManager(requireContext())
+            layoutManager = WrapContentLinearLayoutManager(requireContext())
             adapter = RecentContentAdapter().apply {
                 clickEvent = { type, position ->
                     if (type == "board") {

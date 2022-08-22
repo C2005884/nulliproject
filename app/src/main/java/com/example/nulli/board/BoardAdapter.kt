@@ -1,17 +1,15 @@
 package com.example.nulli.board
 
+import android.util.Log
 import android.view.LayoutInflater
-import androidx.recyclerview.widget.RecyclerView
 import android.view.ViewGroup
 import androidx.core.view.isVisible
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.nulli.databinding.ItemBoardBinding
-import com.example.nulli.databinding.ItemReviewBinding
 import com.example.nulli.model.Board
-import com.example.nulli.model.Review
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.ArrayList
 
 class BoardAdapter : RecyclerView.Adapter<BoardAdapter.ViewHolder>() {
 
@@ -57,6 +55,7 @@ class BoardAdapter : RecyclerView.Adapter<BoardAdapter.ViewHolder>() {
 
     inner class ViewHolder(private val binding: ItemBoardBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(board: Board) {
+            Log.e("board[$adapterPosition]", board.toString())
             binding.ivProfile.isVisible = !board.imageUri.isNullOrBlank()
             binding.tvTitle.text = board.title
             binding.tvContent.text = board.content

@@ -30,8 +30,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="56dp"
+        android:fillViewport="true"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -43,14 +43,12 @@
                 android:id="@+id/rvContent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
+                tools:itemCount="2"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="24dp"
                 android:nestedScrollingEnabled="false"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="parent"
-                app:layout_constraintVertical_bias="0.496"
+                app:layout_constraintTop_toTopOf="parent"
                 tools:listitem="@layout/item_board" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

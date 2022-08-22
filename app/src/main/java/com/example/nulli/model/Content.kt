@@ -6,6 +6,7 @@ import androidx.annotation.Keep
 
 data class Content(
     var id:String = "",
+    var boardId: String = "",
     var profileImageUri:String? = "",
     var title:String? = "",
     var content:String? = "",
@@ -18,4 +19,5 @@ data class Content(
     var commentcount:Int = 0,
     var scrap:Int = 0,
     var mboard:HashMap<String, Long> = hashMapOf()
-)
+) {
+}

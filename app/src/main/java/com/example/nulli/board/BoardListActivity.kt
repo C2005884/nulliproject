@@ -21,43 +21,29 @@ class BoardListActivity : AppCompatActivity() {
     private val db = Firebase.database.reference
     private val auth = Firebase.auth
     private val fUser = auth.currentUser
-    private var mBoard = Board()
-    private var mid:String = ""
+    private var boardList: ArrayList<Board> = arrayListOf()
+    private var mid: String = ""
 
-    private val binding:ActivityBoardListBinding by lazy {
+    private val binding: ActivityBoardListBinding by lazy {
         ActivityBoardListBinding.inflate(layoutInflater)
     }
 
     override fun onResume() {
         super.onResume()
-        if(mid.isNotBlank()) {
-            binding.btnWrite.isEnabled = false
-            loadData()
-        }
+        loadData()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         mid = intent.getStringExtra(ID) ?: ""
+
         val title = when(mid){
             FREE_BOARD -> "자유 게시판"
             EXTERNAL_DISABLED_BOARD -> "외부장애 게시판"
             INTERNAL_DISABLED_BOARD -> "내부장애 게시판"
             DEVELOP_DISABLED_BOARD -> "발달장애 게시판"
             MENTALITY_DISABLED_BOARD -> "정신장애 게시판"
-            else -> "게시판"
-        }
-
-        binding.tvTitle.text = title
-
-
-        val title = when (mid) {
-            FREE_BOARD -> "자유 게시판"
-            EXTERNAL_DISABLED_BOARD -> "외부 장애 게시판"
-            INTERNAL_DISABLED_BOARD -> "내부 장애 게시판"
-            DEVELOP_DISABLED_BOARD -> "발달 장애 게시판"
-            MENTALITY_DISABLED_BOARD -> "정신 장애 게시판"
             else -> "게시판"
         }
         binding.tvTitle.text = title
@@ -67,16 +53,26 @@ class BoardListActivity : AppCompatActivity() {
 
 //setmessage 글씨작게하려면 62번줄
         binding.btnWrite.setOnClickListener {
-            val intent = Intent(this, BoardWriteActivity::class.java)
+            val intent = Intent(this, BoardWriteActivity::class.java).apply {
+                putExtra(ID, mid)
+                putExtra(FROM, BOARD_LIST)
+            }
             startActivity(intent)
         }
     }
 
 
     private fun loadData() {
-        db.child("board").child(mid).addListenerForSingleValueEvent(object : ValueEventListener{
+        db.child(mid).addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                //mBoard = snapshot.getValue(Board::class.java)!!
+                for (s in snapshot.children) {
+                    try {
+                        boardList.add(s.getValue(Board::class.java)!!)
+                        Log.e("boardList[${boardList.size}]", boardList.toString())
+                    } catch (e: Exception) {
+                        Log.e("loadData", "${e.message}")
+                    }
+                }
                 setData()
             }
             override fun onCancelled(error: DatabaseError) {
@@ -85,56 +81,7 @@ class BoardListActivity : AppCompatActivity() {
     }
 
     private fun setData(){
-        val datas:ArrayList<Board> = arrayListOf()
-        //Pair<String, Long>
-        var boardKeyList = mBoard.mboard.toList()
-        boardKeyList = boardKeyList.sortedBy { it.second }
-
-        for(board in boardKeyList) {
-            Log.e("setData", "${board}")
-            db.child("board").child(board.first)
-                .addListenerForSingleValueEvent(object : ValueEventListener {
-                    override fun onDataChange(snapshot: DataSnapshot) {
-                        val board = snapshot.getValue(Board::class.java)
-                        Log.e("board","${board.toString()}")
-
-                        if (board != null) {
-                            if (!datas.contains(board)) {
-                                datas.add(board)
-                                (binding.rvContent.adapter as BoardAdapter).addData(board)
-                            }
-                        }
-                    }
-
-                    override fun onCancelled(error: DatabaseError) {
-
-                    }
-
-                })
-        }
-//            Review(
-//                id = "",
-//                buildingId = "",
-//                content = "국회의 정기회는 법률이 정하는 바에 의하여 매년 1회 집회되며, 국회의 임시회는 대통령 또는 국회재적의원 4분의 1 이상의 요구에 의하여 집회된다. 일반사면을 명하려면 국회의 동의를 얻어야 한다.".substring(0, Random().nextInt(100)),
-//                date = 1660043301000,
-//                dateText = "2022년 8월 9일 화요일 오후 8:08:21 GMT+09:00",
-//                imageUri = "",
-//                nickname = "닉네임은여덟자리",
-//                profileImageUri = "https://picsum.photos/id/${Random().nextInt(500)}/200/300",
-//                uid = ""
-//            ),
-//            Review(
-//                id = "",
-//                buildingId = "",
-//                content = "국회의 정기회는 법률이 정하는 바에 의하여 매년 1회 집회되며, 국회의 임시회는 대통령 또는 국회재적의원 4분의 1 이상의 요구에 의하여 집회된다. 일반사면을 명하려면 국회의 동의를 얻어야 한다.".substring(0, Random().nextInt(100)),
-//                date = 1660043301000,
-//                dateText = "2022년 8월 9일 화요일 오후 8:08:21 GMT+09:00",
-//                imageUri = "https://picsum.photos/id/${Random().nextInt(500)}/200/300",
-//                nickname = "닉네임은여덟자리",
-//                profileImageUri = "https://picsum.photos/id/${Random().nextInt(500)}/200/300",
-//                uid = ""
-//            )
-        (binding.rvContent.adapter as BoardAdapter).setDatas(datas)
+        (binding.rvContent.adapter as BoardAdapter).setDatas(boardList)
     }
 
     private fun setRv() {
@@ -147,6 +94,10 @@ class BoardListActivity : AppCompatActivity() {
 
     companion object {
         const val ID = "ID"
+        const val FROM = "FROM"
+
+        const val BOARD_LIST = "boardList"
+        const val HOME_FRAGMENT = "homeFragment"
 
         const val FREE_BOARD = "freeBoard"
         const val EXTERNAL_DISABLED_BOARD = "externalDisabledBoard"
