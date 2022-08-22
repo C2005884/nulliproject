@@ -23,10 +23,10 @@ class SettingsNickChangeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        binding.stnick.setText(fuser?.displayName?: "")
+        binding.etNicknameChange.setText(fuser?.displayName?: "")
         binding.btnChange.setOnClickListener {
             val profileUpdates = userProfileChangeRequest {
-                displayName = binding.stnick.text.toString()
+                displayName = binding.etNicknameChange.text.toString()
             }
 
             fuser!!.updateProfile(profileUpdates)

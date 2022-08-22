@@ -78,7 +78,7 @@
                 android:layout_marginStart="3dp"
                 android:text="50"
                 android:textSize="15dp"
-                app:layout_constraintStart_toStartOf="@id/imsi1" />
+                app:layout_constraintStart_toStartOf="@id/ivReview" />
 
             <ImageView
                 android:layout_width="20dp"
