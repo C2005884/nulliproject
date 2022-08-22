@@ -1,4 +1,4 @@
-package com.example.nulli.ui.home
+package com.example.nulli.ui
 
 import android.os.Bundle
 import android.os.Handler
@@ -6,10 +6,8 @@ import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import com.example.nulli.R
 import com.example.nulli.databinding.FragmentHomeBinding
 import com.example.nulli.ui.dialog.LottieDialog

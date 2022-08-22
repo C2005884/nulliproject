@@ -11,9 +11,19 @@
         <item name="colorOnSecondary">@color/black</item>
         <!-- Customize your theme here. -->
     </style>
+
     <style name="AuthEditText" parent="android:Widget.EditText">
         <item name="android:background">@android:color/transparent</item>
         <item name="android:textSize">15sp</item>
         <item name="android:layout_margin">10dp</item>
     </style>
+
+    <style name="Theme.Nulli.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.Nulli.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.Nulli.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>
