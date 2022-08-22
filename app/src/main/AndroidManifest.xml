@@ -16,12 +16,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Nulli">
         <activity
-            android:name=".declare.DeclareUseLimitActivity"
-            android:exported="false" />
-        <activity
-            android:name=".declare.DeclareCommunityActivity"
-            android:exported="false" />
-        <activity
             android:name=".declare.DeclareReviewActivity"
             android:exported="false" />
         <activity
