@@ -47,7 +47,6 @@ class HomeFragment : Fragment() {
 //                (it as DialogFragment).dismiss()
 //            }
 //        }, 1000)
-
         setRv()
         loadRecentContent()
         loadFavoritContent()
@@ -131,6 +130,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun loadFavoritContent() {
+
 
     }
 

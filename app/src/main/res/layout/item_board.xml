@@ -92,13 +92,55 @@
         tools:text="선거에 있어서 최고득표자가 2인 이상인 때에는 국회의 재적의원 과반수가 출석한 공개회의에서 다수표를 얻은 자를 당선자로 한다. 국가는 전통문화의 계승·발전과 민족문화의 창달에 노력하여야 한다. 국회는 국무총리 또는 국무위원의 해임을 대통령에게 건의할 수 있다. 정당의 설립은 자유이며, 복수정당제는 보장된다." />
 
 
+    <LinearLayout
+        android:id="@+id/llType2"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvContent">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="315dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/like2" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="3dp"
+            android:layout_marginTop="10dp"
+            android:text="50"
+            android:textSize="15dp"
+            app:layout_constraintStart_toStartOf="@id/llType2" />
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/chat" />
+
+        <TextView
+            android:layout_width="12dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="3dp"
+            android:layout_marginTop="10dp"
+            android:text="5"
+            android:textSize="15dp" />
+
+    </LinearLayout>
 
     <View
+        android:id="@+id/view"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginTop="16dp"
         android:background="@color/txt_white_gray"
-        app:layout_constraintTop_toBottomOf="@id/tvContent" />
+        app:layout_constraintTop_toBottomOf="@id/llType2" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

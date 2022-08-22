@@ -1,8 +1,10 @@
 package com.example.nulli.ui.home
 
 import android.view.LayoutInflater
+
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import android.view.ViewGroup
 import com.example.nulli.databinding.ItemRecentContentBinding
 
 class RecentContentAdapter : RecyclerView.Adapter<RecentContentAdapter.ViewHolder>() {
@@ -19,13 +21,13 @@ class RecentContentAdapter : RecyclerView.Adapter<RecentContentAdapter.ViewHolde
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding =
             ItemRecentContentBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+
         return ViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(datas[position])
     }
-
     override fun getItemCount(): Int {
         return datas.size
     }
@@ -42,6 +44,7 @@ class RecentContentAdapter : RecyclerView.Adapter<RecentContentAdapter.ViewHolde
             }
             binding.tvRecentContent.setOnClickListener {
                 clickEvent("content", adapterPosition.toString())
+
             }
         }
     }
