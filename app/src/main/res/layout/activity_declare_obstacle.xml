@@ -178,7 +178,7 @@
         android:gravity="left"
         android:layout_marginLeft="17dp"
         android:textSize="13dp"
-        android:text="아래 신고서를 장애물 지도 신고센터 팩스(070-1234-5678)로 전달해주시기 바랍니다."
+        android:text="아래 신고서를 장애물 지도 신고센터 메일(nulli@naver.com)로 전달해주시기 바랍니다."
         android:textStyle="normal"
         android:textColor="@color/txt_dark_gray"
         app:layout_constraintTop_toTopOf="parent"

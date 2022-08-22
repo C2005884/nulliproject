@@ -10,7 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="문의하기"
+        android:text="신고하기"
         android:textColor="@color/black"
         android:textSize="20dp"
         app:layout_constraintTop_toTopOf="parent"
@@ -28,59 +28,6 @@
         >
 
 
-        <TextView
-            android:id="@+id/tvCommunity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            android:text="커뮤니티 이용"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:text="게시판 이용, 게시판 관리"
-            android:textColor="@color/txt_dark_gray"
-            android:textSize="15sp"
-            android:textStyle="normal" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:background="#999999"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_height="1dp"/>
-
-        <TextView
-            android:id="@+id/tvUseLimit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            android:text="이용제한"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:text="게시판 이용제한"
-            android:textColor="@color/txt_dark_gray"
-            android:textSize="15sp"
-            android:textStyle="normal" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:background="#999999"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_height="1dp"/>
 
         <TextView
             android:id="@+id/tvBoardDeclare"
@@ -155,40 +102,7 @@
             android:textSize="15sp"
             android:textStyle="normal" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:background="#999999"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_height="1dp"/>
 
-        <TextView
-            android:id="@+id/tvAd"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            android:text="광고 문의"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:background="#999999"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_height="1dp"/>
-
-        <TextView
-            android:id="@+id/tvAlliance"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            android:text="제휴 문의"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:textStyle="bold" />
 
     </LinearLayout>
 
