@@ -58,6 +58,16 @@ class BoardListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         mid = intent.getStringExtra(ID) ?: ""
+        val title = when(mid){
+            FREE_BOARD -> "자유 게시판"
+            EXTERNAL_DISABLED_BOARD -> "외부장애 게시판"
+            INTERNAL_DISABLED_BOARD -> "내부장애 게시판"
+            DEVELOP_DISABLED_BOARD -> "발달장애 게시판"
+            MENTALITY_DISABLED_BOARD -> "정신장애 게시판"
+            else -> "게시판"
+        }
+
+        binding.tvTitle.text = title
 
         setRv()
         setData()
@@ -73,7 +83,7 @@ class BoardListActivity : AppCompatActivity() {
     private fun loadData() {
         db.child("board").child(mid).addListenerForSingleValueEvent(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
-                mBoard = snapshot.getValue(Board::class.java)!!
+                //mBoard = snapshot.getValue(Board::class.java)!!
                 setData()
             }
             override fun onCancelled(error: DatabaseError) {
@@ -144,5 +154,12 @@ class BoardListActivity : AppCompatActivity() {
 
     companion object {
         const val ID = "ID"
+
+        const val FREE_BOARD = "freeBoard"
+        const val EXTERNAL_DISABLED_BOARD = "externalDisabledBoard"
+        const val INTERNAL_DISABLED_BOARD = "internalDisabledBoard"
+        const val DEVELOP_DISABLED_BOARD = "developDisabledBoard"
+        const val MENTALITY_DISABLED_BOARD = "mentalityDisabledBoard"
+
     }
 }

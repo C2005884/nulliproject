@@ -16,11 +16,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Nulli">
         <activity
-            android:name=".ui.DrawerActivity"
-            android:exported="false"
-            android:label="@string/title_activity_drawer"
-            android:theme="@style/Theme.Nulli.NoActionBar" />
-        <activity
             android:name=".declare.DeclareReviewActivity"
             android:exported="false" />
         <activity
