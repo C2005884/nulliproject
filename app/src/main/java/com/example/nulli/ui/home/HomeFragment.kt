@@ -1,4 +1,4 @@
-package com.example.nulli.ui
+package com.example.nulli.ui.home
 
 import android.os.Bundle
 import android.os.Handler
@@ -33,15 +33,15 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val dialog = LottieDialog().apply { 
-            lottieRes = R.raw.loading
-        }.show(childFragmentManager,"lottie")
-
-        Handler(Looper.myLooper()!!).postDelayed({
-            childFragmentManager.findFragmentByTag("lottie")?.let {
-                (it as DialogFragment).dismiss()
-            }
-        }, 1000)
+//        val dialog = LottieDialog().apply {
+//            lottieRes = R.raw.loading
+//        }.show(childFragmentManager,"lottie")
+//
+//        Handler(Looper.myLooper()!!).postDelayed({
+//            childFragmentManager.findFragmentByTag("lottie")?.let {
+//                (it as DialogFragment).dismiss()
+//            }
+//        }, 1000)
     }
 
     override fun onDestroyView() {
