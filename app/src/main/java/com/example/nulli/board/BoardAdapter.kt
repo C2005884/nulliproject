@@ -55,7 +55,8 @@ class BoardAdapter : RecyclerView.Adapter<BoardAdapter.ViewHolder>() {
 
     inner class ViewHolder(private val binding: ItemBoardBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(board: Board) {
-            Log.e("board[$adapterPosition]", board.toString())
+            binding.cv.isVisible = !board.imageUri.isNullOrBlank()
+            Glide.with(binding.root).load(board.imageUri).into(binding.ivReview)
             binding.ivProfile.isVisible = !board.imageUri.isNullOrBlank()
             binding.tvTitle.text = board.title
             binding.tvContent.text = board.content
@@ -65,6 +66,7 @@ class BoardAdapter : RecyclerView.Adapter<BoardAdapter.ViewHolder>() {
         }
 
         fun clear() {
+            Glide.with(binding.root).clear(binding.ivProfile)
             Glide.with(binding.root).clear(binding.ivProfile)
         }
     }

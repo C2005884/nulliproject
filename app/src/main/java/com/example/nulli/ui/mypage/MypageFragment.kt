@@ -74,6 +74,8 @@ class MypageFragment : Fragment() {
             ${fuser?.uid}
         """.trimMargin("|")
 
+
+
         binding.tvWithhdrawal.setOnClickListener {
             val intent = Intent(requireActivity(),SettingsWithdrawalActivity::class.java)
             requireActivity().startActivity(intent)
@@ -112,6 +114,9 @@ class MypageFragment : Fragment() {
             requireActivity().startActivity(intent)
             requireActivity().finish()
         }
+
+    }
+    fun clear(){
 
     }
 

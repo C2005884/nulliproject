@@ -1,9 +1,11 @@
 package com.example.nulli.board
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
 import com.example.nulli.databinding.ActivityBoardListBinding
 import com.example.nulli.model.Board
 import com.example.nulli.util.WrapContentLinearLayoutManager
@@ -37,6 +39,7 @@ class BoardListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         mid = intent.getStringExtra(ID) ?: ""
+        supportActionBar?.hide()
 
         val title = when(mid){
             FREE_BOARD -> "자유 게시판"
@@ -50,6 +53,7 @@ class BoardListActivity : AppCompatActivity() {
 
         setRv()
         setData()
+
 
 //setmessage 글씨작게하려면 62번줄
         binding.btnWrite.setOnClickListener {

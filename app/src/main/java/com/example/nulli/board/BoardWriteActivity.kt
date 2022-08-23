@@ -35,6 +35,7 @@ class BoardWriteActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        supportActionBar?.hide()
 
         mId = intent.getStringExtra(BoardListActivity.ID)?:""
         from = intent.getStringExtra(BoardListActivity.FROM)?:""
@@ -98,8 +99,16 @@ class BoardWriteActivity: AppCompatActivity() {
 
         contentRef.child(key).setValue(content).addOnCompleteListener {
             recentRef.child(mId).setValue(content).addOnCompleteListener {
-                Toast.makeText(this, "등록 완료되었습니다.", Toast.LENGTH_SHORT).show()
-                finish()
+                if(mImageUri != null){
+                    storage.child("review").child(key).putFile(mImageUri!!)
+                        .addOnCompleteListener {
+                            Toast.makeText(this, "등록 완료되었습니다.", Toast.LENGTH_SHORT).show()
+                            finish()
+                        }
+                }else{
+                    Toast.makeText(this, "등록 완료되었습니다.", Toast.LENGTH_SHORT).show()
+                    finish()
+                }
             }
         }
     }

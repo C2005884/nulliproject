@@ -63,6 +63,7 @@ class WriteBuildingActivity : AppCompatActivity() {
         maddress = intent.getStringExtra(ADR)?:""
         mtype = intent.getIntExtra(TYPE, 0)
         setType(mtype)
+        supportActionBar?.hide()
 
 
         binding.tvAddress.text = maddress

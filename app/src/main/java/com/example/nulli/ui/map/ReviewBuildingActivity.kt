@@ -44,6 +44,7 @@ class ReviewBuildingActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        supportActionBar?.hide()
 
         binding.etContent.setHint(
             Html.fromHtml("<h6>" + "내용을 입력해주세요" + "</h6>" + "<small>" + "" +
@@ -129,7 +130,6 @@ class ReviewBuildingActivity : AppCompatActivity() {
     }
 
     private fun showSingleImage(uri: Uri) {
-
         mImageUri = uri
         Glide.with(this).load(mImageUri).into(binding.ivReview)
     }

@@ -20,7 +20,7 @@ class JoinActivity : AppCompatActivity() {
     val auth = Firebase.auth
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
+        supportActionBar?.hide()
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         binding.btnJoin.setOnClickListener {
