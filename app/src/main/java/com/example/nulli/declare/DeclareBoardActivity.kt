@@ -19,7 +19,7 @@ class DeclareBoardActivity : AppCompatActivity() {
             val address = arrayOf("olivesession@gmail.com")
             email.putExtra(Intent.EXTRA_EMAIL, address)
             email.putExtra(Intent.EXTRA_SUBJECT, "[널리/게시물 권리침해 및 유해정보 신고]")
-            email.putExtra(Intent.EXTRA_TEXT, "아래 양식에 맞추어 신고글을 작성해주시기 바랍니다. /br 해당 게시물 게시 날짜: /br 해당 게시물 신고 이유:")
+            email.putExtra(Intent.EXTRA_TEXT, "아래 양식에 맞추어 신고글을 작성해주시기 바랍니다. \n\n 해당 게시물 게시 날짜: \n 해당 게시물 신고 이유:")
             startActivity(email)
         }
     }
