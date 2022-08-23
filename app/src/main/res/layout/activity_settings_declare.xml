@@ -70,7 +70,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
-            android:text="잘못된 장애물 등록 신고 및 삭제 요청 "
+            android:text="부적절한 장애물 등록 신고 및 삭제 요청 "
             android:textColor="@color/txt_dark_gray"
             android:textSize="15sp"
             android:textStyle="normal" />
@@ -97,7 +97,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
-            android:text="잘못된 후기 정보 등록 신고 및 삭제 요청"
+            android:text="부적절한 후기 정보 등록 신고 및 삭제 요청"
             android:textColor="@color/txt_dark_gray"
             android:textSize="15sp"
             android:textStyle="normal" />
