@@ -96,7 +96,7 @@ public class TeachableActivity extends AppCompatActivity {
                     maxPos = i;
                 }
             }
-            String[] classes = {"경사", "계단", "기타", "턱"};
+            String[] classes = {"계단", "경사", "턱", "기타"};
 
             result.setText(classes[maxPos]);
 
