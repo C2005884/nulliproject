@@ -42,12 +42,25 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="2022년 8월 9일"
+        android:text="2022년 8월 9일 17:02"
         android:textColor="@color/black"
         android:textSize="8dp"
         app:layout_constraintBottom_toBottomOf="@id/cvProfile"
         app:layout_constraintStart_toEndOf="@id/cvProfile" />
     />
+
+    <ImageView
+        android:id="@+id/ivDelete"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:src="@drawable/plus2"
+        android:visibility="gone"
+        tools:visibility="visible"
+        android:padding="6dp"
+        app:tint = "#777777"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/cvProfile"
+        app:layout_constraintBottom_toBottomOf="@id/cvProfile"/>
 
     <TextView
         android:id="@+id/tvContent"

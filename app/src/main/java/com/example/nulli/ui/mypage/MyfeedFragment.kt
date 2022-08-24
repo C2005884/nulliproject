@@ -1,6 +1,5 @@
 package com.example.nulli.ui.mypage
 
-import android.R
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -66,10 +65,10 @@ class MyfeedFragment : Fragment() {
         Glide.with(binding.root).load(fuser?.photoUrl).into(binding.ivProfile)
         binding.tvNickname.text = fuser?.displayName
 
-//        binding.ivSettings.setOnClickListener {
-//            val intent = Intent(requireActivity(),MypageFragment::class.java)
-//            requireActivity().startActivity(intent)
-//        }
+        binding.ivSettings.setOnClickListener {
+            val intent = Intent(requireActivity(), MypageActivity::class.java)
+            requireActivity().startActivity(intent)
+        }
     }
 
 

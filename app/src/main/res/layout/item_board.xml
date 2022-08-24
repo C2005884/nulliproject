@@ -102,19 +102,25 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvContent">
 
+        <View
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
         <ImageView
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:layout_marginStart="315dp"
             android:layout_marginTop="10dp"
             android:src="@drawable/like2" />
 
         <TextView
+            android:id="@+id/tvLikeCount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="3dp"
             android:layout_marginTop="10dp"
-            android:text="50"
+            android:text="0"
+            tools:text="50"
             android:textSize="15dp"
             app:layout_constraintStart_toStartOf="@id/llType2" />
 
@@ -126,11 +132,14 @@
             android:src="@drawable/chat" />
 
         <TextView
+            android:id="@+id/tvReplyCount"
             android:layout_width="12dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="3dp"
             android:layout_marginTop="10dp"
-            android:text="5"
+            tools:text="5"
+            android:text="0"
+            android:layout_marginEnd="16dp"
             android:textSize="15dp" />
 
     </LinearLayout>

@@ -8,7 +8,7 @@ data class UserData(
     var email:String? = "",
     var nickname:String? = "",
     var profileImageUri:String? = "",
-    var scrapMap:HashMap<String, String>? = hashMapOf(),
+    var scrapMap:HashMap<String, Long>? = hashMapOf(),
     var myContentMap:HashMap<String, String>? = hashMapOf()
 ) {
 }

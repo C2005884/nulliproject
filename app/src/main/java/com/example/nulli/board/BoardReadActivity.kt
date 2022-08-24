@@ -1,13 +1,18 @@
 package com.example.nulli.board
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.example.nulli.R
 import com.example.nulli.databinding.ActivityBoardReadBinding
 import com.example.nulli.model.Content
+import com.example.nulli.model.Reply
 import com.example.nulli.model.UserData
+import com.example.nulli.util.WrapContentLinearLayoutManager
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
@@ -43,10 +48,50 @@ class BoardReadActivity : AppCompatActivity() {
         intent.getStringExtra(BoardListActivity.FROM) ?: ""
     }
 
-    var existLikeTimeStamp = ""
     var isLike = false
-    var existScrapTimeStamp = ""
     var isScrap = false
+
+    val replyListener = object : ChildEventListener {
+        override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
+            try {
+                val data = snapshot.getValue(Reply::class.java)!!
+                data.mine = (data.uid == user.uid)
+                (binding.rvReply.adapter as ReplyAdapter).addData(data)
+            } catch (e: Exception) {
+
+            }
+        }
+
+        override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {}
+        override fun onChildRemoved(snapshot: DataSnapshot) {
+            try {
+                val data = snapshot.getValue(Reply::class.java)!!
+                (binding.rvReply.adapter as ReplyAdapter).deleteData(data)
+            } catch (e: Exception) {
+
+            }
+        }
+
+        override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {}
+        override fun onCancelled(error: DatabaseError) {}
+    }
+
+    override fun onBackPressed() {
+        if (from == BoardListActivity.BOARD_LIST) {
+            super.onBackPressed()
+        } else {
+            val intent = Intent(this, BoardListActivity::class.java)
+            intent.putExtra(BoardListActivity.ID, boardId)
+            startActivity(intent)
+            finish()
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        db.child(boardId).child(id).child("replyMap")
+            .addChildEventListener(replyListener)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,6 +102,7 @@ class BoardReadActivity : AppCompatActivity() {
 
         loadUser()
         loadData()
+        setRv()
 
         binding.ivLike.setOnClickListener {
             isLike = !isLike
@@ -70,6 +116,48 @@ class BoardReadActivity : AppCompatActivity() {
             binding.ivScrap.setImageResource(
                 if (isScrap) R.drawable.star2 else R.drawable.star
             )
+        }
+
+        binding.btnWriteReply.setOnClickListener {
+            writeReply()
+        }
+    }
+
+    private fun setRv() {
+        binding.rvReply.apply {
+            layoutManager = WrapContentLinearLayoutManager(this@BoardReadActivity)
+            adapter = ReplyAdapter().apply {
+                moreClick = {
+                    if (it != null) {
+                        this.deleteData(it)
+                    }
+                }
+            }
+        }
+    }
+
+    private fun writeReply() {
+        if (binding.etReply.text.toString().isBlank()) {
+            Toast.makeText(this, "댓글을 입력해 주세요", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        val replyId = db.child("reply").push().key!!
+        val reply = Reply(
+            id = replyId,
+            contentId = id,
+            boardId = boardId,
+            uid = user.uid,
+            profileImageUri = user.profileImageUri,
+            nickname = user.nickname,
+            content = binding.etReply.text.toString(),
+            date = System.currentTimeMillis(),
+            dateText = SimpleDateFormat("yyyy_MMdd HH:mm:ss").format(System.currentTimeMillis()),
+        )
+
+        binding.etReply.setText("")
+        db.child("reply").child(replyId).setValue(reply).addOnCompleteListener {
+            db.child(boardId).child(id).child("replyMap").child(replyId).setValue(reply)
         }
     }
 
@@ -89,9 +177,8 @@ class BoardReadActivity : AppCompatActivity() {
 
     private fun initScrap() {
         for (entry in user.scrapMap!!) {
-            if (entry.value == id) {
+            if (entry.key == id) {
                 isScrap = true
-                existScrapTimeStamp = entry.key.toString()
                 binding.ivScrap.setImageResource(
                     if (isScrap) R.drawable.star2 else R.drawable.star
                 )
@@ -123,55 +210,49 @@ class BoardReadActivity : AppCompatActivity() {
         binding.tvLike.text = content.likeMap.count().toString()
         binding.tvReply.text = content.replyMap.count().toString()
 
-
         for (map in content.likeMap) {
-            if (map.value == fuser?.uid) {
+            if (map.key == fuser?.uid) {
                 isLike = true
-                existLikeTimeStamp = map.key.toString()
                 binding.ivLike.setImageResource(
                     if (isLike) R.drawable.like else R.drawable.like2
                 )
                 break
             }
         }
+
+        val entries = ArrayList(content.replyMap.entries)
+        entries.sortBy { it.value.date }
+        val replyDatas: ArrayList<Reply> = arrayListOf()
+
+        for (entry in entries) {
+            replyDatas.add(entry.value)
+        }
+
+        //(binding.rvReply.adapter as ReplyAdapter).setDatas(replyDatas)
     }
 
     override fun onPause() {
         super.onPause()
 
+        db.child(boardId).child(id).child("replyMap")
+            .removeEventListener(replyListener)
+
         if (isLike) {
-            if(existLikeTimeStamp.isBlank()) {
-                db.child(boardId).child(id).child("likeMap").child(System.currentTimeMillis().toString()).setValue(user.uid)
-            }
+            db.child(boardId).child(id).child("likeMap").child(user.uid!!)
+                .setValue(System.currentTimeMillis())
         } else {
-            if(existLikeTimeStamp.isNotBlank()) {
-                db.child(boardId).child(id).child("likeMap").child(existLikeTimeStamp).setValue(null)
-            }
+            db.child(boardId).child(id).child("likeMap").child(user.uid!!)
+                .setValue(null)
         }
 
 
         if (isScrap) {
-            if(existScrapTimeStamp.isBlank()) {
-                db.child("user").child(user.uid!!).child("scrapMap").child(System.currentTimeMillis().toString()).setValue(
-                    id
-                )
-            }
+            db.child("user").child(user.uid!!).child("scrapMap").child(id)
+                .setValue(System.currentTimeMillis())
         } else {
-            if(existScrapTimeStamp.isNotBlank()) {
-                db.child("user").child(user.uid!!).child("scrapMap").child(existScrapTimeStamp).setValue(null)
-            }
+            db.child("user").child(user.uid!!).child("scrapMap").child(id)
+                .setValue(null)
         }
-
-        db.child(boardId).child(id).child("likeMap").child(System.currentTimeMillis().toString())
-            .setValue(
-                if (isLike) user.uid else null
-            )
-
-        db.child("user").child(user.uid!!).child("scrapMap")
-            .child(System.currentTimeMillis().toString()).setValue(
-            if (isScrap) id else null
-        )
-
     }
 
     companion object {

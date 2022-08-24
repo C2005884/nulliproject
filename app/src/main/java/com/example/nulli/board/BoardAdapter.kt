@@ -13,7 +13,7 @@ import java.util.*
 
 class BoardAdapter : RecyclerView.Adapter<BoardAdapter.ViewHolder>() {
 
-    var itemClick: (String) -> Unit = {}
+    var itemClick: (String, String) -> Unit = { _, _ -> }
     val datas: ArrayList<Content> = arrayListOf()
     fun setDatas(arrayList: ArrayList<Content>){
         datas.clear()
@@ -58,17 +58,20 @@ class BoardAdapter : RecyclerView.Adapter<BoardAdapter.ViewHolder>() {
         fun bind(content: Content) {
             binding.root.setOnClickListener {
                 Log.e("viewholder", content.id)
-                itemClick(content.id)
+                itemClick(content.boardId, content.id)
             }
 
             binding.cv.isVisible = !content.imageUri.isNullOrBlank()
             Glide.with(binding.root).load(content.imageUri).into(binding.ivReview)
-            binding.ivProfile.isVisible = !content.imageUri.isNullOrBlank()
+            binding.ivProfile.isVisible = !content.profileImageUri.isNullOrBlank()
             binding.tvTitle.text = content.title
             binding.tvContent.text = content.content
             Glide.with(binding.root).load(content.profileImageUri).into(binding.ivProfile)
             binding.tvNickname.text = content.nickname
-            binding.tvDate.text = SimpleDateFormat("yyyy년 M월 d일", Locale.KOREAN).format(content.date)
+            binding.tvDate.text =
+                SimpleDateFormat("yyyy년 M월 d일", Locale.KOREAN).format(content.date)
+            binding.tvLikeCount.text = content.likeMap.size.toString()
+            binding.tvReplyCount.text = content.replyMap.size.toString()
         }
 
         fun clear() {

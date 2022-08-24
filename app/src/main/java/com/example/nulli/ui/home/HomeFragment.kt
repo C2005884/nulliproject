@@ -2,14 +2,17 @@ package com.example.nulli.ui.home
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.nulli.board.BoardAdapter
 import com.example.nulli.board.BoardListActivity
+import com.example.nulli.board.BoardReadActivity
 import com.example.nulli.databinding.FragmentHomeBinding
+import com.example.nulli.model.Content
 import com.example.nulli.util.WrapContentLinearLayoutManager
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -88,7 +91,16 @@ class HomeFragment : Fragment() {
         }
 
         binding.rvContent.apply {
-            layoutManager = LinearLayoutManager(requireContext())
+            layoutManager = WrapContentLinearLayoutManager(requireContext())
+            adapter = BoardAdapter().apply {
+                itemClick = { s: String, s1: String ->
+                    val intent = Intent(requireContext(), BoardReadActivity::class.java).apply {  }
+                    intent.putExtra(BoardListActivity.BOARD_ID, s)
+                    intent.putExtra(BoardListActivity.ID, s1)
+                    intent.putExtra(BoardListActivity.FROM, BoardListActivity.HOME_FRAGMENT)
+                    startActivity(intent)
+                }
+            }
         }
     }
 
@@ -135,8 +147,143 @@ class HomeFragment : Fragment() {
     }
 
     private fun loadFavoritContent() {
+        val candidateContentList: ArrayList<Content> = arrayListOf()
 
+        var isCompleteFree = false
+        var isCompleteExternal = false
+        var isCompleteInternal = false
+        var isCompleteDevelop = false
+        var isCompleteMentality = false
 
+        db.child(BoardListActivity.FREE_BOARD).limitToLast(20)
+            .addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    for (s in snapshot.children) {
+                        try {
+                            candidateContentList.add(s.getValue(Content::class.java)!!)
+                        } catch (e: Exception) {
+
+                        }
+                    }
+                    isCompleteFree = true
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+
+                }
+
+            })
+
+        db.child(BoardListActivity.EXTERNAL_DISABLED_BOARD).limitToLast(20)
+            .addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    for (s in snapshot.children) {
+                        try {
+                            candidateContentList.add(s.getValue(Content::class.java)!!)
+                        } catch (e: Exception) {
+
+                        }
+                    }
+                    isCompleteExternal = true
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+
+                }
+
+            })
+
+        db.child(BoardListActivity.INTERNAL_DISABLED_BOARD).limitToLast(20)
+            .addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    for (s in snapshot.children) {
+                        try {
+                            candidateContentList.add(s.getValue(Content::class.java)!!)
+                        } catch (e: Exception) {
+
+                        }
+                    }
+                    isCompleteInternal = true
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+
+                }
+
+            })
+
+        db.child(BoardListActivity.DEVELOP_DISABLED_BOARD).limitToLast(20)
+            .addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    for (s in snapshot.children) {
+                        try {
+                            candidateContentList.add(s.getValue(Content::class.java)!!)
+                        } catch (e: Exception) {
+
+                        }
+                    }
+                    isCompleteDevelop = true
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+
+                }
+
+            })
+
+        db.child(BoardListActivity.MENTALITY_DISABLED_BOARD).limitToLast(20)
+            .addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    for (s in snapshot.children) {
+                        try {
+                            candidateContentList.add(s.getValue(Content::class.java)!!)
+                        } catch (e: Exception) {
+
+                        }
+                    }
+                    isCompleteMentality = true
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+
+                }
+
+            })
+
+        object : CountDownTimer(5000, 500) {
+            override fun onTick(p0: Long) {
+                if (
+                    isCompleteFree &&
+                    isCompleteExternal &&
+                    isCompleteInternal &&
+                    isCompleteDevelop &&
+                    isCompleteMentality
+                ) {
+                    inputFavoriteData(candidateContentList)
+                    cancel()
+                }
+            }
+
+            override fun onFinish() {
+                inputFavoriteData(candidateContentList)
+            }
+        }.start()
+    }
+
+    private fun inputFavoriteData(candidateContentList: ArrayList<Content>) {
+        candidateContentList.sortByDescending { it.date }
+        candidateContentList.sortByDescending { it.likeMap.size }
+
+        val viewDatas: ArrayList<Content> = arrayListOf()
+        for (i in 0 until 3) {
+            try {
+                Log.e("[$i]", candidateContentList[i].toString())
+                viewDatas.add(candidateContentList[i])
+            } catch (e: Exception) {
+
+            }
+        }
+        (binding.rvContent.adapter as BoardAdapter).setDatas(viewDatas)
     }
 
     override fun onDestroyView() {
