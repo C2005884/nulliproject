@@ -1,15 +1,17 @@
 package com.example.nulli.ui.auth
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
-import com.example.nulli.MainActivity
+import androidx.appcompat.app.AppCompatActivity
 import com.example.nulli.databinding.ActivityJoinBinding
+import com.example.nulli.model.UserData
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 
 class JoinActivity : AppCompatActivity() {
     private val TAG: String = "JoinActivity"
@@ -18,6 +20,8 @@ class JoinActivity : AppCompatActivity() {
     }
 
     val auth = Firebase.auth
+    var db = Firebase.database.reference
+    var storage = Firebase.storage.reference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         supportActionBar?.hide()
@@ -80,12 +84,25 @@ class JoinActivity : AppCompatActivity() {
 
     private fun updateUI(user: FirebaseUser?) {
         if (user != null) {
+            userDatabaseUpload(user)
             sendAuthMail()
         }
 
     }
 
-    fun sendAuthMail(){
+    private fun userDatabaseUpload(fuser: FirebaseUser) {
+        val user = UserData(
+            uid = fuser.uid,
+            email = fuser.email,
+            nickname = fuser.displayName,
+            profileImageUri = fuser.photoUrl.toString(),
+            scrapMap = hashMapOf(),
+            myContentMap = hashMapOf()
+        )
+        db.child("user").child(fuser.uid).setValue(user)
+    }
+
+    fun sendAuthMail() {
         val user = Firebase.auth.currentUser
 
         user!!.sendEmailVerification()

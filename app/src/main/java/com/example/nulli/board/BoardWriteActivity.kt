@@ -90,7 +90,7 @@ class BoardWriteActivity: AppCompatActivity() {
             nickname = fUser?.displayName.toString()
             date = System.currentTimeMillis()
             dateText = SimpleDateFormat("yyyyMMdd_HH:mm:ss", Locale.KOREAN).format(Date())
-            profileImageUri = fUser?.photoUrl.toString()
+            profileImageUri = "https://firebasestorage.googleapis.com/v0/b/nulli-e491a.appspot.com/o/user%2F${fUser?.uid}?alt=media"
             imageUri =
                 if (mImageUri == null) "" else
                     """https://firebasestorage.googleapis.com/v0/b/nulli-e491a.appspot.com/o/content%2F$key?alt=media"""
@@ -100,7 +100,7 @@ class BoardWriteActivity: AppCompatActivity() {
         contentRef.child(key).setValue(content).addOnCompleteListener {
             recentRef.child(mId).setValue(content).addOnCompleteListener {
                 if(mImageUri != null){
-                    storage.child("review").child(key).putFile(mImageUri!!)
+                    storage.child("content").child(key).putFile(mImageUri!!)
                         .addOnCompleteListener {
                             Toast.makeText(this, "등록 완료되었습니다.", Toast.LENGTH_SHORT).show()
                             finish()

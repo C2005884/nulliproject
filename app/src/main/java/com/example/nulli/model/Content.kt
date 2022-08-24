@@ -15,8 +15,8 @@ data class Content(
     var date:Long = 0L,
     var dateText:String="",
     var imageUri:String = "",
-    var heart:Int = 0,
-    var commentcount:Int = 0,
+    var likeMap:HashMap<String, String> = hashMapOf(),
+    var replyMap:HashMap<String, String> = hashMapOf(),
     var scrap:Int = 0,
     var mboard:HashMap<String, Long> = hashMapOf()
 ) {

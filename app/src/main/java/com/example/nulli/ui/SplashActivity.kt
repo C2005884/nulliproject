@@ -12,13 +12,11 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.nulli.MainActivity
 import com.example.nulli.R
 import com.example.nulli.databinding.ActivitySplashBinding
+import com.example.nulli.model.UserData
 import com.example.nulli.ui.auth.AuthMailActivity
 import com.example.nulli.ui.auth.JoinActivity
 import com.example.nulli.ui.auth.LoginActivity
-import com.google.android.gms.auth.api.Auth
 import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.SignInButton
 import com.google.android.gms.common.api.ApiException
@@ -26,7 +24,9 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 import com.gun0912.tedpermission.PermissionListener
 import com.gun0912.tedpermission.normal.TedPermission
 
@@ -34,9 +34,10 @@ import com.gun0912.tedpermission.normal.TedPermission
 class SplashActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private val RC_SIGN_IN = 9001
+    private val db = Firebase.database.reference
+    private val storage = Firebase.storage.reference
 
-
-    val binding : ActivitySplashBinding by lazy {
+    val binding: ActivitySplashBinding by lazy {
         ActivitySplashBinding.inflate(layoutInflater)
     }
 
@@ -135,9 +136,20 @@ class SplashActivity : AppCompatActivity() {
         auth.signInWithCredential(credential)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    val user = auth.currentUser
-                    Log.d("xxxx ", user.toString())
-                    moveMainPage(task.result?.user)
+                    val fuser = auth.currentUser!!
+                    Log.d("xxxx ", fuser.toString())
+                    val user = UserData(
+                        uid = fuser.uid,
+                        email = fuser.email,
+                        nickname = fuser.displayName,
+                        profileImageUri = fuser.photoUrl.toString(),
+                        scrapMap = hashMapOf(),
+                        myContentMap = hashMapOf(),
+                    )
+
+                    db.child("user").child(fuser.uid).setValue(user).addOnCompleteListener {
+                        moveMainPage(task.result?.user)
+                    }
                 } else {
                     Log.d("xxxx ", "signInWithCredential:failure", task.exception)
                 }

@@ -7,14 +7,15 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.nulli.databinding.ItemBoardBinding
-import com.example.nulli.model.Board
+import com.example.nulli.model.Content
 import java.text.SimpleDateFormat
 import java.util.*
 
 class BoardAdapter : RecyclerView.Adapter<BoardAdapter.ViewHolder>() {
 
-    val datas:ArrayList<Board> = arrayListOf()
-    fun setDatas(arrayList: ArrayList<Board>){
+    var itemClick: (String) -> Unit = {}
+    val datas: ArrayList<Content> = arrayListOf()
+    fun setDatas(arrayList: ArrayList<Content>){
         datas.clear()
         datas.addAll(arrayList)
         //안좋은 방식이다 최후의 방법으로 쓰라고 나온다
@@ -23,7 +24,7 @@ class BoardAdapter : RecyclerView.Adapter<BoardAdapter.ViewHolder>() {
 
     }
 
-    fun addData(data : Board){
+    fun addData(data : Content){
         datas.add(0,data)
         notifyItemInserted(0)
     }
@@ -54,15 +55,20 @@ class BoardAdapter : RecyclerView.Adapter<BoardAdapter.ViewHolder>() {
     }
 
     inner class ViewHolder(private val binding: ItemBoardBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(board: Board) {
-            binding.cv.isVisible = !board.imageUri.isNullOrBlank()
-            Glide.with(binding.root).load(board.imageUri).into(binding.ivReview)
-            binding.ivProfile.isVisible = !board.imageUri.isNullOrBlank()
-            binding.tvTitle.text = board.title
-            binding.tvContent.text = board.content
-            Glide.with(binding.root).load(board.profileImageUri).into(binding.ivProfile)
-            binding.tvNickname.text = board.nickname
-            binding.tvDate.text = SimpleDateFormat("yyyy년 M월 d일", Locale.KOREAN).format(board.date)
+        fun bind(content: Content) {
+            binding.root.setOnClickListener {
+                Log.e("viewholder", content.id)
+                itemClick(content.id)
+            }
+
+            binding.cv.isVisible = !content.imageUri.isNullOrBlank()
+            Glide.with(binding.root).load(content.imageUri).into(binding.ivReview)
+            binding.ivProfile.isVisible = !content.imageUri.isNullOrBlank()
+            binding.tvTitle.text = content.title
+            binding.tvContent.text = content.content
+            Glide.with(binding.root).load(content.profileImageUri).into(binding.ivProfile)
+            binding.tvNickname.text = content.nickname
+            binding.tvDate.text = SimpleDateFormat("yyyy년 M월 d일", Locale.KOREAN).format(content.date)
         }
 
         fun clear() {

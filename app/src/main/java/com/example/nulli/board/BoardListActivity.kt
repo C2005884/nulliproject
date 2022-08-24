@@ -1,13 +1,11 @@
 package com.example.nulli.board
 
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import com.bumptech.glide.Glide
 import com.example.nulli.databinding.ActivityBoardListBinding
-import com.example.nulli.model.Board
+import com.example.nulli.model.Content
 import com.example.nulli.util.WrapContentLinearLayoutManager
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
@@ -23,7 +21,7 @@ class BoardListActivity : AppCompatActivity() {
     private val db = Firebase.database.reference
     private val auth = Firebase.auth
     private val fUser = auth.currentUser
-    private var boardList: ArrayList<Board> = arrayListOf()
+    private var boardList: ArrayList<Content> = arrayListOf()
     private var mid: String = ""
 
     private val binding: ActivityBoardListBinding by lazy {
@@ -69,14 +67,20 @@ class BoardListActivity : AppCompatActivity() {
     private fun loadData() {
         db.child(mid).addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
+                val newBoardList:ArrayList<Content> = arrayListOf()
+
                 for (s in snapshot.children) {
                     try {
-                        boardList.add(s.getValue(Board::class.java)!!)
+                        newBoardList.add(s.getValue(Content::class.java)!!)
                         Log.e("boardList[${boardList.size}]", boardList.toString())
                     } catch (e: Exception) {
                         Log.e("loadData", "${e.message}")
                     }
                 }
+
+                newBoardList.reverse()
+                boardList.clear()
+                boardList.addAll(newBoardList)
                 setData()
             }
             override fun onCancelled(error: DatabaseError) {
@@ -91,12 +95,20 @@ class BoardListActivity : AppCompatActivity() {
     private fun setRv() {
         binding.rvContent.apply{
             layoutManager = WrapContentLinearLayoutManager(this@BoardListActivity)
-            adapter = BoardAdapter()
+            adapter = BoardAdapter().apply {
+                itemClick = {
+                    val intent = Intent(this@BoardListActivity, BoardReadActivity::class.java).apply {  }
+                    intent.putExtra(BOARD_ID, mid)
+                    intent.putExtra(ID, it)
+                    intent.putExtra(FROM, BOARD_LIST)
+                    startActivity(intent)
+                }
+            }
         }
     }
 
-
     companion object {
+        const val BOARD_ID = "BOARD_ID"
         const val ID = "ID"
         const val FROM = "FROM"
 
