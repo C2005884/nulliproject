@@ -3,6 +3,7 @@ package com.example.nulli.board
 import android.view.LayoutInflater
 import androidx.recyclerview.widget.RecyclerView
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import com.bumptech.glide.Glide
 import com.example.nulli.databinding.ItemReplyBinding
 import com.example.nulli.model.Reply
@@ -54,6 +55,7 @@ class ReplyAdapter : RecyclerView.Adapter<ReplyAdapter.ViewHolder>() {
             binding.tvNickname.text = reply.nickname
             binding.tvDate.text = SimpleDateFormat("yyyy년 MM월 dd일 HH:mm").format(reply.date)
             binding.tvContent.text = reply.content
+            binding.ivDelete.isVisible = reply.mine
         }
     }
 }

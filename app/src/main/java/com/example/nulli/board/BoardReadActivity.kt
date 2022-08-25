@@ -55,6 +55,7 @@ class BoardReadActivity : AppCompatActivity() {
         override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
             try {
                 val data = snapshot.getValue(Reply::class.java)!!
+                data.mine = (data.uid == user.uid)
                 (binding.rvReply.adapter as ReplyAdapter).addData(data)
             } catch (e:Exception) {
 
@@ -67,7 +68,7 @@ class BoardReadActivity : AppCompatActivity() {
         }
 
         override fun onChildRemoved(snapshot: DataSnapshot) {
-            TODO("Not yet implemented")
+
         }
 
         override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
@@ -152,6 +153,7 @@ class BoardReadActivity : AppCompatActivity() {
                     id = replyId,
                     contentId = id,
                     boardId = boardId,
+                    uid = user.uid,
                     profileImageUri = user.profileImageUri,
                     nickname = user.nickname,
                     content = binding.etReply.text.toString(),
@@ -255,7 +257,7 @@ class BoardReadActivity : AppCompatActivity() {
 
         if (isScrap) {
 
-                db.child("user").child(user.uid!!).child("scrapMap").child(user.uid!!).setValue(
+                db.child("user").child(user.uid!!).child("scrapMap").child(id).setValue(
                     System.currentTimeMillis()
                 )
 

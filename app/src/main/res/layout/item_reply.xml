@@ -49,6 +49,19 @@
         app:layout_constraintStart_toEndOf="@id/cvProfile" />
     />
 
+    <ImageView
+        android:id="@+id/ivDelete"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:src="@drawable/plus2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/cvProfile"
+        app:layout_constraintTop_toTopOf="@id/cvProfile"
+        android:padding="6dp"
+        android:visibility="gone"
+        tools:visibility="visible"
+        app:tint="#777777" />
+
     <TextView
         android:id="@+id/tvContent"
         android:layout_width="0dp"
