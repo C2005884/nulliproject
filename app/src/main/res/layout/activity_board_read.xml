@@ -216,16 +216,18 @@
             android:layout_weight="1"
             android:background="@null"
             android:hint="댓글을 입력해 주세요"
+            android:textSize="10sp"
             android:maxLines="4"
             android:paddingLeft="16dp" />
 
         <ImageView
             android:id="@+id/btnWriteReply"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:padding="7dp"
             android:layout_marginTop="2dp"
             android:layout_marginRight="10dp"
-            android:src="@drawable/send">
+            android:src="@drawable/ic_baseline_send_24">
         </ImageView>
 
     </LinearLayout>
