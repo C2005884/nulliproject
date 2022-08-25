@@ -69,6 +69,8 @@ class BoardAdapter : RecyclerView.Adapter<BoardAdapter.ViewHolder>() {
             Glide.with(binding.root).load(content.profileImageUri).into(binding.ivProfile)
             binding.tvNickname.text = content.nickname
             binding.tvDate.text = SimpleDateFormat("yyyy년 M월 d일", Locale.KOREAN).format(content.date)
+            binding.tvLikeCount.text = content.likeMap.size.toString()
+            binding.tvReplyCount.text = content.replyMap.size.toString()
         }
 
         fun clear() {

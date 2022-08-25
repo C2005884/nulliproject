@@ -46,9 +46,7 @@ class BoardReadActivity : AppCompatActivity() {
         intent.getStringExtra(BoardListActivity.FROM) ?: ""
     }
 
-    var existLikeTimeStamp = ""
     var isLike = false
-    var existScrapTimeStamp = ""
     var isScrap = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -75,6 +73,10 @@ class BoardReadActivity : AppCompatActivity() {
             )
         }
 
+        binding.btnWriteReply.setOnClickListener {
+            writeReply()
+        }
+
         binding.ivDelete.setOnClickListener {
             val builder = AlertDialog.Builder(this)
             builder
@@ -91,6 +93,10 @@ class BoardReadActivity : AppCompatActivity() {
             builder.create()
             builder.show()
         }
+    }
+
+    private fun writeReply() {
+
     }
 
     private fun deleteContent() {
@@ -113,9 +119,8 @@ class BoardReadActivity : AppCompatActivity() {
 
     private fun initScrap() {
         for (entry in user.scrapMap!!) {
-            if (entry.value == id) {
+            if (entry.key == id) {
                 isScrap = true
-                existScrapTimeStamp = entry.key.toString()
                 binding.ivScrap.setImageResource(
                     if (isScrap) R.drawable.star2 else R.drawable.star
                 )
@@ -149,9 +154,8 @@ class BoardReadActivity : AppCompatActivity() {
 
 
         for (map in content.likeMap) {
-            if (map.value == fuser?.uid) {
+            if (map.key == fuser?.uid) {
                 isLike = true
-                existLikeTimeStamp = map.key.toString()
                 binding.ivLike.setImageResource(
                     if (isLike) R.drawable.like else R.drawable.like2
                 )
@@ -164,37 +168,25 @@ class BoardReadActivity : AppCompatActivity() {
         super.onPause()
 
         if (isLike) {
-            if(existLikeTimeStamp.isBlank()) {
-                db.child(boardId).child(id).child("likeMap").child(System.currentTimeMillis().toString()).setValue(user.uid)
-            }
+                db.child(boardId).child(id).child("likeMap").child(user.uid!!).setValue(System.currentTimeMillis())
         } else {
-            if(existLikeTimeStamp.isNotBlank()) {
-                db.child(boardId).child(id).child("likeMap").child(existLikeTimeStamp).setValue(null)
-            }
+                db.child(boardId).child(id).child("likeMap").child(user.uid!!).setValue(null)
         }
 
 
         if (isScrap) {
-            if(existScrapTimeStamp.isBlank()) {
-                db.child("user").child(user.uid!!).child("scrapMap").child(System.currentTimeMillis().toString()).setValue(
-                    id
+
+                db.child("user").child(user.uid!!).child("scrapMap").child(user.uid!!).setValue(
+                    System.currentTimeMillis()
                 )
-            }
+
         } else {
-            if(existScrapTimeStamp.isNotBlank()) {
-                db.child("user").child(user.uid!!).child("scrapMap").child(existScrapTimeStamp).setValue(null)
-            }
+
+            db.child("user").child(user.uid!!).child("scrapMap").child(user.uid!!).setValue(
+                null
+            )
+
         }
-
-        db.child(boardId).child(id).child("likeMap").child(System.currentTimeMillis().toString())
-            .setValue(
-                if (isLike) user.uid else null
-            )
-
-        db.child("user").child(user.uid!!).child("scrapMap")
-            .child(System.currentTimeMillis().toString()).setValue(
-                if (isScrap) id else null
-            )
 
     }
 

@@ -42,7 +42,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="2022년 8월 9일"
+        android:text="2022년 8월 9일 17:02"
         android:textColor="@color/black"
         android:textSize="8dp"
         app:layout_constraintBottom_toBottomOf="@id/cvProfile"
