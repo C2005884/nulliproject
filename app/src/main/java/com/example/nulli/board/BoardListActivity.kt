@@ -96,10 +96,10 @@ class BoardListActivity : AppCompatActivity() {
         binding.rvContent.apply{
             layoutManager = WrapContentLinearLayoutManager(this@BoardListActivity)
             adapter = BoardAdapter().apply {
-                itemClick = {
+                itemClick = { s: String, s1: String ->
                     val intent = Intent(this@BoardListActivity, BoardReadActivity::class.java).apply {  }
-                    intent.putExtra(BOARD_ID, mid)
-                    intent.putExtra(ID, it)
+                    intent.putExtra(BOARD_ID, s)
+                    intent.putExtra(ID, s1)
                     intent.putExtra(FROM, BOARD_LIST)
                     startActivity(intent)
                 }

@@ -13,7 +13,7 @@ import java.util.*
 
 class BoardAdapter : RecyclerView.Adapter<BoardAdapter.ViewHolder>() {
 
-    var itemClick: (String) -> Unit = {}
+    var itemClick: (String, String) -> Unit = { _, _ -> }
     val datas: ArrayList<Content> = arrayListOf()
     fun setDatas(arrayList: ArrayList<Content>){
         datas.clear()
@@ -58,7 +58,7 @@ class BoardAdapter : RecyclerView.Adapter<BoardAdapter.ViewHolder>() {
         fun bind(content: Content) {
             binding.root.setOnClickListener {
                 Log.e("viewholder", content.id)
-                itemClick(content.id)
+                itemClick(content.boardId, content.id)
             }
 
             binding.cv.isVisible = !content.imageUri.isNullOrBlank()

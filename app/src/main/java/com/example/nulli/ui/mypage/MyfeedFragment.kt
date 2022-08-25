@@ -66,10 +66,10 @@ class MyfeedFragment : Fragment() {
         Glide.with(binding.root).load(fuser?.photoUrl).into(binding.ivProfile)
         binding.tvNickname.text = fuser?.displayName
 
-//        binding.ivSettings.setOnClickListener {
-//            val intent = Intent(requireActivity(),MypageFragment::class.java)
-//            requireActivity().startActivity(intent)
-//        }
+        binding.ivSettings.setOnClickListener {
+            val intent = Intent(requireActivity(),MypageActivity::class.java)
+            requireActivity().startActivity(intent)
+        }
     }
 
 

@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.nulli.board.BoardAdapter
 import com.example.nulli.board.BoardListActivity
+import com.example.nulli.board.BoardReadActivity
 import com.example.nulli.databinding.FragmentHomeBinding
 import com.example.nulli.model.Content
 import com.example.nulli.util.WrapContentLinearLayoutManager
@@ -91,8 +92,17 @@ class HomeFragment : Fragment() {
         }
 
         binding.rvContent.apply {
-            layoutManager = LinearLayoutManager(requireContext())
-            adapter = BoardAdapter()
+            layoutManager = WrapContentLinearLayoutManager(requireContext())
+            adapter = BoardAdapter().apply {
+                itemClick = { s: String, s1: String ->
+                    val intent = Intent(requireContext(), BoardReadActivity::class.java).apply {  }
+                    intent.putExtra(BoardListActivity.BOARD_ID, s)
+                    intent.putExtra(BoardListActivity.ID, s1)
+                    intent.putExtra(BoardListActivity.FROM, BoardListActivity.HOME_FRAGMENT)
+                    startActivity(intent)
+                }
+
+            }
         }
     }
 

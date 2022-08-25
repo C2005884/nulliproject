@@ -1,6 +1,7 @@
 package com.example.nulli.board
 
 import android.content.DialogInterface
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -79,6 +80,17 @@ class BoardReadActivity : AppCompatActivity() {
             TODO("Not yet implemented")
         }
 
+    }
+
+    override fun onBackPressed() {
+        if(from == BoardListActivity.BOARD_LIST) {
+            super.onBackPressed()
+        } else {
+            val intent = Intent(this, BoardListActivity::class.java)
+            intent.putExtra(BoardListActivity.ID, boardId)
+            startActivity(intent)
+            finish()
+        }
     }
 
     override fun onResume() {
@@ -175,6 +187,14 @@ class BoardReadActivity : AppCompatActivity() {
 
     private fun deleteContent() {
         db.child(boardId).child(id).removeValue()
+//        if(from == BoardListActivity.BOARD_LIST) {
+//            super.onBackPressed()
+//        } else {
+//            val intent = Intent(this, BoardListActivity::class.java)
+//            intent.putExtra(BoardListActivity.ID, boardId)
+//            startActivity(intent)
+//            finish()
+//        }
     }
 
     private fun loadUser() {
