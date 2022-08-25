@@ -2,18 +2,19 @@ package com.example.nulli.board
 
 import android.content.DialogInterface
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.nulli.R
 import com.example.nulli.databinding.ActivityBoardReadBinding
 import com.example.nulli.model.Content
+import com.example.nulli.model.Reply
 import com.example.nulli.model.UserData
+import com.example.nulli.util.WrapContentLinearLayoutManager
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.*
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
@@ -49,6 +50,41 @@ class BoardReadActivity : AppCompatActivity() {
     var isLike = false
     var isScrap = false
 
+
+    val replyListener = object : ChildEventListener {
+        override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
+            try {
+                val data = snapshot.getValue(Reply::class.java)!!
+                (binding.rvReply.adapter as ReplyAdapter).addData(data)
+            } catch (e:Exception) {
+
+            }
+
+        }
+
+        override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
+            TODO("Not yet implemented")
+        }
+
+        override fun onChildRemoved(snapshot: DataSnapshot) {
+            TODO("Not yet implemented")
+        }
+
+        override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
+            TODO("Not yet implemented")
+        }
+
+        override fun onCancelled(error: DatabaseError) {
+            TODO("Not yet implemented")
+        }
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+        db.child(boardId).child(id).child("replyMap").addChildEventListener(replyListener)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -58,6 +94,7 @@ class BoardReadActivity : AppCompatActivity() {
 
         loadUser()
         loadData()
+        setRV()
 
         binding.ivLike.setOnClickListener {
             isLike = !isLike
@@ -95,8 +132,37 @@ class BoardReadActivity : AppCompatActivity() {
         }
     }
 
-    private fun writeReply() {
+    private fun setRV() {
 
+        binding.rvReply.apply {
+            layoutManager = WrapContentLinearLayoutManager(this@BoardReadActivity)
+            adapter = ReplyAdapter()
+        }
+    }
+
+    private fun writeReply() {
+        if(binding.etReply.text.toString().isBlank()) {
+            Toast.makeText(this, "댓글을 입력해 주세요", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        val replyId = db.child("reply").push().key!!
+
+        val reply = Reply (
+                    id = replyId,
+                    contentId = id,
+                    boardId = boardId,
+                    profileImageUri = user.profileImageUri,
+                    nickname = user.nickname,
+                    content = binding.etReply.text.toString(),
+                    date = System.currentTimeMillis(),
+                    dateText = SimpleDateFormat("yyyy_MMdd HH:mm:ss").format(System.currentTimeMillis()),
+                )
+
+        binding.etReply.setText("")
+        db.child("reply").child(replyId).setValue(reply).addOnCompleteListener {
+            db.child(boardId).child(id).child("replyMap").child(replyId).setValue(reply)
+        }
     }
 
     private fun deleteContent() {
@@ -162,10 +228,23 @@ class BoardReadActivity : AppCompatActivity() {
                 break
             }
         }
+
+        val entries = ArrayList(content.replyMap.entries)
+        entries.sortBy {it.value.date}
+        val replyDatas : ArrayList<Reply> = arrayListOf()
+
+        for(entry in entries) {
+            replyDatas.add(entry.value)
+        }
+
+        (binding.rvReply.adapter as ReplyAdapter).setDatas(replyDatas)
     }
 
     override fun onPause() {
         super.onPause()
+
+        db.child(boardId).child(id).child("replyMap")
+            .removeEventListener(replyListener)
 
         if (isLike) {
                 db.child(boardId).child(id).child("likeMap").child(user.uid!!).setValue(System.currentTimeMillis())

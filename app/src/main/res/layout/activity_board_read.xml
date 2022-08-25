@@ -200,7 +200,7 @@
     <LinearLayout
         android:id="@+id/llInputReply"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:background="@drawable/bg_graytext"
         android:orientation="horizontal"
@@ -209,11 +209,20 @@
         app:layout_constraintLeft_toRightOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
+        <EditText
+            android:id="@+id/etReply"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@null"
+            android:hint="댓글을 입력해 주세요"
+            android:paddingLeft="16dp"
+            android:maxLines="4"/>
+
         <Button
             android:id="@+id/btnWriteReply"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="290dp"
+            android:layout_height="match_parent"
             android:layout_marginTop="5dp"
             android:text="작성"></Button>
 
