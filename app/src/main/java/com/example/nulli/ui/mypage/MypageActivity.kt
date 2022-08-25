@@ -51,8 +51,6 @@ class MypageActivity : AppCompatActivity(){
         setContentView(binding.root)
         supportActionBar?.hide()
 
-        Toast.makeText(this,"이상해.",Toast.LENGTH_SHORT).show()
-
         Glide.with(binding.root).load(fuser?.photoUrl).into(binding.ivProfile)
         binding.tvNickname.text = fuser?.displayName
         binding.tvProfile.text = """
