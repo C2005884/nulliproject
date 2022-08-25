@@ -211,20 +211,22 @@
 
         <EditText
             android:id="@+id/etReply"
-            android:layout_width="0dp"
+            android:layout_width="175dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@null"
             android:hint="댓글을 입력해 주세요"
-            android:paddingLeft="16dp"
-            android:maxLines="4"/>
+            android:maxLines="4"
+            android:paddingLeft="16dp" />
 
-        <Button
+        <ImageView
             android:id="@+id/btnWriteReply"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginTop="5dp"
-            android:text="작성"></Button>
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/send">
+        </ImageView>
 
     </LinearLayout>
 
