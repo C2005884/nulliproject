@@ -137,7 +137,13 @@ class BoardReadActivity : AppCompatActivity() {
 
         binding.rvReply.apply {
             layoutManager = WrapContentLinearLayoutManager(this@BoardReadActivity)
-            adapter = ReplyAdapter()
+            adapter = ReplyAdapter().apply {
+                moreClick = {
+                    if (it != null) {
+                        this.deleteData(it)
+                    }
+                }
+            }
         }
     }
 
@@ -239,7 +245,7 @@ class BoardReadActivity : AppCompatActivity() {
             replyDatas.add(entry.value)
         }
 
-        (binding.rvReply.adapter as ReplyAdapter).setDatas(replyDatas)
+        //(binding.rvReply.adapter as ReplyAdapter).setDatas(replyDatas)
     }
 
     override fun onPause() {

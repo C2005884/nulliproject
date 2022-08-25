@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat
 
 class ReplyAdapter : RecyclerView.Adapter<ReplyAdapter.ViewHolder>() {
 
+    var moreClick:(String?) -> Unit = { }
     val datas:ArrayList<Reply> = arrayListOf()
     fun setDatas(arrayList: ArrayList<Reply>) {
         datas.clear()
@@ -37,6 +38,22 @@ class ReplyAdapter : RecyclerView.Adapter<ReplyAdapter.ViewHolder>() {
         }
     }
 
+    fun deleteData(key:String) {
+        var targetPosition = -1
+        for(i in datas.indices) {
+            if(datas[i].id == key) {
+                targetPosition = i
+                break
+            }
+        }
+        try {
+            datas.removeAt(targetPosition)
+            notifyItemRemoved(targetPosition)
+        } catch (e:Exception) {
+
+        }
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ItemReplyBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
@@ -56,6 +73,9 @@ class ReplyAdapter : RecyclerView.Adapter<ReplyAdapter.ViewHolder>() {
             binding.tvDate.text = SimpleDateFormat("yyyy년 MM월 dd일 HH:mm").format(reply.date)
             binding.tvContent.text = reply.content
             binding.ivDelete.isVisible = reply.mine
+            binding.ivDelete.setOnClickListener {
+                moreClick(reply.id)
+            }
         }
     }
 }
