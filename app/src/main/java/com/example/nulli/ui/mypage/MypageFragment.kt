@@ -72,8 +72,6 @@ class MypageFragment : Fragment() {
         binding.tvNickname.text = fuser?.displayName
         binding.tvProfile.text = """
             ${fuser?.email}
-            ${fuser?.displayName}
-            ${fuser?.uid}
         """.trimMargin("|")
 
 

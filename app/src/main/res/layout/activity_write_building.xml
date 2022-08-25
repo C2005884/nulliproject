@@ -96,6 +96,14 @@
                     tools:text="병원" />
             </LinearLayout>
 
+            <View
+                android:id="@+id/view"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/txt_white_gray"
+
+                app:layout_constraintBottom_toBottomOf="@+id/llType"/>
+
             <LinearLayout
                 android:id="@+id/llLocation"
                 android:layout_width="0dp"
@@ -129,7 +137,6 @@
                 android:id="@+id/rvReview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="24dp"
                 android:nestedScrollingEnabled="false"
