@@ -51,7 +51,7 @@
                         android:src="@drawable/ic_person" />
 
                     <LinearLayout
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
 
@@ -59,6 +59,7 @@
                             android:id="@+id/tvNickname"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
                             android:layout_marginTop="10dp"
                             android:text="아이디"
                             android:textColor="@color/black"
@@ -71,10 +72,27 @@
                             android:id="@+id/tvDate"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
                             android:text="06/08 12:17"
                             android:textColor="@color/txt_dark_gray"
                             android:textSize="10dp" />
+
+
                     </LinearLayout>
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1" />
+
+
+                    <ImageView
+                        android:id="@+id/ivDelete"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="10dp"
+                        android:src="@drawable/plus2" />
 
                 </LinearLayout>
 
