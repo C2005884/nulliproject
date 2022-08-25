@@ -168,16 +168,17 @@ class BoardReadActivity : AppCompatActivity() {
         val replyId = db.child("reply").push().key!!
 
         val reply = Reply (
-                    id = replyId,
-                    contentId = id,
-                    boardId = boardId,
-                    uid = user.uid,
-                    profileImageUri = user.profileImageUri,
-                    nickname = user.nickname,
-                    content = binding.etReply.text.toString(),
-                    date = System.currentTimeMillis(),
-                    dateText = SimpleDateFormat("yyyy_MMdd HH:mm:ss").format(System.currentTimeMillis()),
-                )
+            id = replyId,
+            contentId = id,
+            boardId = boardId,
+            uid = user.uid,
+            profileImageUri = user.profileImageUri,
+            nickname = user.nickname,
+            content = binding.tvTitle.text.toString(),
+            title = binding.etReply.text.toString(),
+            date = System.currentTimeMillis(),
+            dateText = SimpleDateFormat("yyyy_MMdd HH:mm:ss").format(System.currentTimeMillis()),
+        )
 
         binding.etReply.setText("")
         db.child("reply").child(replyId).setValue(reply).addOnCompleteListener {
@@ -245,6 +246,7 @@ class BoardReadActivity : AppCompatActivity() {
         Glide.with(this).load(content.imageUri).into(binding.ivContent)
         binding.tvLike.text = content.likeMap.count().toString()
         binding.tvReply.text = content.replyMap.count().toString()
+        binding.tvTitle.text = content.title
 
 
         for (map in content.likeMap) {
@@ -275,17 +277,17 @@ class BoardReadActivity : AppCompatActivity() {
             .removeEventListener(replyListener)
 
         if (isLike) {
-                db.child(boardId).child(id).child("likeMap").child(user.uid!!).setValue(System.currentTimeMillis())
+            db.child(boardId).child(id).child("likeMap").child(user.uid!!).setValue(System.currentTimeMillis())
         } else {
-                db.child(boardId).child(id).child("likeMap").child(user.uid!!).setValue(null)
+            db.child(boardId).child(id).child("likeMap").child(user.uid!!).setValue(null)
         }
 
 
         if (isScrap) {
 
-                db.child("user").child(user.uid!!).child("scrapMap").child(id).setValue(
-                    System.currentTimeMillis()
-                )
+            db.child("user").child(user.uid!!).child("scrapMap").child(id).setValue(
+                System.currentTimeMillis()
+            )
 
         } else {
 

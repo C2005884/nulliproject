@@ -13,6 +13,7 @@ class Reply (
     var content:String? = "",
     var date:Long? = 0L,
     var dateText:String? = "",
+    var title:String? = "",
 
     // local view 제어용 변수
     var mine:Boolean = false

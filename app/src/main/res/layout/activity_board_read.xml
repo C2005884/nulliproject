@@ -96,6 +96,23 @@
 
                 </LinearLayout>
 
+
+                <TextView
+                    android:id="@+id/tvTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="@id/tvDate"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="10dp"
+                    android:maxLength="20"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@id/cv"
+                    tools:text = "글 제목 어쩌구어쩌구어쩌구어쩌구어쩌구어쩌구어쩌구"
+
+                    />
+
+
                 <TextView
                     android:id="@+id/tvContent"
                     android:layout_width="wrap_content"
