@@ -174,8 +174,8 @@ class BoardReadActivity : AppCompatActivity() {
             uid = user.uid,
             profileImageUri = user.profileImageUri,
             nickname = user.nickname,
-            content = binding.tvTitle.text.toString(),
-            title = binding.etReply.text.toString(),
+            content = binding.etReply.text.toString(),
+            title = binding.tvTitle.text.toString(),
             date = System.currentTimeMillis(),
             dateText = SimpleDateFormat("yyyy_MMdd HH:mm:ss").format(System.currentTimeMillis()),
         )
