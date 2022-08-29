@@ -220,7 +220,9 @@ class BoardReadActivity : AppCompatActivity() {
 
     private fun deleteContent() {
         db.child(boardId).child(id).removeValue().addOnCompleteListener {
-            finish()
+            db.child("user").child(content?.uid!!).child("myContentMap").child(content.id).setValue(null).addOnCompleteListener {
+                finish()
+            }
         }
     }
 
@@ -315,13 +317,12 @@ class BoardReadActivity : AppCompatActivity() {
                 boardId = content.boardId,
                 title = content.title
             )
+            db.child(content.boardId).child(content.id).child("scrapMap").child(user?.uid!!).setValue(System.currentTimeMillis())
             db.child("user").child(user.uid!!).child("scrapMap").child(id).setValue(contentSummary)
 
         } else {
-            db.child("user").child(user.uid!!).child("scrapMap").child(id).setValue(
-                null
-            )
-
+            db.child("user").child(user.uid!!).child("scrapMap").child(id).setValue(null)
+            db.child(content.boardId).child(content.id).child("scrapMap").child(user?.uid!!).setValue(null)
         }
 
     }

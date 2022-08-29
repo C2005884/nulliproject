@@ -17,6 +17,7 @@ data class Content(
     var imageUri:String = "",
     var likeMap:HashMap<String, Long> = hashMapOf(),
     var replyMap:HashMap<String, Reply> = hashMapOf(),
+    var scrapMap:HashMap<String, Long> = hashMapOf(),
     var scrap:Int = 0,
     var mboard:HashMap<String, Long> = hashMapOf()
 ) {
