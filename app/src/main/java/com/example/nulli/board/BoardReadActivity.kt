@@ -159,10 +159,10 @@ class BoardReadActivity : AppCompatActivity() {
             adapter = ReplyAdapter().apply {
                 moreClick = {
                     if (it != null) {
-                        val replyData = Reply()
+                        var replyData = Reply()
                         for (r in this.datas) {
                             if(r.id == it) {
-                                replyData == r
+                                replyData = r
                                 break
                             }
                         }
@@ -219,6 +219,14 @@ class BoardReadActivity : AppCompatActivity() {
     }
 
     private fun deleteContent() {
+        val scraperList:ArrayList<String> = arrayListOf()
+        for (map in content.scrapMap){
+            scraperList.add(map.key)
+        }
+        for(key in scraperList){
+            db.child("user").child(key).child("scrapMap").child(content.id).setValue(null)
+        }
+
         db.child(boardId).child(id).removeValue().addOnCompleteListener {
             db.child("user").child(content?.uid!!).child("myContentMap").child(content.id).setValue(null).addOnCompleteListener {
                 finish()
