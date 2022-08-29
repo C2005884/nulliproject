@@ -120,5 +120,11 @@ class BoardListActivity : AppCompatActivity() {
         const val INTERNAL_DISABLED_BOARD = "internalDisabledBoard"
         const val DEVELOP_DISABLED_BOARD = "developDisabledBoard"
         const val MENTALITY_DISABLED_BOARD = "mentalityDisabledBoard"
+
+        const val FREE_BOARD_KOREAN = "자유게시판"
+        const val EXTERNAL_DISABLED_BOARD_KOREAN = "외부장애 게시판"
+        const val INTERNAL_DISABLED_BOARD_KOREAN = "내부장애 게시판"
+        const val DEVELOP_DISABLED_BOARD_KOREAN = "발달장애 게시판"
+        const val MENTALITY_DISABLED_BOARD_KOREAN = "정신장애 게시판"
     }
 }

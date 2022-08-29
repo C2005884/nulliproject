@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
 
 
 
@@ -105,6 +105,7 @@
 
 
     <LinearLayout
+        android:id="@+id/llMyContent"
         android:layout_width="match_parent"
         android:background="@drawable/bg_edittext"
         android:layout_height="wrap_content"
@@ -135,8 +136,12 @@
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginRight="150dp"
                 android:src="@drawable/write"></ImageView>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
 
             <ImageView
                 android:layout_width="25dp"
@@ -155,51 +160,28 @@
                 android:textSize="15sp" />
         </LinearLayout>
 
-        <TextView
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvMyContent"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:text="오늘 제 점심 어때요?"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:textStyle="bold"
+            android:layout_height="wrap_content"
+            tools:listitem="@layout/item_recent_content"
+            android:paddingHorizontal="16dp"
+            tools:itemCount="4"
             />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:text="강남에 ㅇㄱ병원 비추합니다."
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:textStyle="bold"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:text="보청기 추천해주실분"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:textStyle="bold"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:text="배고프고 졸리네요"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:textStyle="bold"/>
 
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/llScrap"
         android:layout_width="match_parent"
         android:background="@drawable/bg_edittext"
         android:layout_height="wrap_content"
-        android:layout_marginTop="480dp"
         android:layout_marginStart="5dp"
         android:layout_marginEnd="5dp"
         android:orientation="vertical"
+        android:layout_marginTop="16dp"
         app:layout_constraintLeft_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/llMyContent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -221,8 +203,12 @@
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginRight="150dp"
                 android:src="@drawable/star2"></ImageView>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
 
             <ImageView
                 android:layout_width="25dp"
@@ -241,38 +227,15 @@
                 android:textSize="15sp" />
         </LinearLayout>
 
-        <TextView
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvScrap"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:text="오늘 제 점심 어때요?"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:textStyle="bold"
+            android:layout_height="wrap_content"
+            tools:listitem="@layout/item_recent_content"
+            android:paddingHorizontal="16dp"
+            tools:itemCount="4"
             />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:text="강남에 ㅇㄱ병원 비추합니다."
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:textStyle="bold"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:text="보청기 추천해주실분"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:textStyle="bold"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:text="배고프고 졸리네요"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:textStyle="bold"/>
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

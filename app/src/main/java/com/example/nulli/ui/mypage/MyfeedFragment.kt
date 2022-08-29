@@ -11,7 +11,10 @@ import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
+import com.example.nulli.board.BoardListActivity
 import com.example.nulli.databinding.FragmentMyfeedBinding
+import com.example.nulli.ui.home.RecentContentAdapter
+import com.example.nulli.util.WrapContentLinearLayoutManager
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
@@ -69,6 +72,25 @@ class MyfeedFragment : Fragment() {
         binding.ivSettings.setOnClickListener {
             val intent = Intent(requireActivity(),MypageActivity::class.java)
             requireActivity().startActivity(intent)
+        }
+
+        setRv()
+    }
+
+    private fun setRv() {
+        binding.rvMyContent.apply {
+            layoutManager = WrapContentLinearLayoutManager(requireContext())
+            adapter = RecentContentAdapter().apply {
+                clickEvent = {
+                    requireActivity().startActivity(
+                        Intent(
+                            requireActivity(),
+                            BoardListActivity::class.java
+                        ).apply {
+                            putExtra(BoardListActivity.ID, target)
+                        })
+                }
+            }
         }
     }
 
