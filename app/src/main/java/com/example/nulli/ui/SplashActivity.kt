@@ -2,6 +2,8 @@ package com.example.nulli.ui
 
 import android.Manifest
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -9,6 +11,9 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.target.CustomTarget
+import com.bumptech.glide.request.transition.Transition
 import com.example.nulli.MainActivity
 import com.example.nulli.R
 import com.example.nulli.databinding.ActivitySplashBinding
@@ -29,6 +34,8 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import com.gun0912.tedpermission.PermissionListener
 import com.gun0912.tedpermission.normal.TedPermission
+import java.io.ByteArrayOutputStream
+import java.io.File
 
 
 class SplashActivity : AppCompatActivity() {
@@ -142,13 +149,43 @@ class SplashActivity : AppCompatActivity() {
                         uid = fuser.uid,
                         email = fuser.email,
                         nickname = fuser.displayName,
-                        profileImageUri = fuser.photoUrl.toString(),
+                        profileImageUri = "https://firebasestorage.googleapis.com/v0/b/nulli-e491a.appspot.com/o/user%2F${fuser?.uid}?alt=media",
                         scrapMap = hashMapOf(),
                         myContentMap = hashMapOf(),
                     )
 
                     db.child("user").child(fuser.uid).setValue(user).addOnCompleteListener {
-                        moveMainPage(task.result?.user)
+                        if (fuser.photoUrl == null) {
+                            moveMainPage(task.result?.user)
+                        } else {
+                            Glide.with(this)
+                                .asBitmap()
+                                .load(fuser.photoUrl)
+                                .into(object : CustomTarget<Bitmap>(){
+                                    override fun onResourceReady(
+                                        resource: Bitmap,
+                                        transition: Transition<in Bitmap>?
+                                    ) {
+                                        val baos = ByteArrayOutputStream()
+                                        resource.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+                                        val data = baos.toByteArray()
+
+                                        val profileImageRef = storage.child("user").child(fuser?.uid!!)
+                                        var uploadTask = profileImageRef.putBytes(data)
+                                        uploadTask.addOnFailureListener {
+                                            // Handle unsuccessful uploads
+                                        }.addOnCompleteListener { taskSnapshot ->
+                                            moveMainPage(task.result?.user)
+                                        }
+
+                                    }
+
+                                    override fun onLoadCleared(placeholder: Drawable?) {
+
+                                    }
+
+                                })
+                        }
                     }
                 } else {
                     Log.d("xxxx ", "signInWithCredential:failure", task.exception)

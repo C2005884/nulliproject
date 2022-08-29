@@ -94,7 +94,7 @@ class JoinActivity : AppCompatActivity() {
         val user = UserData(
             uid = fuser.uid,
             email = fuser.email,
-            nickname = fuser.displayName,
+            nickname = binding.etName.text.toString(),
             profileImageUri = fuser.photoUrl.toString(),
             scrapMap = hashMapOf(),
             myContentMap = hashMapOf()

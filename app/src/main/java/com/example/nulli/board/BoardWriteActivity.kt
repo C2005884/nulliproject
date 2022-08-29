@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.example.nulli.databinding.ActivityBoardWriteBinding
 import com.example.nulli.model.Content
+import com.example.nulli.model.ContentSummary
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
@@ -78,6 +79,7 @@ class BoardWriteActivity: AppCompatActivity() {
     private fun makeContent() {
         val contentRef = db.child(mId)
         val recentRef = db.child("recentContent")
+        val myContentRef = db.child("user").child(fUser?.uid!!)
 
         Log.e("mid","${mId}")
         var key = contentRef.push().key!!
@@ -96,19 +98,27 @@ class BoardWriteActivity: AppCompatActivity() {
                     """https://firebasestorage.googleapis.com/v0/b/nulli-e491a.appspot.com/o/content%2F$key?alt=media"""
         }
 
+        val contentSummary = ContentSummary(
+            contentId = content.id,
+            boardId = content.boardId,
+            title = content.title
+        )
 
         contentRef.child(key).setValue(content).addOnCompleteListener {
             recentRef.child(mId).setValue(content).addOnCompleteListener {
-                if(mImageUri != null){
-                    storage.child("content").child(key).putFile(mImageUri!!)
-                        .addOnCompleteListener {
+                myContentRef.child("myContentMap").child(key).setValue(contentSummary)
+                    .addOnCompleteListener {
+                        if (mImageUri != null) {
+                            storage.child("content").child(key).putFile(mImageUri!!)
+                                .addOnCompleteListener {
+                                    Toast.makeText(this, "등록 완료되었습니다.", Toast.LENGTH_SHORT).show()
+                                    finish()
+                                }
+                        } else {
                             Toast.makeText(this, "등록 완료되었습니다.", Toast.LENGTH_SHORT).show()
                             finish()
                         }
-                }else{
-                    Toast.makeText(this, "등록 완료되었습니다.", Toast.LENGTH_SHORT).show()
-                    finish()
-                }
+                    }
             }
         }
     }

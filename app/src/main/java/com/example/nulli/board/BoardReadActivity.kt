@@ -11,6 +11,7 @@ import com.bumptech.glide.Glide
 import com.example.nulli.R
 import com.example.nulli.databinding.ActivityBoardReadBinding
 import com.example.nulli.model.Content
+import com.example.nulli.model.ContentSummary
 import com.example.nulli.model.Reply
 import com.example.nulli.model.UserData
 import com.example.nulli.util.WrapContentLinearLayoutManager
@@ -128,20 +129,26 @@ class BoardReadActivity : AppCompatActivity() {
         }
 
         binding.ivDelete.setOnClickListener {
-            val builder = AlertDialog.Builder(this)
-            builder
-                .setMessage("게시물을 삭제하시겠습니까?")
-                .setPositiveButton("삭제",
-                    DialogInterface.OnClickListener { dialog, id ->
-                        // 삭제 버튼 선택시 수행
-                        deleteContent()
-                    })
-                .setNegativeButton("취소",
-                    DialogInterface.OnClickListener {dialog, id ->
-                        // 취소 버튼 선택시 수행
-                    })
-            builder.create()
-            builder.show()
+            if (content.uid == user.uid) {
+                val builder = AlertDialog.Builder(this)
+                builder
+                    .setMessage("게시물을 삭제하시겠습니까?")
+                    .setPositiveButton("삭제",
+                        DialogInterface.OnClickListener { dialog, id ->
+                            // 삭제 버튼 선택시 수행
+                            deleteContent()
+                        })
+                    .setNegativeButton("취소",
+                        DialogInterface.OnClickListener {dialog, id ->
+                            // 취소 버튼 선택시 수행
+                        })
+                builder.create()
+                builder.show()
+            } else {
+                //신고 or 차단 추가
+            }
+
+
         }
     }
 
@@ -152,7 +159,32 @@ class BoardReadActivity : AppCompatActivity() {
             adapter = ReplyAdapter().apply {
                 moreClick = {
                     if (it != null) {
-                        this.deleteData(it)
+                        val replyData = Reply()
+                        for (r in this.datas) {
+                            if(r.id == it) {
+                                replyData == r
+                                break
+                            }
+                        }
+                        if(replyData.uid == user.uid) {
+                            val builder = AlertDialog.Builder(this@BoardReadActivity)
+                            builder
+                                .setMessage("댓글을 삭제하시겠습니까?")
+                                .setPositiveButton("삭제",
+                                    DialogInterface.OnClickListener { dialog, id ->
+                                        // 삭제 버튼 선택시 수행
+                                        this.deleteData(it)
+                                    })
+                                .setNegativeButton("취소",
+                                    DialogInterface.OnClickListener {dialog, id ->
+                                        // 취소 버튼 선택시 수행
+                                    })
+                            builder.create()
+                            builder.show()
+
+                        } else {
+                            // 신고기능
+                        }
                     }
                 }
             }
@@ -187,15 +219,9 @@ class BoardReadActivity : AppCompatActivity() {
     }
 
     private fun deleteContent() {
-        db.child(boardId).child(id).removeValue()
-//        if(from == BoardListActivity.BOARD_LIST) {
-//            super.onBackPressed()
-//        } else {
-//            val intent = Intent(this, BoardListActivity::class.java)
-//            intent.putExtra(BoardListActivity.ID, boardId)
-//            startActivity(intent)
-//            finish()
-//        }
+        db.child(boardId).child(id).removeValue().addOnCompleteListener {
+            finish()
+        }
     }
 
     private fun loadUser() {
@@ -284,14 +310,15 @@ class BoardReadActivity : AppCompatActivity() {
 
 
         if (isScrap) {
-
-            db.child("user").child(user.uid!!).child("scrapMap").child(id).setValue(
-                System.currentTimeMillis()
+            val contentSummary = ContentSummary(
+                contentId = content.id,
+                boardId = content.boardId,
+                title = content.title
             )
+            db.child("user").child(user.uid!!).child("scrapMap").child(id).setValue(contentSummary)
 
         } else {
-
-            db.child("user").child(user.uid!!).child("scrapMap").child(user.uid!!).setValue(
+            db.child("user").child(user.uid!!).child("scrapMap").child(id).setValue(
                 null
             )
 
