@@ -63,7 +63,7 @@ class BoardAdapter : RecyclerView.Adapter<BoardAdapter.ViewHolder>() {
 
             binding.cv.isVisible = !content.imageUri.isNullOrBlank()
             Glide.with(binding.root).load(content.imageUri).into(binding.ivReview)
-            binding.ivProfile.isVisible = !content.imageUri.isNullOrBlank()
+            binding.ivProfile.isVisible = !content.profileImageUri.isNullOrBlank()
             binding.tvTitle.text = content.title
             binding.tvContent.text = content.content
             Glide.with(binding.root).load(content.profileImageUri).into(binding.ivProfile)
