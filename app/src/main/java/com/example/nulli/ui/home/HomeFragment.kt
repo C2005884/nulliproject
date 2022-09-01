@@ -3,17 +3,22 @@ package com.example.nulli.ui.home
 import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.nulli.R
 import com.example.nulli.board.BoardAdapter
 import com.example.nulli.board.BoardListActivity
 import com.example.nulli.board.BoardReadActivity
 import com.example.nulli.databinding.FragmentHomeBinding
 import com.example.nulli.model.Content
+import com.example.nulli.ui.dialog.LottieDialog
 import com.example.nulli.util.WrapContentLinearLayoutManager
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -49,15 +54,15 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        val dialog = LottieDialog().apply {
-//            lottieRes = R.raw.loading
-//        }.show(childFragmentManager,"lottie")
-//
-//        Handler(Looper.myLooper()!!).postDelayed({
-//            childFragmentManager.findFragmentByTag("lottie")?.let {
-//                (it as DialogFragment).dismiss()
-//            }
-//        }, 1000)
+        val dialog = LottieDialog().apply {
+            lottieRes = R.raw.loading
+        }.show(childFragmentManager,"lottie")
+
+        Handler(Looper.myLooper()!!).postDelayed({
+            childFragmentManager.findFragmentByTag("lottie")?.let {
+                (it as DialogFragment).dismiss()
+            }
+        }, 1000)
         setRv()
     }
 

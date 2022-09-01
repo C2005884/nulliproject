@@ -2,14 +2,19 @@ package com.example.nulli.board
 
 import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.text.Html
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.DialogFragment
 import com.bumptech.glide.Glide
+import com.example.nulli.R
 import com.example.nulli.databinding.ActivityBoardWriteBinding
 import com.example.nulli.model.Content
 import com.example.nulli.model.ContentSummary
+import com.example.nulli.ui.dialog.LottieDialog
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase

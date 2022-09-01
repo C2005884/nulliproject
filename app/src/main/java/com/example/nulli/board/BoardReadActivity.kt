@@ -10,10 +10,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.nulli.R
 import com.example.nulli.databinding.ActivityBoardReadBinding
+import com.example.nulli.declare.DeclareBoardActivity
 import com.example.nulli.model.Content
 import com.example.nulli.model.ContentSummary
 import com.example.nulli.model.Reply
 import com.example.nulli.model.UserData
+import com.example.nulli.ui.map.ReviewBuildingActivity
+import com.example.nulli.ui.map.WriteBuildingActivity
 import com.example.nulli.util.WrapContentLinearLayoutManager
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.*
@@ -146,6 +149,20 @@ class BoardReadActivity : AppCompatActivity() {
                 builder.show()
             } else {
                 //신고 or 차단 추가
+                val builder2 = AlertDialog.Builder(this@BoardReadActivity)
+                builder2
+                    .setMessage("사용자 및 게시물을 신고하시겠습니까?")
+                    .setPositiveButton("신고",
+                        DialogInterface.OnClickListener { dialog, id ->
+                            // 삭제 버튼 선택시 수행
+                            goToDeclare()
+                        })
+                    .setNegativeButton("취소",
+                        DialogInterface.OnClickListener {dialog, id ->
+                            // 취소 버튼 선택시 수행
+                        })
+                builder2.create()
+                builder2.show()
             }
 
 
@@ -184,11 +201,17 @@ class BoardReadActivity : AppCompatActivity() {
 
                         } else {
                             // 신고기능
+
                         }
                     }
                 }
             }
         }
+    }
+
+    private fun goToDeclare() {
+        val intent = Intent(this, DeclareBoardActivity::class.java)
+        startActivity(intent)
     }
 
     private fun writeReply() {
@@ -220,13 +243,18 @@ class BoardReadActivity : AppCompatActivity() {
 
     private fun deleteContent() {
         val scraperList:ArrayList<String> = arrayListOf()
+        for(map in content.scrapMap) {
+            scraperList.add(map.key)
+        }
+        for(key in scraperList) {
+            db.child("user").child(key).child("scrapMap").child(content.id).setValue(null)
+        }
         for (map in content.scrapMap){
             scraperList.add(map.key)
         }
         for(key in scraperList){
             db.child("user").child(key).child("scrapMap").child(content.id).setValue(null)
         }
-
         db.child(boardId).child(id).removeValue().addOnCompleteListener {
             db.child("user").child(content?.uid!!).child("myContentMap").child(content.id).setValue(null).addOnCompleteListener {
                 finish()

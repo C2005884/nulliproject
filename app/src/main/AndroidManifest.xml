@@ -15,10 +15,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Nulli">
-
         <activity
-        android:name=".ui.mypage.MypageActivity"
-        android:exported="false" />
+            android:name=".ScrapDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MyContentDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DetailScrapActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DetailMyContentActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.mypage.MypageActivity"
+            android:exported="false" />
         <activity
             android:name=".board.BoardReadActivity"
             android:exported="false" />

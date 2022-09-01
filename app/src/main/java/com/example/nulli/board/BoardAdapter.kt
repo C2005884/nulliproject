@@ -57,7 +57,6 @@ class BoardAdapter : RecyclerView.Adapter<BoardAdapter.ViewHolder>() {
     inner class ViewHolder(private val binding: ItemBoardBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(content: Content) {
             binding.root.setOnClickListener {
-                Log.e("viewholder", content.id)
                 itemClick(content.boardId, content.id)
             }
 
