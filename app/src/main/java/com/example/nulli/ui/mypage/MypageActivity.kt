@@ -16,7 +16,6 @@ import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.example.nulli.databinding.ActivityBoardReadBinding
 import com.example.nulli.databinding.ActivityMypageBinding
-import com.example.nulli.databinding.FragmentMypageBinding
 import com.example.nulli.settings.SettingsDeclareActivity
 import com.example.nulli.settings.SettingsImgChangeActivity
 import com.example.nulli.settings.SettingsNickChangeActivity
