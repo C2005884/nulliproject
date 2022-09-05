@@ -1,26 +1,18 @@
 package com.example.nulli.ui.mypage
 
-import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
-import android.os.PersistableBundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
-import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
-import com.example.nulli.databinding.ActivityBoardReadBinding
 import com.example.nulli.databinding.ActivityMypageBinding
 import com.example.nulli.settings.SettingsDeclareActivity
 import com.example.nulli.settings.SettingsImgChangeActivity
 import com.example.nulli.settings.SettingsNickChangeActivity
 import com.example.nulli.settings.SettingsWithdrawalActivity
-import com.example.nulli.ui.SplashActivity
+import com.example.nulli.LoginJoinActivity
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
@@ -102,7 +94,7 @@ class MypageActivity : AppCompatActivity(){
 
         binding.tvLogout.setOnClickListener {
             auth.signOut()
-            val intent = Intent(this,SplashActivity::class.java)
+            val intent = Intent(this, LoginJoinActivity::class.java)
             startActivity(intent)
             finish()
         }

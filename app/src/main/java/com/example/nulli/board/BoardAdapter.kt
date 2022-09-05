@@ -24,6 +24,12 @@ class BoardAdapter : RecyclerView.Adapter<BoardAdapter.ViewHolder>() {
 
     }
 
+    fun removeData(){
+        val size = datas.size
+        datas.clear()
+        notifyItemRangeRemoved(0,size)
+    }
+
     fun addData(data : Content){
         datas.add(0,data)
         notifyItemInserted(0)

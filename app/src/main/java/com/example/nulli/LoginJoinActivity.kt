@@ -1,4 +1,4 @@
-package com.example.nulli.ui
+package com.example.nulli
 
 import android.Manifest
 import android.content.Intent
@@ -14,8 +14,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
-import com.example.nulli.MainActivity
-import com.example.nulli.R
 import com.example.nulli.databinding.ActivitySplashBinding
 import com.example.nulli.model.UserData
 import com.example.nulli.ui.auth.AuthMailActivity
@@ -35,10 +33,9 @@ import com.google.firebase.storage.ktx.storage
 import com.gun0912.tedpermission.PermissionListener
 import com.gun0912.tedpermission.normal.TedPermission
 import java.io.ByteArrayOutputStream
-import java.io.File
 
 
-class SplashActivity : AppCompatActivity() {
+class LoginJoinActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private val RC_SIGN_IN = 9001
     private val db = Firebase.database.reference
@@ -56,9 +53,9 @@ class SplashActivity : AppCompatActivity() {
                     user.reload()
 
                     val intent = if (user.isEmailVerified) {
-                        Intent(this@SplashActivity, MainActivity::class.java)
+                        Intent(this@LoginJoinActivity, MainActivity::class.java)
                     } else {
-                        Intent(this@SplashActivity, AuthMailActivity::class.java)
+                        Intent(this@LoginJoinActivity, AuthMailActivity::class.java)
                     }
 
                     startActivity(intent)
@@ -113,13 +110,11 @@ class SplashActivity : AppCompatActivity() {
         binding.btnLogin.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
-            finish()
         }
 
         binding.btnJoin.setOnClickListener {
             val intent = Intent(this, JoinActivity::class.java)
             startActivity(intent)
-            finish()
         }
 
     }

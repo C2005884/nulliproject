@@ -35,6 +35,9 @@ class BoardReadActivity : AppCompatActivity() {
     var user = UserData()
     var content = Content()
 
+    var isOriginLike = false
+    var originLikeCount = 0
+
     val binding: ActivityBoardReadBinding by lazy {
         ActivityBoardReadBinding.inflate(layoutInflater)
     }
@@ -69,19 +72,15 @@ class BoardReadActivity : AppCompatActivity() {
         }
 
         override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
-            TODO("Not yet implemented")
         }
 
         override fun onChildRemoved(snapshot: DataSnapshot) {
-
         }
 
         override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
-            TODO("Not yet implemented")
         }
 
         override fun onCancelled(error: DatabaseError) {
-            TODO("Not yet implemented")
         }
 
     }
@@ -118,7 +117,30 @@ class BoardReadActivity : AppCompatActivity() {
             binding.ivLike.setImageResource(
                 if (isLike) R.drawable.like else R.drawable.like2
             )
-        }
+//첫번째 방법
+            if (isLike == isOriginLike){
+                binding.tvLike.text = originLikeCount.toString()
+            }else if (isLike){
+                binding.tvLike.text = (originLikeCount+1).toString()
+            }else{
+                binding.tvLike.text = (originLikeCount-1).toString()
+            }
+//두번째 방법
+//            binding.tvLike.text = when(isLike){
+//                isOriginLike -> originLikeCount.toString()
+//                true -> (originLikeCount+1).toString()
+//                else -> (originLikeCount-1).toString()
+//            }
+//세번째 방법
+//            binding.tvLike.text = originLikeCount.plus(
+//                when(isLike){
+//                    isOriginLike -> 0
+//                    true -> 1
+//                    else -> -1
+//                }
+//            ).toString()
+
+    }
 
         binding.ivScrap.setOnClickListener {
             isScrap = !isScrap
@@ -312,9 +334,10 @@ class BoardReadActivity : AppCompatActivity() {
         binding.tvReply.text = content.replyMap.count().toString()
         binding.tvTitle.text = content.title
 
-
+        originLikeCount = content.likeMap.count()
         for (map in content.likeMap) {
             if (map.key == fuser?.uid) {
+                isOriginLike = true
                 isLike = true
                 binding.ivLike.setImageResource(
                     if (isLike) R.drawable.like else R.drawable.like2

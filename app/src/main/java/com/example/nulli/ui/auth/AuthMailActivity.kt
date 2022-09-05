@@ -3,12 +3,10 @@ package com.example.nulli.ui.auth
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import com.example.nulli.MainActivity
-import com.example.nulli.R
 import com.example.nulli.databinding.ActivityAuthMailBinding
-import com.example.nulli.ui.SplashActivity
+import com.example.nulli.LoginJoinActivity
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
@@ -34,7 +32,7 @@ class AuthMailActivity : AppCompatActivity() {
         }
         binding.btnLogout.setOnClickListener {
             auth.signOut()
-            val intent = Intent(this,SplashActivity::class.java)
+            val intent = Intent(this, LoginJoinActivity::class.java)
             startActivity(intent)
             finish()
         }

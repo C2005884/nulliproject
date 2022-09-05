@@ -129,6 +129,17 @@ class MyfeedFragment : Fragment() {
             val intent = Intent(requireActivity(),MypageActivity::class.java)
             requireActivity().startActivity(intent)
         }
+        binding.WriteDetail.setOnClickListener {
+            val intent = Intent(requireActivity(),BoardListActivity::class.java)
+            intent.putExtra(BoardListActivity.ID, BoardListActivity.MY_CONTENT)
+            startActivity(intent)
+        }
+
+        binding.tvScrapDetail.setOnClickListener {
+            val intent = Intent(requireActivity(),BoardListActivity::class.java)
+            intent.putExtra(BoardListActivity.ID, BoardListActivity.MY_SCRAP)
+            startActivity(intent)
+        }
 
         setRv()
     }

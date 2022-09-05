@@ -62,7 +62,7 @@ class LoginActivity : AppCompatActivity() {
                     Intent(this,AuthMailActivity::class.java)
                 }
                 startActivity(intent)
-                finish()
+                finishAffinity()
             }
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)

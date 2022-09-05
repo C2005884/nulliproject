@@ -16,16 +16,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Nulli">
         <activity
-            android:name=".ScrapDetailActivity"
+            android:name=".LoadingActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.mypage.ScrapDetailActivity"
             android:exported="false" />
         <activity
-            android:name=".MyContentDetailActivity"
-            android:exported="false" />
-        <activity
-            android:name=".DetailScrapActivity"
-            android:exported="false" />
-        <activity
-            android:name=".DetailMyContentActivity"
+            android:name=".ui.mypage.MyContentDetailActivity"
             android:exported="false" />
         <activity
             android:name=".ui.mypage.MypageActivity"
@@ -94,14 +97,8 @@
             android:name=".ui.auth.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.SplashActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:name=".LoginJoinActivity"
+            android:exported="true"></activity>
         <activity
             android:name=".MainActivity"
             android:exported="true"

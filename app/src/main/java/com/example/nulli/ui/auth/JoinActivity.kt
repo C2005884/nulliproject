@@ -9,6 +9,7 @@ import com.example.nulli.databinding.ActivityJoinBinding
 import com.example.nulli.model.UserData
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.auth.ktx.userProfileChangeRequest
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
@@ -99,7 +100,14 @@ class JoinActivity : AppCompatActivity() {
             scrapMap = hashMapOf(),
             myContentMap = hashMapOf()
         )
-        db.child("user").child(fuser.uid).setValue(user)
+        db.child("user").child(fuser.uid).setValue(user).addOnCompleteListener {
+            val profileUpdates = userProfileChangeRequest {
+                displayName = user.nickname
+            }
+
+            fuser!!.updateProfile(profileUpdates)
+
+        }
     }
 
     fun sendAuthMail() {
