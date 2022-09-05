@@ -8,17 +8,19 @@ import com.example.nulli.databinding.ItemSearchHistoryBinding
 
 class SearchHistoryAdapter : RecyclerView.Adapter<ViewHolder>() {
 
+    var stringClick:(String)->Unit = {}
+
     val datas:ArrayList<String> = arrayListOf()
     fun setDatas(arrayList: ArrayList<String>) {
         datas.clear()
-        datas.addAll(arrayList)
+        datas.addAll(arrayList.reversed())
         notifyItemRangeInserted(0, datas.size)
     }
 
-    fun removeAllData(){
+    fun removeAllData() {
         val size = datas.size
         datas.clear()
-        notifyItemRangeRemoved(0,size)
+        notifyItemRangeRemoved(0, size)
     }
 
     fun removeData(str:String) {
@@ -38,8 +40,8 @@ class SearchHistoryAdapter : RecyclerView.Adapter<ViewHolder>() {
     }
 
     fun addData(str:String) {
-        datas.add(str)
-        notifyItemInserted(datas.size -1)
+        datas.add(0, str)
+        notifyItemInserted(0)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -56,6 +58,12 @@ class SearchHistoryAdapter : RecyclerView.Adapter<ViewHolder>() {
 
     inner class ViewHolder(private val binding: ItemSearchHistoryBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(s: String) {
+            binding.root.setOnClickListener {
+                stringClick(s)
+            }
+            binding.ivDelete.setOnClickListener {
+                removeData(s)
+            }
             binding.tvText.text = s
         }
     }

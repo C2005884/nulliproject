@@ -29,6 +29,11 @@ class BoardAdapter : RecyclerView.Adapter<BoardAdapter.ViewHolder>() {
         notifyItemInserted(0)
     }
 
+    fun addDataAtLast(data : Content){
+        datas.add(data)
+        notifyItemInserted(datas.size-1)
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ItemBoardBinding.inflate(
             LayoutInflater.from(parent.context),
