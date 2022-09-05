@@ -4,10 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import com.example.nulli.databinding.FragmentSearchBinding
 import com.example.nulli.util.SharedPreferencesManager
 import com.example.nulli.util.WrapContentLinearLayoutManager
@@ -36,16 +33,25 @@ class SearchFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setRv()
         binding.etSearch.setOnEditorActionListener { textView, i, keyEvent ->
-            pref.addSearchHistorySet(textView.text.toString())
+            //textview.text 가 2글자 이상인지 판별
+            pref.addSearchHistoryList(textView.text.toString())
+            (binding.rvHistory.adapter as SearchHistoryAdapter).addData(textView.text.toString())
             textView.setText("")
-            Toast.makeText(requireContext(),pref.searchHistorySet.toString(),Toast.LENGTH_SHORT).show()
+//            Toast.makeText(requireContext(),pref.searchHistorySet.toString(),Toast.LENGTH_SHORT).show()
             false
+        }
+        binding.tvRemoveAll.setOnClickListener {
+            pref.searchHistoryList = "[]"
+            (binding.rvHistory.adapter as SearchHistoryAdapter).removeAllData()
         }
     }
 
     private fun setRv() {
-        binding.rvSearch.apply {
+        binding.rvHistory.apply {
             layoutManager = WrapContentLinearLayoutManager(requireContext())
+            adapter = SearchHistoryAdapter().apply {
+                setDatas(pref.loadSearchHistoryList())
+            }
         }
     }
 
