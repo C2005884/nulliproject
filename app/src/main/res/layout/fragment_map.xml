@@ -30,15 +30,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:src="@drawable/ic_search"
-        app:layout_constraintBottom_toBottomOf="@+id/etSearch"
-        app:layout_constraintStart_toStartOf="@+id/etSearch"
-        app:layout_constraintTop_toTopOf="@id/etSearch" />
-
     <com.google.android.material.chip.Chip
         android:id="@+id/chipReview"
         android:layout_width="wrap_content"
