@@ -104,9 +104,7 @@ class JoinActivity : AppCompatActivity() {
             val profileUpdates = userProfileChangeRequest {
                 displayName = user.nickname
             }
-
             fuser!!.updateProfile(profileUpdates)
-
         }
     }
 

@@ -20,7 +20,7 @@ class ReplyAdapter : RecyclerView.Adapter<ReplyAdapter.ViewHolder>() {
     }
     fun addData(data:Reply) {
         datas.add(data)
-        notifyItemInserted(datas.size-1)
+        notifyItemInserted(datas.size-1) // 순서 오름차순 정렬
     }
     fun deleteData(data:Reply) {
         var targetPosition = -1

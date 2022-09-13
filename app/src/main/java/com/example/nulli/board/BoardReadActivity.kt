@@ -199,8 +199,8 @@ class BoardReadActivity : AppCompatActivity() {
                 moreClick = {
                     if (it != null) {
                         var replyData = Reply()
-                        for (r in this.datas) {
-                            if(r.id == it) {
+                        for (r in this.datas) { // this: 어뎁터 데이터를 의미
+                            if(r.id == it) { // it : 키를 의미
                                 replyData = r
                                 break
                             }
