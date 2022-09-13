@@ -75,31 +75,10 @@
 
         <ImageView
             android:id="@+id/ivProfile"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
             android:layout_gravity="center"
             android:src="@drawable/ic_person"></ImageView>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_weight="1"
-            android:text="숫자"
-            android:textColor="#000000"
-            android:textStyle="bold"
-            android:textSize="10sp" />
-
-        <TextView
-            android:id="@+id/tvboard"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_weight="1"
-            android:text="게시물"
-            android:textColor="#000000"
-            android:textStyle="bold"
-            android:textSize="15sp" />
 
     </LinearLayout>
 
@@ -166,10 +145,9 @@
             android:id="@+id/rvMyContent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:listitem="@layout/item_recent_content"
             android:paddingHorizontal="16dp"
             tools:itemCount="4"
-            />
+            tools:listitem="@layout/item_recent_content" />
 
     </LinearLayout>
 
