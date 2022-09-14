@@ -13,8 +13,7 @@
         android:layout_marginTop="16dp"
         android:text="글쓰기 페이지"
         android:textColor="#000000"
-        android:textSize="20sp"
-        android:textStyle="bold"
+        android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -24,8 +23,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:layout_marginHorizontal="10dp"
         android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/bg_graytext"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2">
 
@@ -43,22 +44,41 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <EditText
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llType2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/bg_graytext"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/llType1">
+
+
+    <EditText
             android:id="@+id/etContent"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="450dp"
             android:hint="내용을 입력해주세요"
             android:paddingStart="20dp"
             android:textColorHint="@color/txt_white_gray"
             android:textSize="20sp"
             android:textStyle="bold" />
 
+    </LinearLayout>
+
         <LinearLayout
-            android:id="@+id/llType2"
+            android:id="@+id/llType3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="100dp"
-            android:orientation="horizontal">
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/llType2">
 
             <ImageView
                 android:id="@+id/ivPhoto"
@@ -75,7 +95,7 @@
                 android:layout_marginStart="260dp"
                 android:text="완료" />
 
-        </LinearLayout>
+
     </LinearLayout>
 
 

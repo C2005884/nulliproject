@@ -43,9 +43,20 @@
                 android:id="@+id/tvRecentContentTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:textStyle="bold"
+                android:textColor="#000000"
                 android:text="최신 게시물"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginHorizontal="10dp"
+                android:background="@color/txt_white_gray"
+                app:layout_constraintTop_toBottomOf="@id/tvRecentContentTitle" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvRecentContent"
@@ -59,22 +70,34 @@
                 tools:itemCount="5"
                 tools:listitem="@layout/item_recent_content" />
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginHorizontal="10dp"
+                android:background="@color/txt_white_gray"
+                app:layout_constraintTop_toBottomOf="@id/rvRecentContent" />
+
             <TextView
                 android:id="@+id/tvFavoritContentTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="10dp"
+                android:textStyle="bold"
+                android:textColor="#000000"
                 android:text="인기 게시물"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/rvRecentContent" />
 
 
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvContent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="5dp"
                 android:nestedScrollingEnabled="false"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tvFavoritContentTitle"
