@@ -93,10 +93,21 @@ class MypageActivity : AppCompatActivity(){
         }
 
         binding.tvLogout.setOnClickListener {
-            auth.signOut()
-            val intent = Intent(this, LoginJoinActivity::class.java)
-            startActivity(intent)
-            finish()
+
+            val builder = AlertDialog.Builder(this)
+            builder
+                .setTitle("로그아웃 하시겠습니까?")
+                .setPositiveButton("로그아웃",
+                    DialogInterface.OnClickListener { dialog, id ->
+                        // Start 버튼 선택시 수행
+                        auth.signOut()
+                        val intent = Intent(this, LoginJoinActivity::class.java)
+                        startActivity(intent)
+                        finish()
+                    })
+                .setNegativeButton("취소", {dialog, id ->})
+            builder.create()
+            builder.show()
         }
 
     }

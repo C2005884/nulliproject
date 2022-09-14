@@ -48,7 +48,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="5dp"
-                android:text="• 닉네임 최대 8자 이내로 설정 가능합니다."
+                android:text="• 닉네임은 8자 이내로 설정 가능합니다."
                 android:textColor="#000000"
                 android:textSize="15sp"
                 android:textStyle="bold" />

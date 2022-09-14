@@ -35,5 +35,20 @@ class SettingsDeclareActivity : AppCompatActivity() {
             val intent = Intent(this, DeclareReviewActivity::class.java)
             startActivity(intent)
         }
+
+        binding.tvBoardDeclare2.setOnClickListener {
+            val intent = Intent(this, DeclareBoardActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.tvObstacleDeclare2.setOnClickListener {
+            val intent = Intent(this, DeclareObstacleActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.tvReviewDeclare2.setOnClickListener {
+            val intent = Intent(this, DeclareReviewActivity::class.java)
+            startActivity(intent)
+        }
     }
 }
