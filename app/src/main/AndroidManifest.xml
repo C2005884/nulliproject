@@ -98,7 +98,7 @@
             android:exported="false" />
         <activity
             android:name=".LoginJoinActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".MainActivity"
             android:exported="true"
