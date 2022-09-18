@@ -71,7 +71,8 @@
         android:id="@+id/btnChange"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_margin="20dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/background_radius_orange"
         android:text="비밀번호 변경"
         android:textSize="20sp" />
