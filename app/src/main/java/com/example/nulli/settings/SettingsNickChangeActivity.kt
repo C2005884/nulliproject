@@ -1,10 +1,12 @@
 package com.example.nulli.settings
 
+import android.app.ActionBar
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.appcompat.widget.Toolbar
 import com.example.nulli.R
 import com.example.nulli.databinding.ActivitySettingsNickChangeBinding
 import com.google.firebase.auth.FirebaseAuth
@@ -25,6 +27,10 @@ class SettingsNickChangeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
+        getSupportActionBar()?.setDisplayOptions(androidx.appcompat.app.ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar()?.setCustomView(R.layout.custom_toolbar);
+
         binding.etNicknameChange.setText(fuser?.displayName?: "")
         binding.btnChange.setOnClickListener {
             val profileUpdates = userProfileChangeRequest {

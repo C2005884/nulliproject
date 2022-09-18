@@ -21,6 +21,9 @@ class SettingsDeclareActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        getSupportActionBar()?.setDisplayOptions(androidx.appcompat.app.ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar()?.setCustomView(R.layout.custom_toolbar);
+
         binding.tvBoardDeclare.setOnClickListener {
             val intent = Intent(this, DeclareBoardActivity::class.java)
             startActivity(intent)

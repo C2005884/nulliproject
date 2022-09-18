@@ -52,9 +52,6 @@
             android:name=".settings.SettingsNotificationActivity"
             android:exported="false" />
         <activity
-            android:name=".board.BoardCommentActivity"
-            android:exported="false" />
-        <activity
             android:name=".board.BoardWriteActivity"
             android:exported="false" />
         <activity
