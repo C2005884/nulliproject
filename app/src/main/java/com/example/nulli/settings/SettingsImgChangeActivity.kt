@@ -29,6 +29,7 @@ class SettingsImgChangeActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        supportActionBar?.hide()
 
         getSupportActionBar()?.setDisplayOptions(androidx.appcompat.app.ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar()?.setCustomView(R.layout.custom_toolbar);
