@@ -33,7 +33,7 @@ class MypageActivity : AppCompatActivity(){
             finish()
         }else{
             b4ClickTime = System.currentTimeMillis()
-            //Toast.makeText(this,"한번 더 누르시면 앱이 꺼집니다.",Toast.LENGTH_SHORT).show()
+            Toast.makeText(this,"한번 더 누르시면 앱이 꺼집니다.",Toast.LENGTH_SHORT).show()
         }
     }
 
