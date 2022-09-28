@@ -59,7 +59,7 @@ class WriteObstacleActivity : AppCompatActivity() {
                         1 -> {
                             Glide.with(this@WriteObstacleActivity).load(R.drawable.block).into(binding.ivType)
                             binding.tvType.text = "턱"
-                            mtype = Obstacle.BLOCK
+                            mtype = Obstacle.SLOPE
                         }
                         2 -> {
                             Glide.with(this@WriteObstacleActivity).load(R.drawable.slope).into(binding.ivType)
