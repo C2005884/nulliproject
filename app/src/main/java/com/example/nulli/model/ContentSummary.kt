@@ -7,6 +7,7 @@ class ContentSummary (
     var contentId: String? = "",
     var boardId: String? = "",
     var title: String? = "",
+    var activation:String? = "",
 ){
 
 }

@@ -27,6 +27,9 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
@@ -139,59 +142,88 @@ class LoginJoinActivity : AppCompatActivity() {
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     val fuser = auth.currentUser!!
-                    Log.d("xxxx ", fuser.toString())
-                    val user = UserData(
-                        uid = fuser.uid,
-                        email = fuser.email,
-                        nickname = fuser.displayName,
-                        profileImageUri = "https://firebasestorage.googleapis.com/v0/b/nulli-e491a.appspot.com/o/user%2F${fuser?.uid}?alt=media",
-                        scrapMap = hashMapOf(),
-                        myContentMap = hashMapOf(),
-                    )
 
-                    db.child("user").child(fuser.uid).setValue(user).addOnCompleteListener {
-                        if (fuser.photoUrl == null) {
-                            moveMainPage(task.result?.user)
-                        } else {
-                            Glide.with(this)
-                                .asBitmap()
-                                .load(fuser.photoUrl)
-                                .into(object : CustomTarget<Bitmap>(){
-                                    override fun onResourceReady(
-                                        resource: Bitmap,
-                                        transition: Transition<in Bitmap>?
-                                    ) {
-                                        val baos = ByteArrayOutputStream()
-                                        resource.compress(Bitmap.CompressFormat.JPEG, 100, baos)
-                                        val data = baos.toByteArray()
+                    db.child("user").child(fuser.uid)
+                        .addListenerForSingleValueEvent(object : ValueEventListener {
+                            override fun onDataChange(snapshot: DataSnapshot) {
+                                if (!snapshot.exists()) {
+                                    createUser(fuser)
+                                } else {
+                                    val userData = snapshot.getValue(UserData::class.java)!!
+                                    if (userData.activation.isNullOrBlank() || userData.activation == "true") {
+                                        Toast.makeText(
+                                            this@LoginJoinActivity,
+                                            "접근차단된 유저입니다",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                        auth.signOut()
 
-                                        val profileImageRef = storage.child("user").child(fuser?.uid!!)
-                                        var uploadTask = profileImageRef.putBytes(data)
-                                        uploadTask.addOnFailureListener {
-                                            // Handle unsuccessful uploads
-                                        }.addOnCompleteListener { taskSnapshot ->
-                                            moveMainPage(task.result?.user)
-                                        }
-
+                                        // loading
                                     }
+                                }
+                            }
 
-                                    override fun onLoadCleared(placeholder: Drawable?) {
+                            override fun onCancelled(error: DatabaseError) {
 
-                                    }
+                            }
 
-                                })
-                        }
-                    }
+                        })
                 } else {
                     Log.d("xxxx ", "signInWithCredential:failure", task.exception)
                 }
-
             }
     }
 
     fun moveMainPage(user: FirebaseUser?) {
-        if(user != null) {
+        if (user != null) {
             startActivity(Intent(this, MainActivity::class.java))
         }
+    }
+
+    private fun createUser(fuser: FirebaseUser) {
+        Log.d("xxxx ", fuser.toString())
+        val user = UserData(
+            uid = fuser.uid,
+            email = fuser.email,
+            nickname = fuser.displayName,
+            profileImageUri = "https://firebasestorage.googleapis.com/v0/b/nulli-e491a.appspot.com/o/user%2F${fuser?.uid}?alt=media",
+            scrapMap = hashMapOf(),
+            myContentMap = hashMapOf(),
+        )
+
+        db.child("user").child(fuser.uid).setValue(user).addOnCompleteListener {
+            if (fuser.photoUrl == null) {
+                moveMainPage(fuser)
+            } else {
+                Glide.with(this)
+                    .asBitmap()
+                    .load(fuser.photoUrl)
+                    .into(object : CustomTarget<Bitmap>() {
+                        override fun onResourceReady(
+                            resource: Bitmap,
+                            transition: Transition<in Bitmap>?
+                        ) {
+                            val baos = ByteArrayOutputStream()
+                            resource.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+                            val data = baos.toByteArray()
+
+                            val profileImageRef = storage.child("user").child(fuser?.uid!!)
+                            var uploadTask = profileImageRef.putBytes(data)
+                            uploadTask.addOnFailureListener {
+                                // Handle unsuccessful uploads
+                            }.addOnCompleteListener { taskSnapshot ->
+                                moveMainPage(fuser)
+                            }
+
+                        }
+
+                        override fun onLoadCleared(placeholder: Drawable?) {
+
+                        }
+
+                    })
+            }
+        }
+
     }
 }

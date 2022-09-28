@@ -9,6 +9,7 @@ data class UserData(
     var nickname:String? = "",
     var profileImageUri:String? = "",
     var scrapMap:HashMap<String, ContentSummary>? = hashMapOf(),
-    var myContentMap:HashMap<String, ContentSummary>? = hashMapOf()
+    var myContentMap:HashMap<String, ContentSummary>? = hashMapOf(),
+    var activation:String? = "",
 ) {
 }

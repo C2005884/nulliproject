@@ -11,6 +11,7 @@ import android.os.Looper
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.databinding.DataBindingUtil.setContentView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
@@ -27,6 +28,9 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
@@ -48,22 +52,7 @@ class LoadingActivity : AppCompatActivity() {
         override fun onPermissionGranted() {
             Handler(Looper.myLooper()!!).postDelayed({
                 val user = Firebase.auth.currentUser
-                if (user != null) {
-                    user.reload()
-
-                    val intent = if (user.isEmailVerified) {
-                        Intent(this@LoadingActivity, MainActivity::class.java)
-                    } else {
-                        Intent(this@LoadingActivity, AuthMailActivity::class.java)
-                    }
-
-                    startActivity(intent)
-                    finish()
-                } else {
-                    val intent = Intent(this@LoadingActivity, LoginJoinActivity::class.java)
-                    startActivity(intent)
-                    finish()
-                }
+                updateUi(user)
 
             }, 2000)
         }
@@ -72,6 +61,51 @@ class LoadingActivity : AppCompatActivity() {
 
         }
     }
+
+        private fun updateUi(user: FirebaseUser?) {
+            if (user != null) {
+                user.reload()
+                val database = Firebase.database.reference
+                database.child("user").child(user.uid).addListenerForSingleValueEvent(object :
+                    ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        val userData = snapshot.getValue(UserData::class.java)!!
+                        if (userData.activation.isNullOrBlank() || userData.activation == "true") {
+                            if (user.isEmailVerified) {
+                                val intent = if (user.isAnonymous) {
+                                    Intent(this@LoadingActivity, MainActivity::class.java)
+                                } else {
+                                    Intent(this@LoadingActivity, AuthMailActivity::class.java)
+                                }
+                                startActivity(intent)
+                                finishAffinity()
+                            }
+                            val intent = Intent(this@LoadingActivity, MainActivity::class.java)
+                            startActivity(intent)
+                            finish()
+                        } else {
+                            Toast.makeText(this@LoadingActivity, "접근 차단된 유저 입니다.",Toast.LENGTH_SHORT).show()
+                            auth.signOut()
+
+                            val intent = Intent(this@LoadingActivity, LoginJoinActivity::class.java)
+                            startActivity(intent)
+                            finish()
+                        }
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                        TODO("Not yet implemented")
+                    }
+
+                })
+
+        }else{
+            val intent = Intent(this, LoginJoinActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

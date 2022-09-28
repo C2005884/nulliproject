@@ -16,7 +16,8 @@ class Reply (
     var title:String? = "",
 
     // local view 제어용 변수
-    var mine:Boolean = false
+    var mine:Boolean = false,
+    var activation:String? = "",
 ){
 }
 

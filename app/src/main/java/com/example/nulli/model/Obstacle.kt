@@ -16,6 +16,7 @@ data class Obstacle(
     var date:Long = 0L,
     var dateText:String="",
     var imageUri:String = "",
+    var activation:String? = "",
 ) {
     companion object {
         const val STAIR = 0

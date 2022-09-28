@@ -13,6 +13,7 @@ data class Review(
     var nickname:String? = "",
     var profileImageUri:String? = "",
     var uid:String? = "",
+    var activation:String? = "",
 ){
     companion object {
         const val HOSPITAL = 0
