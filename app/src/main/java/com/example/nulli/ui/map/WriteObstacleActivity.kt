@@ -59,18 +59,22 @@ class WriteObstacleActivity : AppCompatActivity() {
                         1 -> {
                             Glide.with(this@WriteObstacleActivity).load(R.drawable.block).into(binding.ivType)
                             binding.tvType.text = "턱"
+                            mtype = Obstacle.BLOCK
                         }
                         2 -> {
                             Glide.with(this@WriteObstacleActivity).load(R.drawable.slope).into(binding.ivType)
                             binding.tvType.text = "경사"
+                            mtype = Obstacle.SLOPE
                         }
                         3 -> {
                             Glide.with(this@WriteObstacleActivity).load(R.drawable.stairs).into(binding.ivType)
                             binding.tvType.text = "계단"
+                            mtype = Obstacle.STAIR
                         }
                         4 -> {
                             Glide.with(this@WriteObstacleActivity).load(R.drawable.warning).into(binding.ivType)
                             binding.tvType.text = "기타"
+                            mtype = Obstacle.OTHER
                         }
                     }
                     //Toast.makeText(this@WriteBuildingActivity,it.toString(),Toast.LENGTH_SHORT).show()
@@ -191,7 +195,7 @@ class WriteObstacleActivity : AppCompatActivity() {
     private fun showSingleImage(uri: Uri) {
 
         mImageUri = uri
-        mtype = Random().nextInt(4)
+        //mtype = Random().nextInt(4)
 
         Glide.with(this).load(mImageUri).into(binding.ivObstacle)
         when(mtype) {

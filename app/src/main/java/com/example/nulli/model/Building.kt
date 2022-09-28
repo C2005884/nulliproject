@@ -16,7 +16,8 @@ data class Building(
     var date:Long = 0L,
     var dateText:String="",
     var imageUri:String = "",
-    var review:HashMap<String, Long> = hashMapOf()
+    var review:HashMap<String, Long> = hashMapOf(),
+    var activation:String? = "",
 ) {
     companion object {
         const val HOSPITAL = 0
