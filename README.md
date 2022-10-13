@@ -12,7 +12,7 @@
 
 ***
 
-* Android Studio(Kotlin/JAVA(ml))
+* Android Studio(Kotlin/Java(ml))
 * Firebase
 * Naver Maps
 * Teachable Machine
