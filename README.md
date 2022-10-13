@@ -12,10 +12,18 @@
 
 ***
 
-* Android Studio(Kotlin/Java(ml))
-* Firebase
-* Naver Maps
-* Teachable Machine
+* 프로젝트 내용
+   - 커뮤니티 + 커뮤니티 매핑 결합 앱
+   - 주사용자: 장애인 및 장애인 서포터즈(장애인활동지원사, 장애인 가족, 사회복지사 등)
+   - 앱 내의 커뮤니티에는 게시물의 업로드와 댓글기능을 통해 공통적인 관심사로 공감대를 형성하고 활발한 소통을 제공합니다.
+   - 후기/장애물 지도를 통해서 장소에 대한 다른 유저들의 후기를 살펴보고, 지도에 등록된 장애물을 살필 수 있으며, 장애물을 직접 지도에 등록하여 함께 이동권을 개선하는데 참여할 수 있습니다.
 
-Go to Youtube▼ </br>
+* 개발 기술
+   - Android Studio(Kotlin/Java(ml))
+   - Firebase
+   - Naver Maps
+   - Teachable Machine
+   </br>
+
+📽 Go to Youtube▼ </br>
 [![Video Label](http://img.youtube.com/vi/-U70xtYH114/0.jpg)](https://youtu.be/-U70xtYH114)
