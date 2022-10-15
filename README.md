@@ -27,6 +27,10 @@
    - Teachable Machine
    </br>
    
+* Software Architecture
+![softwarearchitecture](https://user-images.githubusercontent.com/93236668/195969637-0becb7fc-4af6-4c10-ae16-f7d4b9a7f392.png)
+
+   
 ## 💪🏻Skills
 ### Languages
 ![Java](https://img.shields.io/badge/Java-007396.svg?style=for-the-badge&logo=Java&logoColor=white)
