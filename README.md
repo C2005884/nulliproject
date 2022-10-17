@@ -27,6 +27,9 @@
    - Teachable Machine
    </br>
    
+* 서비스 구성도
+<img width="749" alt="서비스 구성도" src="https://user-images.githubusercontent.com/93236668/196195578-08b5949c-99f0-4269-90ae-7216a98c0a57.png" width="10%" height="10%"/>
+   
 * Software Architecture
 ![softwarearchitecture](https://user-images.githubusercontent.com/93236668/195969637-0becb7fc-4af6-4c10-ae16-f7d4b9a7f392.png)
 
