@@ -33,7 +33,7 @@
 <img width="749" alt="서비스 구성도" src="https://user-images.githubusercontent.com/93236668/196195578-08b5949c-99f0-4269-90ae-7216a98c0a57.png" width="10%" height="10%"/>
    
 ## Software Architecture
-![softwarearchitecture](https://user-images.githubusercontent.com/93236668/195969637-0becb7fc-4af6-4c10-ae16-f7d4b9a7f392.png)
+<img width="934" alt="스크린샷 2022-11-01 오후 4 13 54" src="https://user-images.githubusercontent.com/93236668/199179911-2be741ba-bf77-4af0-bc30-520dfa58f7c4.png">
 
    
 ## 💪🏻Skills
