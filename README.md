@@ -25,16 +25,17 @@
 ## 개발 환경 및 기술 스택
    - Android Studio(Kotlin/Java(ml))
    - Firebase
-   - Naver Maps
+   - Naver Maps API
    - Teachable Machine
 </br>
    
 ## 서비스 구성도
-<img width="749" alt="서비스 구성도" src="https://user-images.githubusercontent.com/93236668/196195578-08b5949c-99f0-4269-90ae-7216a98c0a57.png" width="10%" height="10%"/>
+<img width="420" alt="서비스 구성도" src="https://user-images.githubusercontent.com/89966742/200540710-2acd6009-c19e-47e5-9e12-980035270dc2.png" width="10%" height="10%"/>
+
    
 ## Software Architecture
-<img width="934" alt="스크린샷 2022-11-01 오후 4 13 54" src="https://user-images.githubusercontent.com/93236668/199179911-2be741ba-bf77-4af0-bc30-520dfa58f7c4.png">
-
+<img width="490" alt="스크린샷 2022-11-01 오후 4 13 54" src="https://user-images.githubusercontent.com/89966742/200539832-423b2821-cd73-463b-bf68-875bf3e3e3f7.png">
+<br>
    
 ## 💪🏻Skills
 ### Languages
